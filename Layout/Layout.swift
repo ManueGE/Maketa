@@ -62,10 +62,14 @@ class Layout {
     }
 }
 
+prefix operator <=
+prefix operator >=
+
 protocol LayoutModifier {
     func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint
     func add(_ constant: CGFloat) -> LayoutModifier
     func multiply(by multiplier: CGFloat) -> LayoutModifier
+    func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier
 }
 
 extension UIView {
@@ -80,6 +84,7 @@ extension UIView {
     }
 }
 
+// MARK: - Operations
 
 func + (modifier: LayoutModifier, constant: CGFloat) -> LayoutModifier {
     return modifier.add(constant)
@@ -97,7 +102,33 @@ func / (modifier: LayoutModifier, multiplier: CGFloat) -> LayoutModifier {
     return modifier.multiply(by: 1 / multiplier)
 }
 
-extension CGFloat: LayoutModifier {
+prefix func <= (modifier: LayoutModifier) -> LayoutModifier {
+    return modifier.setRelation(.lessThanOrEqual)
+}
+
+prefix func >= (modifier: LayoutModifier) -> LayoutModifier {
+    return modifier.setRelation(.greaterThanOrEqual)
+}
+
+// MARK: - Constants
+
+protocol CGFloatConvertible {
+    var cgFloat: CGFloat { get }
+}
+
+extension CGFloat: CGFloatConvertible, LayoutModifier {
+    var cgFloat: CGFloat { return self }
+}
+
+extension Int: CGFloatConvertible, LayoutModifier {
+    var cgFloat: CGFloat { return CGFloat(self) }
+}
+
+extension Double: CGFloatConvertible, LayoutModifier {
+    var cgFloat: CGFloat { return CGFloat(self) }
+}
+
+extension LayoutModifier where Self: CGFloatConvertible {
     func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint {
         return NSLayoutConstraint(item: view,
                                   attribute: layoutAttribute,
@@ -105,43 +136,52 @@ extension CGFloat: LayoutModifier {
                                   toItem: nil,
                                   attribute: .notAnAttribute,
                                   multiplier: 0,
-                                  constant: self)
+                                  constant: cgFloat)
     }
     
     func add(_ constant: CGFloat) -> LayoutModifier {
-        return self + constant
+        return cgFloat + constant
     }
     
     func multiply(by multiplier: CGFloat) -> LayoutModifier {
-        return self * multiplier
+        return cgFloat * multiplier
+    }
+    
+    func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier {
+        return LayoutConstant(constant: self.cgFloat, relation: relation)
     }
 }
 
-extension Int: LayoutModifier {
+private struct LayoutConstant: LayoutModifier {
+    var constant: CGFloat
+    var relation: NSLayoutRelation
+    
     func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint {
-        return CGFloat(self).constraint(view: view, layoutAttribute: layoutAttribute)
+        return NSLayoutConstraint(item: view,
+                                  attribute: layoutAttribute,
+                                  relatedBy: relation,
+                                  toItem: nil,
+                                  attribute: .notAnAttribute,
+                                  multiplier: 0,
+                                  constant: constant)
     }
     
     func add(_ constant: CGFloat) -> LayoutModifier {
-        return CGFloat(self) + constant
+        var modifier = self
+        modifier.constant += constant
+        return modifier
     }
     
     func multiply(by multiplier: CGFloat) -> LayoutModifier {
-        return CGFloat(self) * multiplier
-    }
-}
-
-extension Double: LayoutModifier {
-    func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint {
-        return CGFloat(self).constraint(view: view, layoutAttribute: layoutAttribute)
+        var modifier = self
+        modifier.constant *= multiplier
+        return modifier
     }
     
-    func add(_ constant: CGFloat) -> LayoutModifier {
-        return CGFloat(self) + constant
-    }
-    
-    func multiply(by multiplier: CGFloat) -> LayoutModifier {
-        return CGFloat(self) * multiplier
+    func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier {
+        var modifier = self
+        modifier.relation = relation
+        return modifier
     }
 }
 
@@ -150,10 +190,12 @@ struct LayoutAttribute: LayoutModifier {
     let attribute: NSLayoutAttribute
     fileprivate(set) var constant: CGFloat
     fileprivate(set) var multiplier: CGFloat
+    fileprivate(set) var relation: NSLayoutRelation
     
-    fileprivate init(view: UIView, attribute: NSLayoutAttribute, constant: CGFloat = 0, multiplier: CGFloat = 1) {
+    fileprivate init(view: UIView, attribute: NSLayoutAttribute, relation: NSLayoutRelation = .equal, constant: CGFloat = 0, multiplier: CGFloat = 1) {
         self.view = view
         self.attribute = attribute
+        self.relation = relation
         self.constant = constant
         self.multiplier = multiplier
     }
@@ -169,14 +211,20 @@ struct LayoutAttribute: LayoutModifier {
     }
     
     func add(_ constant: CGFloat) -> LayoutModifier {
-        var attribute = self
-        attribute.constant += constant
-        return attribute
+        var modifier = self
+        modifier.constant += constant
+        return modifier
     }
     
     func multiply(by multiplier: CGFloat) -> LayoutModifier {
-        var attribute = self
-        attribute.multiplier *= multiplier
-        return attribute
+        var modifier = self
+        modifier.multiplier *= multiplier
+        return modifier
+    }
+    
+    func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier {
+        var modifier = self
+        modifier.relation = relation
+        return modifier
     }
 }
