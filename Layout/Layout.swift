@@ -9,6 +9,12 @@
 import UIKit
 
 class Layout {
+    
+    fileprivate struct Defaults {
+        static let relation = NSLayoutRelation.equal
+        static let priority = UILayoutPriority.required
+    }
+    
     weak var view: UIView!
     
     init(view: UIView) {
@@ -67,6 +73,7 @@ protocol LayoutModifier {
     func add(_ constant: CGFloat) -> LayoutModifier
     func multiply(by multiplier: CGFloat) -> LayoutModifier
     func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier
+    func setPriority(_ priority: UILayoutPriority) -> LayoutModifier
 }
 
 extension UIView {
@@ -110,6 +117,9 @@ prefix func >= (modifier: LayoutModifier) -> LayoutModifier {
     return modifier.setRelation(.greaterThanOrEqual)
 }
 
+func & (modifier: LayoutModifier, priority: UILayoutPriority) -> LayoutModifier {
+    return modifier.setPriority(priority)
+}
 
 func >> (modifier: LayoutModifier, constraint: inout NSLayoutConstraint) -> LayoutModifier {
     return LayoutConstraintSetter(original: modifier, constraint: &constraint)
@@ -145,7 +155,7 @@ extension LayoutModifier where Self: CGFloatConvertible {
     func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint {
         return NSLayoutConstraint(item: view,
                                   attribute: layoutAttribute,
-                                  relatedBy: .equal,
+                                  relatedBy: Layout.Defaults.relation,
                                   toItem: nil,
                                   attribute: .notAnAttribute,
                                   multiplier: 0,
@@ -161,22 +171,30 @@ extension LayoutModifier where Self: CGFloatConvertible {
     }
     
     func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier {
-        return LayoutConstant(constant: self.cgFloat, relation: relation)
+        return LayoutConstant(constant: self.cgFloat, relation: relation, priority: Layout.Defaults.priority)
+    }
+    
+    func setPriority(_ priority: UILayoutPriority) -> LayoutModifier {
+        return LayoutConstant(constant: self.cgFloat, relation: Layout.Defaults.relation, priority: priority)
     }
 }
 
 private struct LayoutConstant: LayoutModifier {
     var constant: CGFloat
     var relation: NSLayoutRelation
+    var priority: UILayoutPriority
     
     func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint {
-        return NSLayoutConstraint(item: view,
-                                  attribute: layoutAttribute,
-                                  relatedBy: relation,
-                                  toItem: nil,
-                                  attribute: .notAnAttribute,
-                                  multiplier: 0,
-                                  constant: constant)
+        let constraint = NSLayoutConstraint(item: view,
+                                            attribute: layoutAttribute,
+                                            relatedBy: relation,
+                                            toItem: nil,
+                                            attribute: .notAnAttribute,
+                                            multiplier: 0,
+                                            constant: constant)
+        
+        constraint.priority = priority
+        return constraint
     }
     
     func add(_ constant: CGFloat) -> LayoutModifier {
@@ -196,6 +214,12 @@ private struct LayoutConstant: LayoutModifier {
         modifier.relation = relation
         return modifier
     }
+    
+    func setPriority(_ priority: UILayoutPriority) -> LayoutModifier {
+        var modifier = self
+        modifier.priority = priority
+        return modifier
+    }
 }
 
 private struct LayoutAttribute: LayoutModifier {
@@ -204,23 +228,33 @@ private struct LayoutAttribute: LayoutModifier {
     fileprivate(set) var constant: CGFloat
     fileprivate(set) var multiplier: CGFloat
     fileprivate(set) var relation: NSLayoutRelation
+    fileprivate(set) var priority: UILayoutPriority
     
-    fileprivate init(view: UIView, attribute: NSLayoutAttribute, relation: NSLayoutRelation = .equal, constant: CGFloat = 0, multiplier: CGFloat = 1) {
+    fileprivate init(view: UIView,
+                     attribute: NSLayoutAttribute,
+                     relation: NSLayoutRelation = Layout.Defaults.relation,
+                     priority: UILayoutPriority = Layout.Defaults.priority,
+                     constant: CGFloat = 0,
+                     multiplier: CGFloat = 1) {
+        
         self.view = view
         self.attribute = attribute
         self.relation = relation
+        self.priority = priority
         self.constant = constant
         self.multiplier = multiplier
     }
     
     func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint {
-        return NSLayoutConstraint(item: view,
-                                  attribute: layoutAttribute,
-                                  relatedBy: .equal,
-                                  toItem: self.view,
-                                  attribute: attribute,
-                                  multiplier: multiplier,
-                                  constant: constant)
+        let constraint = NSLayoutConstraint(item: view,
+                                            attribute: layoutAttribute,
+                                            relatedBy: relation,
+                                            toItem: self.view,
+                                            attribute: attribute,
+                                            multiplier: multiplier,
+                                            constant: constant)
+        constraint.priority = priority
+        return constraint
     }
     
     func add(_ constant: CGFloat) -> LayoutModifier {
@@ -238,6 +272,12 @@ private struct LayoutAttribute: LayoutModifier {
     func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier {
         var modifier = self
         modifier.relation = relation
+        return modifier
+    }
+    
+    func setPriority(_ priority: UILayoutPriority) -> LayoutModifier {
+        var modifier = self
+        modifier.priority = priority
         return modifier
     }
 }
@@ -287,6 +327,10 @@ private class LayoutConstraintSetter: LayoutModifier {
     
     func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier {
         return original.setRelation(relation)
+    }
+    
+    func setPriority(_ priority: UILayoutPriority) -> LayoutModifier {
+        return original.setPriority(priority)
     }
 }
 

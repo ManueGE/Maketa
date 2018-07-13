@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         let view1 = UIView()
         view.addSubview(view1)
         view1.backgroundColor = .red
-        view1.layout.height = 150 >> heightLayoutConstraint
+        view1.layout.height = (150 & UILayoutPriority.defaultLow) >> heightLayoutConstraint
         view1.layout.width = view1.layout.height >> constraint
         view1.layout.centerX = view.layout.centerX
         view1.layout.centerY = view.layout.centerY >> centerYConstraint
