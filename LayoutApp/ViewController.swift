@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import Layout
 
 class ViewController: UIViewController {
     
     var heightLayoutConstraint: NSLayoutConstraint?
     var centerYConstraint: NSLayoutConstraint!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,10 +21,10 @@ class ViewController: UIViewController {
         let view1 = UIView()
         view.addSubview(view1)
         view1.backgroundColor = .red
-        view1.layout.height = (150 & UILayoutPriority.defaultLow) >> heightLayoutConstraint
-        view1.layout.width = view1.layout.height >> constraint
+        view1.layout.height = (150 & UILayoutPriority.defaultLow) >>> heightLayoutConstraint
+        view1.layout.width = view1.layout.height >>> constraint
         view1.layout.centerX = view.layout.centerX
-        view1.layout.centerY = view.layout.centerY >> centerYConstraint
+        view1.layout.centerY = view.layout.centerY >>> centerYConstraint
         
         let view2 = UIView()
         view.addSubview(view2)
@@ -33,6 +34,14 @@ class ViewController: UIViewController {
         
         view2.layout.top = view1.layout.bottom + 10
         view2.layout.centerX = view1.layout.centerX - 30
+        
+        let view3 = UIView()
+        view.addSubview(view3)
+        view3.backgroundColor = .blue
+        view3.layout.aspectRatio = 2
+        view3.layout.top = view2.layout.bottom + 10
+        view3.layout.centerX = view1.layout.centerX
+        view3.layout.width = view1.layout.width
     }
 
     override func didReceiveMemoryWarning() {

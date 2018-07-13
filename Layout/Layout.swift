@@ -2,338 +2,143 @@
 //  Layout.swift
 //  Layout
 //
-//  Created by Manuel García-Estañ on 12/7/18.
+//  Created by Manuel García-Estañ on 14/7/18.
 //  Copyright © 2018 Manue. All rights reserved.
 //
 
 import UIKit
 
-class Layout {
+public class Layout {
     
-    fileprivate struct Defaults {
+    internal struct Defaults {
         static let relation = NSLayoutRelation.equal
         static let priority = UILayoutPriority.required
     }
     
-    weak var view: UIView!
+    private weak var view: UIView!
+    
+    // MARK: Inits
     
     init(view: UIView) {
         self.view = view
-        view.prepareForAutolayout()
+        view.preparedForAutolayout()
     }
     
-    var top: LayoutModifier {
-        get { return LayoutAttribute(view: view, attribute: .top) }
-        set { constraint(newValue, with: .top) }
-    }
+    // MARK: Raw attributes
     
-    var bottom: LayoutModifier {
-        get { return LayoutAttribute(view: view, attribute: .bottom) }
-        set { constraint(newValue, with: .bottom) }
-    }
-    
-    var left: LayoutModifier {
+    public var left: LayoutModifier {
         get { return LayoutAttribute(view: view, attribute: .left) }
         set { constraint(newValue, with: .left) }
     }
     
-    var right: LayoutModifier {
+    public var right: LayoutModifier {
         get { return LayoutAttribute(view: view, attribute: .right) }
         set { constraint(newValue, with: .right) }
     }
     
-    var centerX: LayoutModifier {
-        get { return LayoutAttribute(view: view, attribute: .centerX) }
-        set { constraint(newValue, with: .centerX) }
+    public var top: LayoutModifier {
+        get { return LayoutAttribute(view: view, attribute: .top) }
+        set { constraint(newValue, with: .top) }
     }
     
-    var centerY: LayoutModifier {
-        get { return LayoutAttribute(view: view, attribute: .centerY) }
-        set { constraint(newValue, with: .centerY) }
+    public var bottom: LayoutModifier {
+        get { return LayoutAttribute(view: view, attribute: .bottom) }
+        set { constraint(newValue, with: .bottom) }
     }
     
-    var height: LayoutModifier {
+    public var leading: LayoutModifier {
+        get { return LayoutAttribute(view: view, attribute: .leading) }
+        set { constraint(newValue, with: .leading) }
+    }
+    
+    public var trailing: LayoutModifier {
+        get { return LayoutAttribute(view: view, attribute: .trailing) }
+        set { constraint(newValue, with: .trailing) }
+    }
+    
+    public var width: LayoutModifier {
+        get { return LayoutAttribute(view: view, attribute: .width) }
+        set { constraint(newValue, with: .width) }
+    }
+    
+    public var height: LayoutModifier {
         get { return LayoutAttribute(view: view, attribute: .height) }
         set { constraint(newValue, with: .height) }
     }
     
-    var width: LayoutModifier {
-        get { return LayoutAttribute(view: view, attribute: .width) }
-        set { constraint(newValue, with: .width) }
+    public var centerX: LayoutModifier {
+        get { return LayoutAttribute(view: view, attribute: .centerX) }
+        set { constraint(newValue, with: .centerX) }
     }
+    
+    public var centerY: LayoutModifier {
+        get { return LayoutAttribute(view: view, attribute: .centerY) }
+        set { constraint(newValue, with: .centerY) }
+    }
+    
+    public var lastBaseline: LayoutModifier {
+        get { return LayoutAttribute(view: view, attribute: .lastBaseline) }
+        set { constraint(newValue, with: .lastBaseline) }
+    }
+    
+    public var firstBaseline: LayoutModifier {
+        get { return LayoutAttribute(view: view, attribute: .firstBaseline) }
+        set { constraint(newValue, with: .firstBaseline) }
+    }
+    
+    public var leftMargin: LayoutModifier {
+        get { return LayoutAttribute(view: view, attribute: .leftMargin) }
+        set { constraint(newValue, with: .leftMargin) }
+    }
+    
+    public var rightMargin: LayoutModifier {
+        get { return LayoutAttribute(view: view, attribute: .rightMargin) }
+        set { constraint(newValue, with: .rightMargin) }
+    }
+    
+    public var topMargin: LayoutModifier {
+        get { return LayoutAttribute(view: view, attribute: .topMargin) }
+        set { constraint(newValue, with: .topMargin) }
+    }
+    
+    public var bottomMargin: LayoutModifier {
+        get { return LayoutAttribute(view: view, attribute: .bottomMargin) }
+        set { constraint(newValue, with: .bottomMargin) }
+    }
+    
+    public var leadingMargin: LayoutModifier {
+        get { return LayoutAttribute(view: view, attribute: .leadingMargin) }
+        set { constraint(newValue, with: .leadingMargin) }
+    }
+    
+    public var trailingMargin: LayoutModifier {
+        get { return LayoutAttribute(view: view, attribute: .trailingMargin) }
+        set { constraint(newValue, with: .trailingMargin) }
+    }
+    
+    public var centerXWithinMargins: LayoutModifier {
+        get { return LayoutAttribute(view: view, attribute: .centerXWithinMargins) }
+        set { constraint(newValue, with: .centerXWithinMargins) }
+    }
+    
+    public var centerYWithinMargins: LayoutModifier {
+        get { return LayoutAttribute(view: view, attribute: .centerYWithinMargins) }
+        set { constraint(newValue, with: .centerYWithinMargins) }
+    }
+    
+    // MARK: Additional attributes
+    
+    public var aspectRatio: CGFloat? {
+        didSet {
+            guard let aspectRatio = aspectRatio else { return }
+            width = height * aspectRatio
+        }
+    }
+    
+    // MARK: - Helper
     
     private func constraint(_ modifier: LayoutModifier, with layoutAttribute: NSLayoutAttribute) {
         let constraint = modifier.constraint(view: view, layoutAttribute: layoutAttribute)
         constraint.isActive = true
     }
-}
-
-protocol LayoutModifier {
-    func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint
-    func add(_ constant: CGFloat) -> LayoutModifier
-    func multiply(by multiplier: CGFloat) -> LayoutModifier
-    func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier
-    func setPriority(_ priority: UILayoutPriority) -> LayoutModifier
-}
-
-extension UIView {
-    var layout: Layout {
-        return Layout(view: self)
-    }
-    
-    fileprivate func prepareForAutolayout() {
-        if translatesAutoresizingMaskIntoConstraints {
-            translatesAutoresizingMaskIntoConstraints = false
-        }
-    }
-}
-
-// MARK: - Operations
-prefix operator <=
-prefix operator >=
-infix operator >>
-
-func + (modifier: LayoutModifier, constant: CGFloat) -> LayoutModifier {
-    return modifier.add(constant)
-}
-
-func - (modifier: LayoutModifier, constant: CGFloat) -> LayoutModifier {
-    return modifier.add(-constant)
-}
-
-func * (modifier: LayoutModifier, multiplier: CGFloat) -> LayoutModifier {
-    return modifier.multiply(by: multiplier)
-}
-
-func / (modifier: LayoutModifier, multiplier: CGFloat) -> LayoutModifier {
-    return modifier.multiply(by: 1 / multiplier)
-}
-
-prefix func <= (modifier: LayoutModifier) -> LayoutModifier {
-    return modifier.setRelation(.lessThanOrEqual)
-}
-
-prefix func >= (modifier: LayoutModifier) -> LayoutModifier {
-    return modifier.setRelation(.greaterThanOrEqual)
-}
-
-func & (modifier: LayoutModifier, priority: UILayoutPriority) -> LayoutModifier {
-    return modifier.setPriority(priority)
-}
-
-func >> (modifier: LayoutModifier, constraint: inout NSLayoutConstraint) -> LayoutModifier {
-    return LayoutConstraintSetter(original: modifier, constraint: &constraint)
-}
-
-func >> (modifier: LayoutModifier, constraint: inout NSLayoutConstraint?) -> LayoutModifier {
-    return LayoutConstraintSetter(original: modifier, optionalConstraint: &constraint)
-}
-
-func >> (modifier: LayoutModifier, constraint: inout NSLayoutConstraint!) -> LayoutModifier {
-    return LayoutConstraintSetter(original: modifier, forcedOptionalConstraint: &constraint)
-}
-
-// MARK: - Constants
-
-protocol CGFloatConvertible {
-    var cgFloat: CGFloat { get }
-}
-
-extension CGFloat: CGFloatConvertible, LayoutModifier {
-    var cgFloat: CGFloat { return self }
-}
-
-extension Int: CGFloatConvertible, LayoutModifier {
-    var cgFloat: CGFloat { return CGFloat(self) }
-}
-
-extension Double: CGFloatConvertible, LayoutModifier {
-    var cgFloat: CGFloat { return CGFloat(self) }
-}
-
-extension LayoutModifier where Self: CGFloatConvertible {
-    func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint {
-        return NSLayoutConstraint(item: view,
-                                  attribute: layoutAttribute,
-                                  relatedBy: Layout.Defaults.relation,
-                                  toItem: nil,
-                                  attribute: .notAnAttribute,
-                                  multiplier: 0,
-                                  constant: cgFloat)
-    }
-    
-    func add(_ constant: CGFloat) -> LayoutModifier {
-        return cgFloat + constant
-    }
-    
-    func multiply(by multiplier: CGFloat) -> LayoutModifier {
-        return cgFloat * multiplier
-    }
-    
-    func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier {
-        return LayoutConstant(constant: self.cgFloat, relation: relation, priority: Layout.Defaults.priority)
-    }
-    
-    func setPriority(_ priority: UILayoutPriority) -> LayoutModifier {
-        return LayoutConstant(constant: self.cgFloat, relation: Layout.Defaults.relation, priority: priority)
-    }
-}
-
-private struct LayoutConstant: LayoutModifier {
-    var constant: CGFloat
-    var relation: NSLayoutRelation
-    var priority: UILayoutPriority
-    
-    func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint {
-        let constraint = NSLayoutConstraint(item: view,
-                                            attribute: layoutAttribute,
-                                            relatedBy: relation,
-                                            toItem: nil,
-                                            attribute: .notAnAttribute,
-                                            multiplier: 0,
-                                            constant: constant)
-        
-        constraint.priority = priority
-        return constraint
-    }
-    
-    func add(_ constant: CGFloat) -> LayoutModifier {
-        var modifier = self
-        modifier.constant += constant
-        return modifier
-    }
-    
-    func multiply(by multiplier: CGFloat) -> LayoutModifier {
-        var modifier = self
-        modifier.constant *= multiplier
-        return modifier
-    }
-    
-    func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier {
-        var modifier = self
-        modifier.relation = relation
-        return modifier
-    }
-    
-    func setPriority(_ priority: UILayoutPriority) -> LayoutModifier {
-        var modifier = self
-        modifier.priority = priority
-        return modifier
-    }
-}
-
-private struct LayoutAttribute: LayoutModifier {
-    let view: UIView
-    let attribute: NSLayoutAttribute
-    fileprivate(set) var constant: CGFloat
-    fileprivate(set) var multiplier: CGFloat
-    fileprivate(set) var relation: NSLayoutRelation
-    fileprivate(set) var priority: UILayoutPriority
-    
-    fileprivate init(view: UIView,
-                     attribute: NSLayoutAttribute,
-                     relation: NSLayoutRelation = Layout.Defaults.relation,
-                     priority: UILayoutPriority = Layout.Defaults.priority,
-                     constant: CGFloat = 0,
-                     multiplier: CGFloat = 1) {
-        
-        self.view = view
-        self.attribute = attribute
-        self.relation = relation
-        self.priority = priority
-        self.constant = constant
-        self.multiplier = multiplier
-    }
-    
-    func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint {
-        let constraint = NSLayoutConstraint(item: view,
-                                            attribute: layoutAttribute,
-                                            relatedBy: relation,
-                                            toItem: self.view,
-                                            attribute: attribute,
-                                            multiplier: multiplier,
-                                            constant: constant)
-        constraint.priority = priority
-        return constraint
-    }
-    
-    func add(_ constant: CGFloat) -> LayoutModifier {
-        var modifier = self
-        modifier.constant += constant
-        return modifier
-    }
-    
-    func multiply(by multiplier: CGFloat) -> LayoutModifier {
-        var modifier = self
-        modifier.multiplier *= multiplier
-        return modifier
-    }
-    
-    func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier {
-        var modifier = self
-        modifier.relation = relation
-        return modifier
-    }
-    
-    func setPriority(_ priority: UILayoutPriority) -> LayoutModifier {
-        var modifier = self
-        modifier.priority = priority
-        return modifier
-    }
-}
-
-private class LayoutConstraintSetter: LayoutModifier {
-    private let original: LayoutModifier
-    private let constraintPointer: UnsafeMutablePointer<NSLayoutConstraint>?
-    private let optionalConstraintPointer: UnsafeMutablePointer<NSLayoutConstraint?>?
-    private let forcedOptionalConstraintPointer: UnsafeMutablePointer<NSLayoutConstraint!>?
-    
-    init(original: LayoutModifier, constraint: inout NSLayoutConstraint) {
-        self.original = original
-        self.constraintPointer = UnsafeMutablePointer(&constraint)
-        self.optionalConstraintPointer = nil
-        self.forcedOptionalConstraintPointer = nil
-    }
-    
-    init(original: LayoutModifier, optionalConstraint: inout NSLayoutConstraint?) {
-        self.original = original
-        self.constraintPointer = nil
-        self.optionalConstraintPointer = UnsafeMutablePointer(&optionalConstraint)
-        self.forcedOptionalConstraintPointer = nil
-    }
-    
-    init(original: LayoutModifier, forcedOptionalConstraint: inout NSLayoutConstraint!) {
-        self.original = original
-        self.constraintPointer = nil
-        self.optionalConstraintPointer = nil
-        self.forcedOptionalConstraintPointer = UnsafeMutablePointer(&forcedOptionalConstraint)
-    }
-    
-    func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint {
-        let constraint = original.constraint(view: view, layoutAttribute: layoutAttribute)
-        constraintPointer?.pointee = constraint
-        optionalConstraintPointer?.pointee = constraint
-        forcedOptionalConstraintPointer?.pointee = constraint
-        return constraint
-    }
-    
-    func add(_ constant: CGFloat) -> LayoutModifier {
-        return original.add(constant)
-    }
-    
-    func multiply(by multiplier: CGFloat) -> LayoutModifier {
-        return original.multiply(by: multiplier)
-    }
-    
-    func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier {
-        return original.setRelation(relation)
-    }
-    
-    func setPriority(_ priority: UILayoutPriority) -> LayoutModifier {
-        return original.setPriority(priority)
-    }
-}
-
-extension NSLayoutConstraint {
-    static var empty: NSLayoutConstraint { return NSLayoutConstraint() }
 }
