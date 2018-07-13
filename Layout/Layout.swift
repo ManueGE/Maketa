@@ -57,13 +57,10 @@ class Layout {
     }
     
     private func constraint(_ modifier: LayoutModifier, with layoutAttribute: NSLayoutAttribute) {
-        let constraint =  modifier.constraint(view: view, layoutAttribute: layoutAttribute)
+        let constraint = modifier.constraint(view: view, layoutAttribute: layoutAttribute)
         constraint.isActive = true
     }
 }
-
-prefix operator <=
-prefix operator >=
 
 protocol LayoutModifier {
     func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint
@@ -85,6 +82,9 @@ extension UIView {
 }
 
 // MARK: - Operations
+prefix operator <=
+prefix operator >=
+infix operator -->
 
 func + (modifier: LayoutModifier, constant: CGFloat) -> LayoutModifier {
     return modifier.add(constant)
@@ -108,6 +108,19 @@ prefix func <= (modifier: LayoutModifier) -> LayoutModifier {
 
 prefix func >= (modifier: LayoutModifier) -> LayoutModifier {
     return modifier.setRelation(.greaterThanOrEqual)
+}
+
+
+func --> (modifier: LayoutModifier, constraint: inout NSLayoutConstraint) -> LayoutModifier {
+    return LayoutConstraintSetter(original: modifier, constraint: &constraint)
+}
+
+func --> (modifier: LayoutModifier, constraint: inout NSLayoutConstraint?) -> LayoutModifier {
+    return LayoutConstraintSetter(original: modifier, optionalConstraint: &constraint)
+}
+
+func --> (modifier: LayoutModifier, constraint: inout NSLayoutConstraint!) -> LayoutModifier {
+    return LayoutConstraintSetter(original: modifier, forcedOptionalConstraint: &constraint)
 }
 
 // MARK: - Constants
@@ -185,7 +198,7 @@ private struct LayoutConstant: LayoutModifier {
     }
 }
 
-struct LayoutAttribute: LayoutModifier {
+private struct LayoutAttribute: LayoutModifier {
     let view: UIView
     let attribute: NSLayoutAttribute
     fileprivate(set) var constant: CGFloat
@@ -227,4 +240,56 @@ struct LayoutAttribute: LayoutModifier {
         modifier.relation = relation
         return modifier
     }
+}
+
+private class LayoutConstraintSetter: LayoutModifier {
+    private let original: LayoutModifier
+    private let constraintPointer: UnsafeMutablePointer<NSLayoutConstraint>?
+    private let optionalConstraintPointer: UnsafeMutablePointer<NSLayoutConstraint?>?
+    private let forcedOptionalConstraintPointer: UnsafeMutablePointer<NSLayoutConstraint!>?
+    
+    init(original: LayoutModifier, constraint: inout NSLayoutConstraint) {
+        self.original = original
+        self.constraintPointer = UnsafeMutablePointer(&constraint)
+        self.optionalConstraintPointer = nil
+        self.forcedOptionalConstraintPointer = nil
+    }
+    
+    init(original: LayoutModifier, optionalConstraint: inout NSLayoutConstraint?) {
+        self.original = original
+        self.constraintPointer = nil
+        self.optionalConstraintPointer = UnsafeMutablePointer(&optionalConstraint)
+        self.forcedOptionalConstraintPointer = nil
+    }
+    
+    init(original: LayoutModifier, forcedOptionalConstraint: inout NSLayoutConstraint!) {
+        self.original = original
+        self.constraintPointer = nil
+        self.optionalConstraintPointer = nil
+        self.forcedOptionalConstraintPointer = UnsafeMutablePointer(&forcedOptionalConstraint)
+    }
+    
+    func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint {
+        let constraint = original.constraint(view: view, layoutAttribute: layoutAttribute)
+        constraintPointer?.pointee = constraint
+        optionalConstraintPointer?.pointee = constraint
+        forcedOptionalConstraintPointer?.pointee = constraint
+        return constraint
+    }
+    
+    func add(_ constant: CGFloat) -> LayoutModifier {
+        return original.add(constant)
+    }
+    
+    func multiply(by multiplier: CGFloat) -> LayoutModifier {
+        return original.multiply(by: multiplier)
+    }
+    
+    func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier {
+        return original.setRelation(relation)
+    }
+}
+
+extension NSLayoutConstraint {
+    static var empty: NSLayoutConstraint { return NSLayoutConstraint() }
 }

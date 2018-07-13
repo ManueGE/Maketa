@@ -9,17 +9,21 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var heightLayoutConstraint: NSLayoutConstraint?
+    var centerYConstraint: NSLayoutConstraint!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var constraint: NSLayoutConstraint = .empty
         let view1 = UIView()
         view.addSubview(view1)
         view1.backgroundColor = .red
-        view1.layout.height = 150
-        view1.layout.width = view1.layout.height
+        view1.layout.height = 150 --> heightLayoutConstraint
+        view1.layout.width = view1.layout.height --> constraint
         view1.layout.centerX = view.layout.centerX
-        view1.layout.centerY = view.layout.centerY
+        view1.layout.centerY = view.layout.centerY --> centerYConstraint
         
         let view2 = UIView()
         view.addSubview(view2)
