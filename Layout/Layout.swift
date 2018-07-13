@@ -84,7 +84,7 @@ extension UIView {
 // MARK: - Operations
 prefix operator <=
 prefix operator >=
-infix operator -->
+infix operator >>
 
 func + (modifier: LayoutModifier, constant: CGFloat) -> LayoutModifier {
     return modifier.add(constant)
@@ -111,15 +111,15 @@ prefix func >= (modifier: LayoutModifier) -> LayoutModifier {
 }
 
 
-func --> (modifier: LayoutModifier, constraint: inout NSLayoutConstraint) -> LayoutModifier {
+func >> (modifier: LayoutModifier, constraint: inout NSLayoutConstraint) -> LayoutModifier {
     return LayoutConstraintSetter(original: modifier, constraint: &constraint)
 }
 
-func --> (modifier: LayoutModifier, constraint: inout NSLayoutConstraint?) -> LayoutModifier {
+func >> (modifier: LayoutModifier, constraint: inout NSLayoutConstraint?) -> LayoutModifier {
     return LayoutConstraintSetter(original: modifier, optionalConstraint: &constraint)
 }
 
-func --> (modifier: LayoutModifier, constraint: inout NSLayoutConstraint!) -> LayoutModifier {
+func >> (modifier: LayoutModifier, constraint: inout NSLayoutConstraint!) -> LayoutModifier {
     return LayoutConstraintSetter(original: modifier, forcedOptionalConstraint: &constraint)
 }
 
