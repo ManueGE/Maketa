@@ -11,6 +11,7 @@ import UIKit
 public struct Center {
     fileprivate let view: UIView
     fileprivate var offset = UIOffset.zero
+    fileprivate var constraintsPointer: MultiTypePointer<[NSLayoutConstraint]>?
     
     fileprivate init(view: UIView) {
         self.view = view
@@ -38,14 +39,37 @@ public func - (center: Center, offset: CGFloatConvertible) -> Center {
     return  center + -offset.layoutCGFloat
 }
 
+public func => (center: Center, constraints: inout [NSLayoutConstraint]) -> Center {
+    var center = center
+    center.constraintsPointer = MultiTypePointer(&constraints)
+    return center
+}
+
+public func => (center: Center, constraints: inout [NSLayoutConstraint]?) -> Center {
+    var center = center
+    center.constraintsPointer = MultiTypePointer(withOptional: &constraints)
+    return center
+}
+
+public func => (center: Center, constraints: inout [NSLayoutConstraint]!) -> Center {
+    var center = center
+    center.constraintsPointer = MultiTypePointer(withForcedUnwrapped: &constraints)
+    return center
+}
+
 public extension Layout {
     public var center: Center {
         get {
             return Center(view: view)
         }
         set {
-            view.layout.centerX = newValue.view.layout.centerX + newValue.offset.horizontal
-            view.layout.centerY = newValue.view.layout.centerY + newValue.offset.vertical
+            var xConstraint = NSLayoutConstraint.empty
+            view.layout.centerX = (newValue.view.layout.centerX + newValue.offset.horizontal) => xConstraint
+            
+            var yConstraint = NSLayoutConstraint.empty
+            view.layout.centerY = (newValue.view.layout.centerY + newValue.offset.vertical) => yConstraint
+            
+            newValue.constraintsPointer?.setPointee([xConstraint, yConstraint])
         }
     }
 }

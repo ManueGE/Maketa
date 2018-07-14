@@ -198,36 +198,26 @@ struct LayoutAttribute: LayoutModifier {
 
 struct LayoutConstraintSetter: LayoutModifier {
     private(set) var original: LayoutModifier
-    private let constraintPointer: UnsafeMutablePointer<NSLayoutConstraint>?
-    private let optionalConstraintPointer: UnsafeMutablePointer<NSLayoutConstraint?>?
-    private let forcedOptionalConstraintPointer: UnsafeMutablePointer<NSLayoutConstraint!>?
+    private let constraintPointer: MultiTypePointer<NSLayoutConstraint>
     
     init(original: LayoutModifier, constraint: inout NSLayoutConstraint) {
         self.original = original
-        self.constraintPointer = UnsafeMutablePointer(&constraint)
-        self.optionalConstraintPointer = nil
-        self.forcedOptionalConstraintPointer = nil
+        self.constraintPointer = MultiTypePointer(&constraint)
     }
     
     init(original: LayoutModifier, optionalConstraint: inout NSLayoutConstraint?) {
         self.original = original
-        self.constraintPointer = nil
-        self.optionalConstraintPointer = UnsafeMutablePointer(&optionalConstraint)
-        self.forcedOptionalConstraintPointer = nil
+        self.constraintPointer = MultiTypePointer(withOptional: &optionalConstraint)
     }
     
     init(original: LayoutModifier, forcedOptionalConstraint: inout NSLayoutConstraint!) {
         self.original = original
-        self.constraintPointer = nil
-        self.optionalConstraintPointer = nil
-        self.forcedOptionalConstraintPointer = UnsafeMutablePointer(&forcedOptionalConstraint)
+        self.constraintPointer = MultiTypePointer(withForcedUnwrapped: &forcedOptionalConstraint)
     }
     
     func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint {
         let constraint = original.constraint(view: view, layoutAttribute: layoutAttribute)
-        constraintPointer?.pointee = constraint
-        optionalConstraintPointer?.pointee = constraint
-        forcedOptionalConstraintPointer?.pointee = constraint
+        constraintPointer.setPointee(constraint)
         return constraint
     }
     
