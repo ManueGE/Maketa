@@ -18,7 +18,8 @@
 		3285E91120F96343004A4BB4 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91020F96343004A4BB4 /* Layout.swift */; };
 		3285E91320F9634B004A4BB4 /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91220F9634B004A4BB4 /* UIView+Layout.swift */; };
 		3285E91520F96355004A4BB4 /* LayoutModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91420F96355004A4BB4 /* LayoutModifier.swift */; };
-		3285E91720F964C0004A4BB4 /* NSLayoutConstraint+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91620F964C0004A4BB4 /* NSLayoutConstraint+Layout.swift */; };
+		3285E91720F964C0004A4BB4 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91620F964C0004A4BB4 /* Helpers.swift */; };
+		3285E91920F9EAA3004A4BB4 /* Layout+Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91820F9EAA3004A4BB4 /* Layout+Edge.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +60,8 @@
 		3285E91020F96343004A4BB4 /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		3285E91220F9634B004A4BB4 /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		3285E91420F96355004A4BB4 /* LayoutModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutModifier.swift; sourceTree = "<group>"; };
-		3285E91620F964C0004A4BB4 /* NSLayoutConstraint+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Layout.swift"; sourceTree = "<group>"; };
+		3285E91620F964C0004A4BB4 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		3285E91820F9EAA3004A4BB4 /* Layout+Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Layout+Edge.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,9 +120,10 @@
 				3285E90520F96335004A4BB4 /* Layout.h */,
 				3285E90620F96335004A4BB4 /* Info.plist */,
 				3285E91020F96343004A4BB4 /* Layout.swift */,
+				3285E91820F9EAA3004A4BB4 /* Layout+Edge.swift */,
 				3285E91420F96355004A4BB4 /* LayoutModifier.swift */,
 				3285E91220F9634B004A4BB4 /* UIView+Layout.swift */,
-				3285E91620F964C0004A4BB4 /* NSLayoutConstraint+Layout.swift */,
+				3285E91620F964C0004A4BB4 /* Helpers.swift */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -248,10 +251,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3285E91920F9EAA3004A4BB4 /* Layout+Edge.swift in Sources */,
 				3285E91320F9634B004A4BB4 /* UIView+Layout.swift in Sources */,
 				3285E91520F96355004A4BB4 /* LayoutModifier.swift in Sources */,
 				3285E91120F96343004A4BB4 /* Layout.swift in Sources */,
-				3285E91720F964C0004A4BB4 /* NSLayoutConstraint+Layout.swift in Sources */,
+				3285E91720F964C0004A4BB4 /* Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

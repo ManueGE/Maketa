@@ -12,10 +12,18 @@ import Layout
 class ViewController: UIViewController {
     
     var heightLayoutConstraint: NSLayoutConstraint?
+    var heightLessLayoutConstraint: NSLayoutConstraint?
     var centerYConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let view0 = UIView()
+        view.addSubview(view0)
+        view0.backgroundColor = .lightGray
+        view0.layout.edges = view.layout.edges - .top - 40
+        view0.layout.height = 200
+        view0.layout.height = <=300 >>> heightLessLayoutConstraint
         
         var constraint: NSLayoutConstraint = .empty
         let view1 = UIView()
@@ -48,7 +56,5 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 

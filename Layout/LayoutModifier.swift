@@ -63,22 +63,6 @@ public func >>> (modifier: LayoutModifier, constraint: inout NSLayoutConstraint!
 
 // MARK: - Constants
 
-public protocol CGFloatConvertible {
-    var cgFloat: CGFloat { get }
-}
-
-extension CGFloat: CGFloatConvertible, LayoutModifier {
-    public var cgFloat: CGFloat { return self }
-}
-
-extension Int: CGFloatConvertible, LayoutModifier {
-    public var cgFloat: CGFloat { return CGFloat(self) }
-}
-
-extension Double: CGFloatConvertible, LayoutModifier {
-    public var cgFloat: CGFloat { return CGFloat(self) }
-}
-
 public extension LayoutModifier where Self: CGFloatConvertible {
     public func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint {
         return NSLayoutConstraint(item: view,
@@ -210,7 +194,7 @@ struct LayoutAttribute: LayoutModifier {
     }
 }
 
-class LayoutConstraintSetter: LayoutModifier {
+struct LayoutConstraintSetter: LayoutModifier {
     private let original: LayoutModifier
     private let constraintPointer: UnsafeMutablePointer<NSLayoutConstraint>?
     private let optionalConstraintPointer: UnsafeMutablePointer<NSLayoutConstraint?>?

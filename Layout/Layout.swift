@@ -15,7 +15,7 @@ public class Layout {
         static let priority = UILayoutPriority.required
     }
     
-    private weak var view: UIView!
+    weak var view: UIView!
     
     // MARK: Inits
     
