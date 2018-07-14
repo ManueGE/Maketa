@@ -99,7 +99,7 @@ public func - (edges: Edges, insets: UIEdgeInsets) -> Edges {
 }
 
 public func - (edges: Edges, inset: CGFloatConvertible) -> Edges {
-    let value = inset.cgFloat
+    let value = inset.layoutCGFloat
     let insets = UIEdgeInsets(top: value, left: value, bottom: value, right: value)
     return edges - insets
 }

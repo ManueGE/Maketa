@@ -60,6 +60,10 @@ public func >>> (modifier: LayoutModifier, constraint: inout NSLayoutConstraint!
 }
 
 // MARK: - Constants
+extension CGFloat: LayoutModifier {}
+extension Float: LayoutModifier {}
+extension Int: LayoutModifier {}
+extension Double: LayoutModifier {}
 
 public extension LayoutModifier where Self: CGFloatConvertible {
     public func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint {
@@ -69,23 +73,23 @@ public extension LayoutModifier where Self: CGFloatConvertible {
                                   toItem: nil,
                                   attribute: .notAnAttribute,
                                   multiplier: 0,
-                                  constant: cgFloat)
+                                  constant: layoutCGFloat)
     }
     
     public func add(_ constant: CGFloat) -> LayoutModifier {
-        return cgFloat + constant
+        return layoutCGFloat + constant
     }
     
     public func multiply(by multiplier: CGFloat) -> LayoutModifier {
-        return cgFloat * multiplier
+        return layoutCGFloat * multiplier
     }
     
     public func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier {
-        return LayoutConstant(constant: self.cgFloat, relation: relation, priority: Layout.Defaults.priority)
+        return LayoutConstant(constant: self.layoutCGFloat, relation: relation, priority: Layout.Defaults.priority)
     }
     
     public func setPriority(_ priority: UILayoutPriority) -> LayoutModifier {
-        return LayoutConstant(constant: self.cgFloat, relation: Layout.Defaults.relation, priority: priority)
+        return LayoutConstant(constant: self.layoutCGFloat, relation: Layout.Defaults.relation, priority: priority)
     }
 }
 

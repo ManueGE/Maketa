@@ -13,21 +13,21 @@ public extension NSLayoutConstraint {
 }
 
 public protocol CGFloatConvertible {
-    var cgFloat: CGFloat { get }
+    var layoutCGFloat: CGFloat { get }
 }
 
-extension CGFloat: CGFloatConvertible, LayoutModifier {
-    public var cgFloat: CGFloat { return self }
+extension CGFloat: CGFloatConvertible {
+    public var layoutCGFloat: CGFloat { return self }
 }
 
-extension Float: CGFloatConvertible, LayoutModifier {
-    public var cgFloat: CGFloat { return CGFloat(self) }
+extension Float: CGFloatConvertible {
+    public var layoutCGFloat: CGFloat { return CGFloat(self) }
 }
 
-extension Int: CGFloatConvertible, LayoutModifier {
-    public var cgFloat: CGFloat { return CGFloat(self) }
+extension Int: CGFloatConvertible {
+    public var layoutCGFloat: CGFloat { return CGFloat(self) }
 }
 
-extension Double: CGFloatConvertible, LayoutModifier {
-    public var cgFloat: CGFloat { return CGFloat(self) }
+extension Double: CGFloatConvertible {
+    public var layoutCGFloat: CGFloat { return CGFloat(self) }
 }
