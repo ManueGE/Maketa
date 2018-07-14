@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     
     var heightLayoutConstraint: NSLayoutConstraint?
     var heightLessLayoutConstraint: NSLayoutConstraint?
+    var heightGreaterLayoutConstraint: NSLayoutConstraint?
     var centerYConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
@@ -23,7 +24,8 @@ class ViewController: UIViewController {
         view0.backgroundColor = .lightGray
         view0.layout.edges = view.layout.edges - .top - 40
         view0.layout.height = 200
-        view0.layout.height = <=300 >>> heightLessLayoutConstraint
+        view0.layout.height < 300 >>> heightLessLayoutConstraint
+        view0.layout.height > 100 >>> heightGreaterLayoutConstraint
         
         var constraint: NSLayoutConstraint = .empty
         let view1 = UIView()

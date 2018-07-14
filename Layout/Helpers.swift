@@ -20,6 +20,10 @@ extension CGFloat: CGFloatConvertible, LayoutModifier {
     public var cgFloat: CGFloat { return self }
 }
 
+extension Float: CGFloatConvertible, LayoutModifier {
+    public var cgFloat: CGFloat { return CGFloat(self) }
+}
+
 extension Int: CGFloatConvertible, LayoutModifier {
     public var cgFloat: CGFloat { return CGFloat(self) }
 }
