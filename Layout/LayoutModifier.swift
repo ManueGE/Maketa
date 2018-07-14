@@ -17,7 +17,7 @@ public protocol LayoutModifier {
 }
 
 // MARK: - Operators
-infix operator >>> : BitwiseShiftPrecedence
+infix operator => : BitwiseShiftPrecedence
 
 public func < (left: inout LayoutModifier, right: LayoutModifier) {
     left = right.setRelation(.lessThanOrEqual)
@@ -47,15 +47,15 @@ public func & (modifier: LayoutModifier, priority: UILayoutPriority) -> LayoutMo
     return modifier.setPriority(priority)
 }
 
-public func >>> (modifier: LayoutModifier, constraint: inout NSLayoutConstraint) -> LayoutModifier {
+public func => (modifier: LayoutModifier, constraint: inout NSLayoutConstraint) -> LayoutModifier {
     return LayoutConstraintSetter(original: modifier, constraint: &constraint)
 }
 
-public func >>> (modifier: LayoutModifier, constraint: inout NSLayoutConstraint?) -> LayoutModifier {
+public func => (modifier: LayoutModifier, constraint: inout NSLayoutConstraint?) -> LayoutModifier {
     return LayoutConstraintSetter(original: modifier, optionalConstraint: &constraint)
 }
 
-public func >>> (modifier: LayoutModifier, constraint: inout NSLayoutConstraint!) -> LayoutModifier {
+public func => (modifier: LayoutModifier, constraint: inout NSLayoutConstraint!) -> LayoutModifier {
     return LayoutConstraintSetter(original: modifier, forcedOptionalConstraint: &constraint)
 }
 
