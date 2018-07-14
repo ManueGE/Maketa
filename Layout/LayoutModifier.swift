@@ -17,9 +17,15 @@ public protocol LayoutModifier {
 }
 
 // MARK: - Operators
-prefix operator <=
-prefix operator >=
-infix operator >>>
+infix operator >>> : BitwiseShiftPrecedence
+
+public func < (left: inout LayoutModifier, right: LayoutModifier) {
+    left = right.setRelation(.lessThanOrEqual)
+}
+
+public func > (left: inout LayoutModifier, right: LayoutModifier) {
+    left = right.setRelation(.greaterThanOrEqual)
+}
 
 public func + (modifier: LayoutModifier, constant: CGFloat) -> LayoutModifier {
     return modifier.add(constant)
@@ -35,14 +41,6 @@ public func * (modifier: LayoutModifier, multiplier: CGFloat) -> LayoutModifier 
 
 public func / (modifier: LayoutModifier, multiplier: CGFloat) -> LayoutModifier {
     return modifier.multiply(by: 1 / multiplier)
-}
-
-public prefix func <= (modifier: LayoutModifier) -> LayoutModifier {
-    return modifier.setRelation(.lessThanOrEqual)
-}
-
-public prefix func >= (modifier: LayoutModifier) -> LayoutModifier {
-    return modifier.setRelation(.greaterThanOrEqual)
 }
 
 public func & (modifier: LayoutModifier, priority: UILayoutPriority) -> LayoutModifier {
@@ -195,7 +193,7 @@ struct LayoutAttribute: LayoutModifier {
 }
 
 struct LayoutConstraintSetter: LayoutModifier {
-    private let original: LayoutModifier
+    private(set) var original: LayoutModifier
     private let constraintPointer: UnsafeMutablePointer<NSLayoutConstraint>?
     private let optionalConstraintPointer: UnsafeMutablePointer<NSLayoutConstraint?>?
     private let forcedOptionalConstraintPointer: UnsafeMutablePointer<NSLayoutConstraint!>?
@@ -230,18 +228,26 @@ struct LayoutConstraintSetter: LayoutModifier {
     }
     
     func add(_ constant: CGFloat) -> LayoutModifier {
-        return original.add(constant)
+        var modifier = self
+        modifier.original = original.add(constant)
+        return modifier
     }
     
     func multiply(by multiplier: CGFloat) -> LayoutModifier {
-        return original.multiply(by: multiplier)
+        var modifier = self
+        modifier.original = original.multiply(by: multiplier)
+        return modifier
     }
     
     func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier {
-        return original.setRelation(relation)
+        var modifier = self
+        modifier.original = original.setRelation(relation)
+        return modifier
     }
     
     func setPriority(_ priority: UILayoutPriority) -> LayoutModifier {
-        return original.setPriority(priority)
+        var modifier = self
+        modifier.original = original.setPriority(priority)
+        return modifier
     }
 }
