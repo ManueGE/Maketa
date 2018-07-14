@@ -128,10 +128,18 @@ public class Layout {
     
     // MARK: Additional attributes
     
-    public var aspectRatio: CGFloat? {
-        didSet {
-            guard let aspectRatio = aspectRatio else { return }
-            width = height * aspectRatio
+    public var aspectRatio: CGFloat {
+        get { return view.frame.width / view.frame.height }
+        set { width = newValue * height }
+    }
+    
+    public var size: CGSize {
+        get {
+            return view.bounds.size
+        }
+        set {
+            width = size.width
+            height = size.height
         }
     }
     

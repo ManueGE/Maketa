@@ -31,12 +31,20 @@ public func + (modifier: LayoutModifier, constant: CGFloat) -> LayoutModifier {
     return modifier.add(constant)
 }
 
+public func + (constant: CGFloat, modifier: LayoutModifier) -> LayoutModifier {
+    return modifier + constant
+}
+
 public func - (modifier: LayoutModifier, constant: CGFloat) -> LayoutModifier {
     return modifier.add(-constant)
 }
 
 public func * (modifier: LayoutModifier, multiplier: CGFloat) -> LayoutModifier {
     return modifier.multiply(by: multiplier)
+}
+
+public func * (multiplier: CGFloat, modifier: LayoutModifier) -> LayoutModifier {
+    return modifier * multiplier
 }
 
 public func / (modifier: LayoutModifier, multiplier: CGFloat) -> LayoutModifier {
