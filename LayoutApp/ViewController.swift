@@ -52,6 +52,12 @@ class ViewController: UIViewController {
         view3.layout.top = view2.layout.bottom + 10
         view3.layout.centerX = view1.layout.centerX
         view3.layout.width = view1.layout.width
+        
+        let view4 = UIView()
+        view3.addSubview(view4)
+        view4.backgroundColor = .white
+        view4.layout.size = CGSize(width: 30, height: 30)
+        view4.layout.center = view3.layout.center + 20
     }
 
     override func didReceiveMemoryWarning() {
