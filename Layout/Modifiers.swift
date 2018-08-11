@@ -65,15 +65,10 @@ extension Float: LayoutModifier {}
 extension Int: LayoutModifier {}
 extension Double: LayoutModifier {}
 
-public extension LayoutModifier where Self: CGFloatConvertible {
+public extension LayoutModifier where Self: LayoutCGFloatConvertible {
     public func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint {
-        return NSLayoutConstraint(item: view,
-                                  attribute: layoutAttribute,
-                                  relatedBy: Layout.Defaults.relation,
-                                  toItem: nil,
-                                  attribute: .notAnAttribute,
-                                  multiplier: 0,
-                                  constant: layoutCGFloat)
+        let constant = LayoutConstant(constant: layoutCGFloat, relation: Layout.Defaults.relation, priority: Layout.Defaults.priority)
+        return constant.constraint(view: view, layoutAttribute: layoutAttribute)
     }
     
     public func add(_ constant: CGFloat) -> LayoutModifier {

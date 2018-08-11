@@ -1,5 +1,5 @@
 //
-//  Helpers.swift
+//  LayoutCGFloatConvertible.swift
 //  Layout
 //
 //  Created by Manuel García-Estañ on 14/7/18.
@@ -8,26 +8,22 @@
 
 import UIKit
 
-public extension NSLayoutConstraint {
-    public static var empty: NSLayoutConstraint { return NSLayoutConstraint() }
-}
-
-public protocol CGFloatConvertible {
+public protocol LayoutCGFloatConvertible {
     var layoutCGFloat: CGFloat { get }
 }
 
-extension CGFloat: CGFloatConvertible {
+extension CGFloat: LayoutCGFloatConvertible {
     public var layoutCGFloat: CGFloat { return self }
 }
 
-extension Float: CGFloatConvertible {
+extension Float: LayoutCGFloatConvertible {
     public var layoutCGFloat: CGFloat { return CGFloat(self) }
 }
 
-extension Int: CGFloatConvertible {
+extension Int: LayoutCGFloatConvertible {
     public var layoutCGFloat: CGFloat { return CGFloat(self) }
 }
 
-extension Double: CGFloatConvertible {
+extension Double: LayoutCGFloatConvertible {
     public var layoutCGFloat: CGFloat { return CGFloat(self) }
 }

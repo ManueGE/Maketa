@@ -139,7 +139,6 @@ extension Layout {
     // MARK: - Helper
     
     private func constraint(_ modifier: LayoutModifier, with layoutAttribute: NSLayoutAttribute) {
-        let constraint = modifier.constraint(view: view, layoutAttribute: layoutAttribute)
-        constraint.isActive = true
+        modifier.constraint(view: view, layoutAttribute: layoutAttribute).activated()
     }
 }

@@ -106,13 +106,13 @@ public func - (edges: Edges, insets: UIEdgeInsets) -> Edges {
     return edges + UIEdgeInsets(top: -insets.top, left: -insets.left, bottom: -insets.bottom, right: -insets.right)
 }
 
-public func + (edges: Edges, inset: CGFloatConvertible) -> Edges {
+public func + (edges: Edges, inset: LayoutCGFloatConvertible) -> Edges {
     let value = inset.layoutCGFloat
     let insets = UIEdgeInsets(top: value, left: value, bottom: value, right: value)
     return edges + insets
 }
 
-public func - (edges: Edges, inset: CGFloatConvertible) -> Edges {
+public func - (edges: Edges, inset: LayoutCGFloatConvertible) -> Edges {
     return edges + -inset.layoutCGFloat
 }
 
