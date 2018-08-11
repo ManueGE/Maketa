@@ -33,6 +33,11 @@ public extension UIView {
         }
     }
     
+    /// Returns the layout object associated to the receiver's superview. It throws a fatal error if view has not a superview
+    public var superLayout: Layout {
+        return layout.superLayout
+    }
+    
     /// Adjust the needed properties to be able to use the view in autolayout and returns the view itself.
     @discardableResult
     public func preparedForAutolayout() -> Self {

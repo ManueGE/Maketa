@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         let view0 = UIView()
         view.addSubview(view0)
         view0.backgroundColor = .lightGray
-        view0.layout.edges = (view.layout.edges - 40 - .bottom) => globalCenterConstraints
+        view0.layout.edges = (view0.superLayout.edges - 40 - .bottom) => globalCenterConstraints
         view0.layout.height = 200
         view0.layout.height < 300 => heightLessLayoutConstraint
         view0.layout.height > 100 => heightGreaterLayoutConstraint
@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         let view1 = UIView()
         view.addSubview(view1)
         view1.backgroundColor = .red
-        view1.layout.height = (150 & UILayoutPriority.defaultLow) => heightLayoutConstraint
+        view1.layout.height = (150 & .defaultLow) => heightLayoutConstraint
         view1.layout.width = view1.layout.height => constraint
         view1.layout.centerX = view.layout.centerX
         view1.layout.centerY = view.layout.centerY => centerYConstraint
