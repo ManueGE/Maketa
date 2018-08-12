@@ -9,21 +9,20 @@
 import UIKit
 
 public struct Edges {
+    fileprivate enum Kind {
+        case edge, margins
+    }
     fileprivate let view: UIView
+    fileprivate let kind: Kind
+    
     fileprivate var edges = Edge.all
     fileprivate var insets = UIEdgeInsets.zero
-    fileprivate var isRelativeToMargins = false
     fileprivate var useLeadingAndTraling = false
     fileprivate var constraintsPointer: MultiTypePointer<[NSLayoutConstraint]>?
     
-    fileprivate init(view: UIView) {
+    fileprivate init(view: UIView, kind: Kind) {
         self.view = view
-    }
-    
-    public var margins: Edges {
-        var edges = self
-        edges.isRelativeToMargins = true
-        return edges
+        self.kind = kind
     }
     
     public var relativeToLeadingAndTrailing: Edges {
@@ -40,45 +39,45 @@ public enum Edge: Equatable {
     fileprivate func constraint(view: UIView, with edges: Edges) -> NSLayoutConstraint {
         let layout = view.layout
         var constraint = NSLayoutConstraint.empty
-        switch (self, edges.useLeadingAndTraling, edges.isRelativeToMargins) {
+        switch (self, edges.useLeadingAndTraling, edges.kind) {
         // Left
-        case (.left, false, false):
+        case (.left, false, .edge):
             layout.left = (edges.view.layout.left - edges.insets.left) => constraint
         
-        case (.left, false, true):
+        case (.left, false, .margins):
             layout.leftMargin = (edges.view.layout.leftMargin - edges.insets.left) => constraint
             
-        case (.left, true, false):
+        case (.left, true, .edge):
             layout.leading = (edges.view.layout.leading - edges.insets.left) => constraint
             
-        case (.left, true, true):
+        case (.left, true, .margins):
             layout.leadingMargin = (edges.view.layout.leadingMargin - edges.insets.left) => constraint
             
         // Right
-        case (.right, false, false):
+        case (.right, false, .edge):
             layout.right = (edges.view.layout.right + edges.insets.right) => constraint
             
-        case (.right, false, true):
+        case (.right, false, .margins):
             layout.rightMargin = (edges.view.layout.rightMargin + edges.insets.right) => constraint
             
-        case (.right, true, false):
+        case (.right, true, .edge):
             layout.trailing = (edges.view.layout.trailing + edges.insets.right) => constraint
             
-        case (.right, true, true):
+        case (.right, true, .margins):
             layout.trailingMargin = (edges.view.layout.trailingMargin + edges.insets.right) => constraint
             
         // Top
-        case (.top, _, false):
+        case (.top, _, .edge):
             layout.top = (edges.view.layout.top - edges.insets.top) => constraint
             
-        case (.top, _, true):
+        case (.top, _, .margins):
             layout.top = (edges.view.layout.top - edges.insets.top) => constraint
             
         // Bottom
-        case (.bottom, _, false):
+        case (.bottom, _, .edge):
             layout.bottom = (edges.view.layout.bottom + edges.insets.bottom) => constraint
             
-        case (.bottom, _, true):
+        case (.bottom, _, .margins):
             layout.bottom = (edges.view.layout.bottom + edges.insets.bottom) => constraint
         }
         
@@ -137,11 +136,24 @@ public func => (edges: Edges, constraints: inout [NSLayoutConstraint]!) -> Edges
 public extension Layout {
     public var edges: Edges {
         get {
-            return Edges(view: view)
+            return Edges(view: view, kind: .edge)
         }
         set {
-            let constraints = newValue.edges.map { $0.constraint(view: view, with: newValue) }
-            newValue.constraintsPointer?.setPointee(constraints)
+            setEdges(newValue)
         }
+    }
+    
+    public var margins: Edges {
+        get {
+            return Edges(view: view, kind: .margins)
+        }
+        set {
+            setEdges(newValue)
+        }
+    }
+    
+    private func setEdges(_ newValue: Edges) {
+        let constraints = newValue.edges.map { $0.constraint(view: view, with: newValue) }
+        newValue.constraintsPointer?.setPointee(constraints)
     }
 }
