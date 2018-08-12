@@ -99,7 +99,7 @@ private struct LayoutConstant: LayoutModifier {
                                             relatedBy: relation,
                                             toItem: nil,
                                             attribute: .notAnAttribute,
-                                            multiplier: 0,
+                                            multiplier: 1,
                                             constant: constant)
         
         constraint.priority = priority

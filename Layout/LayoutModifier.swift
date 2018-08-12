@@ -126,16 +126,6 @@ extension Layout {
         set { width = newValue * height }
     }
     
-    public var size: CGSize {
-        get {
-            return view.bounds.size
-        }
-        set {
-            width = newValue.width
-            height = newValue.height
-        }
-    }
-    
     // MARK: - Helper
     
     private func constraint(_ modifier: LayoutModifier, with layoutAttribute: NSLayoutAttribute) {
