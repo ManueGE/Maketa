@@ -11,6 +11,8 @@
 		3230416120FA9C4200EA3B42 /* Center.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3230416020FA9C4200EA3B42 /* Center.swift */; };
 		3230416320FAA1E000EA3B42 /* LayoutModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3230416220FAA1E000EA3B42 /* LayoutModifier.swift */; };
 		323FF54A211ED09600780D11 /* NSLayoutConstraint+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323FF549211ED09600780D11 /* NSLayoutConstraint+Layout.swift */; };
+		3241AE6421222C88002879C0 /* LayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE6321222C88002879C0 /* LayoutTests.swift */; };
+		3241AE6621222C88002879C0 /* Layout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3285E90320F96334004A4BB4 /* Layout.framework */; };
 		32761E562120DE450062BEC4 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32761E552120DE450062BEC4 /* Size.swift */; };
 		3285E8EA20F7B434004A4BB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E8E920F7B434004A4BB4 /* AppDelegate.swift */; };
 		3285E8EC20F7B434004A4BB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E8EB20F7B434004A4BB4 /* ViewController.swift */; };
@@ -28,6 +30,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3241AE6721222C88002879C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3285E8DE20F7B434004A4BB4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3285E90220F96334004A4BB4;
+			remoteInfo = Layout;
+		};
 		3285E90820F96335004A4BB4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3285E8DE20F7B434004A4BB4 /* Project object */;
@@ -56,6 +65,9 @@
 		3230416020FA9C4200EA3B42 /* Center.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Center.swift; sourceTree = "<group>"; };
 		3230416220FAA1E000EA3B42 /* LayoutModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutModifier.swift; sourceTree = "<group>"; };
 		323FF549211ED09600780D11 /* NSLayoutConstraint+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Layout.swift"; sourceTree = "<group>"; };
+		3241AE6121222C88002879C0 /* LayoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LayoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3241AE6321222C88002879C0 /* LayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutTests.swift; sourceTree = "<group>"; };
+		3241AE6521222C88002879C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32761E552120DE450062BEC4 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		3285E8E620F7B434004A4BB4 /* LayoutApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LayoutApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3285E8E920F7B434004A4BB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +87,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3241AE5E21222C88002879C0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3241AE6621222C88002879C0 /* Layout.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3285E8E320F7B434004A4BB4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -93,11 +113,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3241AE6221222C88002879C0 /* LayoutTests */ = {
+			isa = PBXGroup;
+			children = (
+				3241AE6321222C88002879C0 /* LayoutTests.swift */,
+				3241AE6521222C88002879C0 /* Info.plist */,
+			);
+			path = LayoutTests;
+			sourceTree = "<group>";
+		};
 		3285E8DD20F7B434004A4BB4 = {
 			isa = PBXGroup;
 			children = (
 				3285E8E820F7B434004A4BB4 /* LayoutApp */,
 				3285E90420F96335004A4BB4 /* Layout */,
+				3241AE6221222C88002879C0 /* LayoutTests */,
 				3285E8E720F7B434004A4BB4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -107,6 +137,7 @@
 			children = (
 				3285E8E620F7B434004A4BB4 /* LayoutApp.app */,
 				3285E90320F96334004A4BB4 /* Layout.framework */,
+				3241AE6121222C88002879C0 /* LayoutTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -157,6 +188,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		3241AE6021222C88002879C0 /* LayoutTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3241AE6B21222C88002879C0 /* Build configuration list for PBXNativeTarget "LayoutTests" */;
+			buildPhases = (
+				3241AE5D21222C88002879C0 /* Sources */,
+				3241AE5E21222C88002879C0 /* Frameworks */,
+				3241AE5F21222C88002879C0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3241AE6821222C88002879C0 /* PBXTargetDependency */,
+			);
+			name = LayoutTests;
+			productName = LayoutTests;
+			productReference = 3241AE6121222C88002879C0 /* LayoutTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		3285E8E520F7B434004A4BB4 /* LayoutApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3285E8F820F7B439004A4BB4 /* Build configuration list for PBXNativeTarget "LayoutApp" */;
@@ -204,6 +253,9 @@
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = Manue;
 				TargetAttributes = {
+					3241AE6021222C88002879C0 = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
 					3285E8E520F7B434004A4BB4 = {
 						CreatedOnToolsVersion = 9.4.1;
 					};
@@ -228,11 +280,19 @@
 			targets = (
 				3285E8E520F7B434004A4BB4 /* LayoutApp */,
 				3285E90220F96334004A4BB4 /* Layout */,
+				3241AE6021222C88002879C0 /* LayoutTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3241AE5F21222C88002879C0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3285E8E420F7B434004A4BB4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -253,6 +313,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3241AE5D21222C88002879C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3241AE6421222C88002879C0 /* LayoutTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3285E8E220F7B434004A4BB4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -282,6 +350,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3241AE6821222C88002879C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3285E90220F96334004A4BB4 /* Layout */;
+			targetProxy = 3241AE6721222C88002879C0 /* PBXContainerItemProxy */;
+		};
 		3285E90920F96335004A4BB4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3285E90220F96334004A4BB4 /* Layout */;
@@ -309,6 +382,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3241AE6921222C88002879C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CF864KN2XE;
+				INFOPLIST_FILE = LayoutTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.manuege.LayoutTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3241AE6A21222C88002879C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CF864KN2XE;
+				INFOPLIST_FILE = LayoutTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.manuege.LayoutTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		3285E8F620F7B439004A4BB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -523,6 +632,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3241AE6B21222C88002879C0 /* Build configuration list for PBXNativeTarget "LayoutTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3241AE6921222C88002879C0 /* Debug */,
+				3241AE6A21222C88002879C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3285E8E120F7B434004A4BB4 /* Build configuration list for PBXProject "Layout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
