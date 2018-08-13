@@ -25,13 +25,21 @@ public func + (center: Center, offset: UIOffset) -> Center {
     return center
 }
 
+public func + (offset: UIOffset, center: Center) -> Center {
+    return center + offset
+}
+
 public func - (center: Center, offset: UIOffset) -> Center {
     return center + UIOffset(horizontal: -offset.horizontal, vertical: -offset.vertical)
 }
 
-public func + (center: Center, inset: LayoutCGFloatConvertible) -> Center {
-    let value = inset.layoutCGFloat
+public func + (center: Center, offset: LayoutCGFloatConvertible) -> Center {
+    let value = offset.layoutCGFloat
     let offset = UIOffset(horizontal: value, vertical: value)
+    return center + offset
+}
+
+public func + (offset: LayoutCGFloatConvertible, center: Center) -> Center {
     return center + offset
 }
 

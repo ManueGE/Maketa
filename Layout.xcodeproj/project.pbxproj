@@ -16,6 +16,7 @@
 		3241AE6D21222E23002879C0 /* LayoutModifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE6C21222E23002879C0 /* LayoutModifierTests.swift */; };
 		3241AE6F21223024002879C0 /* SizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE6E21223024002879C0 /* SizeTests.swift */; };
 		3241AE73212233C4002879C0 /* ConstraintsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE72212233C4002879C0 /* ConstraintsTestCase.swift */; };
+		3241AE75212239D6002879C0 /* CenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE74212239D6002879C0 /* CenterTests.swift */; };
 		32761E562120DE450062BEC4 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32761E552120DE450062BEC4 /* Size.swift */; };
 		3285E8EA20F7B434004A4BB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E8E920F7B434004A4BB4 /* AppDelegate.swift */; };
 		3285E8EC20F7B434004A4BB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E8EB20F7B434004A4BB4 /* ViewController.swift */; };
@@ -74,6 +75,7 @@
 		3241AE6C21222E23002879C0 /* LayoutModifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutModifierTests.swift; sourceTree = "<group>"; };
 		3241AE6E21223024002879C0 /* SizeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeTests.swift; sourceTree = "<group>"; };
 		3241AE72212233C4002879C0 /* ConstraintsTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsTestCase.swift; sourceTree = "<group>"; };
+		3241AE74212239D6002879C0 /* CenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterTests.swift; sourceTree = "<group>"; };
 		32761E552120DE450062BEC4 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		3285E8E620F7B434004A4BB4 /* LayoutApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LayoutApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3285E8E920F7B434004A4BB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				3241AE6321222C88002879C0 /* LayoutTests.swift */,
 				3241AE72212233C4002879C0 /* ConstraintsTestCase.swift */,
 				3241AE6C21222E23002879C0 /* LayoutModifierTests.swift */,
+				3241AE74212239D6002879C0 /* CenterTests.swift */,
 				3241AE6E21223024002879C0 /* SizeTests.swift */,
 				3241AE6521222C88002879C0 /* Info.plist */,
 			);
@@ -330,6 +333,7 @@
 				3241AE6D21222E23002879C0 /* LayoutModifierTests.swift in Sources */,
 				3241AE6421222C88002879C0 /* LayoutTests.swift in Sources */,
 				3241AE6F21223024002879C0 /* SizeTests.swift in Sources */,
+				3241AE75212239D6002879C0 /* CenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
