@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     var heightGreaterLayoutConstraint: NSLayoutConstraint?
     var centerYConstraint: NSLayoutConstraint!
     var globalCenterConstraints: [NSLayoutConstraint]?
+    var sizeConstraints: [NSLayoutConstraint]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +59,8 @@ class ViewController: UIViewController {
         view3.addSubview(view4)
         view4.backgroundColor = .white
         view4.layout.center = (view3.layout.center + 20) => globalCenterConstraints
-        view4.layout.size = CGSize(width: 30, height: 30)
+        view4.layout.size = (view2.layout.size - UIOffset(horizontal: 10, vertical: 65)) => sizeConstraints
+        print("\(sizeConstraints)")
         
     }
 
