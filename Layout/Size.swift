@@ -85,10 +85,7 @@ private struct SizeConstraintSetter: Size {
         return constraints
     }
     
-    func add(_ offset: UIOffset) -> Size {
-        let original = self.original.add(offset)
-        return SizeConstraintSetter(original: original, constraintPointer: constraintPointer)
-    }
+    func add(_ offset: UIOffset) -> Size { fatalError("Can't modify a `Size` after it is assigned") }
 }
 
 // MARK: - Operators

@@ -24,9 +24,7 @@ public class Layout {
     }
     
     var superLayout: Layout {
-        guard let superview = view.superview else {
-            fatalError("\(self) has not a superview, so layout.\(#function) can't be used")
-        }
+        guard let superview = view.superview else { fatalError("\(self) has not a superview, so layout.\(#function) can't be used") }
         return superview.layout
     }
 }

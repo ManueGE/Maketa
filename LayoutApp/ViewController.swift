@@ -24,7 +24,8 @@ class ViewController: UIViewController {
         let view0 = UIView()
         view.addSubview(view0)
         view0.backgroundColor = .lightGray
-        view0.layout.edges = (view0.superLayout.edges - 40 - .bottom) => globalCenterConstraints
+        let insets = UIEdgeInsets(top: 20, left: 80, bottom: 20, right: 10)
+        view0.layout.edges = (view0.superLayout.layoutDirectionEdges - insets - .bottom) => globalCenterConstraints
         view0.layout.height = 200
         view0.layout.height < 300 => heightLessLayoutConstraint
         view0.layout.height > 100 => heightGreaterLayoutConstraint
@@ -59,9 +60,7 @@ class ViewController: UIViewController {
         view3.addSubview(view4)
         view4.backgroundColor = .white
         view4.layout.center = (view3.layout.center + 20) => globalCenterConstraints
-        view4.layout.size = (view2.layout.size - UIOffset(horizontal: 10, vertical: 65)) => sizeConstraints
-        print("\(sizeConstraints)")
-        
+        view4.layout.size = (view2.layout.size - 10) => sizeConstraints
     }
 
     override func didReceiveMemoryWarning() {

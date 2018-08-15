@@ -20,13 +20,14 @@ public extension UIView {
     /// Returns the layout object associated to the view
     public private(set) var layout: Layout {
         get {
-            if let layout = objc_getAssociatedObject(self, &UIView.layoutKey) as? Layout {
-                return layout
+            let layout: Layout
+            if let lyt = objc_getAssociatedObject(self, &UIView.layoutKey) as? Layout {
+                layout = lyt
             } else {
-                let layout = Layout(view: self)
+                layout = Layout(view: self)
                 self.layout = layout
-                return layout
             }
+            return layout
         }
         set {
             objc_setAssociatedObject(self, &UIView.layoutKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)

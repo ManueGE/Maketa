@@ -10,75 +10,72 @@ import UIKit
 
 public struct Edges {
     fileprivate enum Kind {
-        case edge, margins
+        case edges, margins
     }
     fileprivate let view: UIView
     fileprivate let kind: Kind
     
-    fileprivate var edges = Edge.all
+    fileprivate var edges: [Edge]
     fileprivate var insets = UIEdgeInsets.zero
-    fileprivate var useLeadingAndTraling = false
     fileprivate var constraintsPointer: MultiTypePointer<[NSLayoutConstraint]>?
     
-    fileprivate init(view: UIView, kind: Kind) {
+    fileprivate init(view: UIView, kind: Kind, edges: [Edge]) {
         self.view = view
         self.kind = kind
-    }
-    
-    public var relativeToLeadingAndTrailing: Edges {
-        var edges = self
-        edges.useLeadingAndTraling = true
-        return edges
+        self.edges = edges
     }
 }
 
 public enum Edge: Equatable {
-    case left, right, top, bottom
+    case left, right, leading, trailing, top, bottom
     static fileprivate let all = [Edge.left, .right, .top, .bottom]
+    static fileprivate let allRelativeToLayoutDirection = [Edge.leading, .trailing, .top, .bottom]
     
     fileprivate func constraint(view: UIView, with edges: Edges) -> NSLayoutConstraint {
         let layout = view.layout
         var constraint = NSLayoutConstraint.empty
-        switch (self, edges.useLeadingAndTraling, edges.kind) {
+        switch (self, edges.kind) {
         // Left
-        case (.left, false, .edge):
+        case (.left, .edges):
             layout.left = (edges.view.layout.left - edges.insets.left) => constraint
         
-        case (.left, false, .margins):
+        case (.left, .margins):
             layout.leftMargin = (edges.view.layout.leftMargin - edges.insets.left) => constraint
             
-        case (.left, true, .edge):
-            layout.leading = (edges.view.layout.leading - edges.insets.left) => constraint
-            
-        case (.left, true, .margins):
-            layout.leadingMargin = (edges.view.layout.leadingMargin - edges.insets.left) => constraint
-            
         // Right
-        case (.right, false, .edge):
+        case (.right, .edges):
             layout.right = (edges.view.layout.right + edges.insets.right) => constraint
             
-        case (.right, false, .margins):
+        case (.right, .margins):
             layout.rightMargin = (edges.view.layout.rightMargin + edges.insets.right) => constraint
             
-        case (.right, true, .edge):
+        // Leading
+        case (.leading, .edges):
+            layout.leading = (edges.view.layout.leading - edges.insets.left) => constraint
+            
+        case (.leading, .margins):
+            layout.leadingMargin = (edges.view.layout.leadingMargin - edges.insets.left) => constraint
+            
+        // Trailing
+        case (.trailing, .edges):
             layout.trailing = (edges.view.layout.trailing + edges.insets.right) => constraint
             
-        case (.right, true, .margins):
+        case (.trailing, .margins):
             layout.trailingMargin = (edges.view.layout.trailingMargin + edges.insets.right) => constraint
             
         // Top
-        case (.top, _, .edge):
+        case (.top, .edges):
             layout.top = (edges.view.layout.top - edges.insets.top) => constraint
             
-        case (.top, _, .margins):
-            layout.top = (edges.view.layout.top - edges.insets.top) => constraint
+        case (.top, .margins):
+            layout.topMargin = (edges.view.layout.topMargin - edges.insets.top) => constraint
             
         // Bottom
-        case (.bottom, _, .edge):
+        case (.bottom, .edges):
             layout.bottom = (edges.view.layout.bottom + edges.insets.bottom) => constraint
             
-        case (.bottom, _, .margins):
-            layout.bottom = (edges.view.layout.bottom + edges.insets.bottom) => constraint
+        case (.bottom, .margins):
+            layout.bottomMargin = (edges.view.layout.bottomMargin + edges.insets.bottom) => constraint
         }
         
         return constraint
@@ -96,7 +93,7 @@ public func + (edges: Edges, insets: UIEdgeInsets) -> Edges {
     var edges = edges
     edges.insets.left += insets.left
     edges.insets.right += insets.right
-    edges.insets.top += insets.left
+    edges.insets.top += insets.top
     edges.insets.bottom += insets.bottom
     return edges
 }
@@ -136,7 +133,7 @@ public func => (edges: Edges, constraints: inout [NSLayoutConstraint]!) -> Edges
 public extension Layout {
     public var edges: Edges {
         get {
-            return Edges(view: view, kind: .edge)
+            return Edges(view: view, kind: .edges, edges: Edge.all)
         }
         set {
             setEdges(newValue)
@@ -144,12 +141,15 @@ public extension Layout {
     }
     
     public var margins: Edges {
-        get {
-            return Edges(view: view, kind: .margins)
-        }
-        set {
-            setEdges(newValue)
-        }
+        return Edges(view: view, kind: .margins, edges: Edge.all)
+    }
+    
+    public var layoutDirectionEdges: Edges {
+        return Edges(view: view, kind: .edges, edges: Edge.allRelativeToLayoutDirection)
+    }
+    
+    public var layoutDirectionMargins: Edges {
+        return Edges(view: view, kind: .margins, edges: Edge.allRelativeToLayoutDirection)
     }
     
     private func setEdges(_ newValue: Edges) {
