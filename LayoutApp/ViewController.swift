@@ -24,7 +24,8 @@ class ViewController: UIViewController {
         let view0 = UIView()
         view.addSubview(view0)
         view0.backgroundColor = .lightGray
-        view0.layout.edges = (view0.superLayout.edges - 40 - .bottom) => globalCenterConstraints
+        let insets = UIEdgeInsets(top: 20, left: 80, bottom: 20, right: 10)
+        view0.layout.edges = (view0.superLayout.layoutDirectionEdges - insets - .bottom) => globalCenterConstraints
         view0.layout.height = 200
         view0.layout.height < 300 => heightLessLayoutConstraint
         view0.layout.height > 100 => heightGreaterLayoutConstraint

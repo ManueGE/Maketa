@@ -1,5 +1,5 @@
 //
-//  LayoutModifierTests.swift
+//  ModifiersTests.swift
 //  LayoutTests
 //
 //  Created by Manuel García-Estañ on 13/8/18.
