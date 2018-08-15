@@ -1,6 +1,6 @@
 //
 //  UIView+Layout.swift
-//  Layout
+//  Maketa
 //
 //  Created by Manuel García-Estañ on 14/7/18.
 //  Copyright © 2018 Manue. All rights reserved.
@@ -15,21 +15,22 @@ import ObjectiveC
  */
 public extension UIView {
     
-    private static var layoutKey: UInt8 = 0
+    private static var key: UInt8 = 0
     
     /// Returns the layout object associated to the view
-    public private(set) var layout: Layout {
+    public private(set) var mkt: Maketa {
         get {
-            if let layout = objc_getAssociatedObject(self, &UIView.layoutKey) as? Layout {
-                return layout
+            let maketa: Maketa
+            if let mkt = objc_getAssociatedObject(self, &UIView.key) as? Maketa {
+                maketa = mkt
             } else {
-                let layout = Layout(view: self)
-                self.layout = layout
-                return layout
+                maketa = Maketa(view: self)
+                self.mkt = maketa
             }
+            return maketa
         }
         set {
-            objc_setAssociatedObject(self, &UIView.layoutKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(self, &UIView.key, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
     

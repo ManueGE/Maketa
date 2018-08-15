@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:../Layout">
+      location = "self:/Users/Manu/Documents/Dev/Tools/Layout/Maketa.xcodeproj">
    </FileRef>
 </Workspace>

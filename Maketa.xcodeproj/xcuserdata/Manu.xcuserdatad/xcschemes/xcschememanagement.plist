@@ -4,20 +4,35 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Layout.xcscheme</key>
+		<key>Maketa.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>LayoutApp.xcscheme</key>
+		<key>MaketaApp.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>MaketaTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>3241AE6021222C88002879C0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>3285E8E520F7B434004A4BB4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3285E90220F96334004A4BB4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

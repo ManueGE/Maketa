@@ -1,29 +1,22 @@
 //
-//  Layout.swift
-//  Layout
+//  MaketaModifier.swift
+//  Maketa
 //
 //  Created by Manuel García-Estañ on 14/7/18.
 //  Copyright © 2018 Manue. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-public class Layout {
-    
-    internal struct Defaults {
-        static let relation = NSLayoutRelation.equal
-        static let priority = UILayoutPriority.required
-    }
-    
-    private weak var view: UIView!
-    
-    // MARK: Inits
-    
-    init(view: UIView) {
-        self.view = view
-        view.preparedForAutolayout()
-    }
-    
+public protocol LayoutModifier {
+    func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint
+    func add(_ constant: CGFloat) -> LayoutModifier
+    func multiply(by multiplier: CGFloat) -> LayoutModifier
+    func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier
+    func setPriority(_ priority: UILayoutPriority) -> LayoutModifier
+}
+
+extension Maketa {
     // MARK: Raw attributes
     
     public var left: LayoutModifier {
@@ -128,17 +121,14 @@ public class Layout {
     
     // MARK: Additional attributes
     
-    public var aspectRatio: CGFloat? {
-        didSet {
-            guard let aspectRatio = aspectRatio else { return }
-            width = height * aspectRatio
-        }
+    public var aspectRatio: CGFloat {
+        get { return view.frame.width / view.frame.height }
+        set { width = newValue * height }
     }
     
     // MARK: - Helper
     
     private func constraint(_ modifier: LayoutModifier, with layoutAttribute: NSLayoutAttribute) {
-        let constraint = modifier.constraint(view: view, layoutAttribute: layoutAttribute)
-        constraint.isActive = true
+        modifier.constraint(view: view, layoutAttribute: layoutAttribute).activated()
     }
 }
