@@ -67,8 +67,8 @@ extension Double: LayoutModifier {}
 
 public extension LayoutModifier where Self: LayoutCGFloatConvertible {
     public func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint {
-        let constant = LayoutConstant(constant: layoutCGFloat, relation: Layout.Defaults.relation, priority: Layout.Defaults.priority)
-        return constant.constraint(view: view, layoutAttribute: layoutAttribute)
+        let attribute = LayoutAttribute(view: nil, attribute: .notAnAttribute, constant: layoutCGFloat)
+        return attribute.constraint(view: view, layoutAttribute: layoutAttribute)
     }
     
     public func add(_ constant: CGFloat) -> LayoutModifier {
@@ -80,66 +80,23 @@ public extension LayoutModifier where Self: LayoutCGFloatConvertible {
     }
     
     public func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier {
-        return LayoutConstant(constant: self.layoutCGFloat, relation: relation, priority: Layout.Defaults.priority)
+        return LayoutAttribute(view: nil, attribute: .notAnAttribute, relation: relation, constant: layoutCGFloat)
     }
     
     public func setPriority(_ priority: UILayoutPriority) -> LayoutModifier {
-        return LayoutConstant(constant: self.layoutCGFloat, relation: Layout.Defaults.relation, priority: priority)
-    }
-}
-
-private struct LayoutConstant: LayoutModifier {
-    var constant: CGFloat
-    var relation: NSLayoutRelation
-    var priority: UILayoutPriority
-    
-    func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint {
-        let constraint = NSLayoutConstraint(item: view,
-                                            attribute: layoutAttribute,
-                                            relatedBy: relation,
-                                            toItem: nil,
-                                            attribute: .notAnAttribute,
-                                            multiplier: 1,
-                                            constant: constant)
-        
-        constraint.priority = priority
-        return constraint
-    }
-    
-    func add(_ constant: CGFloat) -> LayoutModifier {
-        var modifier = self
-        modifier.constant += constant
-        return modifier
-    }
-    
-    func multiply(by multiplier: CGFloat) -> LayoutModifier {
-        var modifier = self
-        modifier.constant *= multiplier
-        return modifier
-    }
-    
-    func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier {
-        var modifier = self
-        modifier.relation = relation
-        return modifier
-    }
-    
-    func setPriority(_ priority: UILayoutPriority) -> LayoutModifier {
-        var modifier = self
-        modifier.priority = priority
-        return modifier
+        return LayoutAttribute(view: nil, attribute: .notAnAttribute, priority: priority, constant: layoutCGFloat)
     }
 }
 
 struct LayoutAttribute: LayoutModifier {
-    let view: UIView
+    let view: UIView?
     let attribute: NSLayoutAttribute
     fileprivate(set) var constant: CGFloat
     fileprivate(set) var multiplier: CGFloat
     fileprivate(set) var relation: NSLayoutRelation
     fileprivate(set) var priority: UILayoutPriority
     
-    init(view: UIView,
+    init(view: UIView?,
                      attribute: NSLayoutAttribute,
                      relation: NSLayoutRelation = Layout.Defaults.relation,
                      priority: UILayoutPriority = Layout.Defaults.priority,
@@ -217,26 +174,20 @@ struct LayoutConstraintSetter: LayoutModifier {
     }
     
     func add(_ constant: CGFloat) -> LayoutModifier {
-        var modifier = self
-        modifier.original = original.add(constant)
-        return modifier
+        fatalError("Can't modify a `LayoutModifier` after it is assigned")
     }
     
     func multiply(by multiplier: CGFloat) -> LayoutModifier {
-        var modifier = self
-        modifier.original = original.multiply(by: multiplier)
-        return modifier
+        fatalError("Can't modify a `LayoutModifier` after it is assigned")
+    }
+    
+    func setPriority(_ priority: UILayoutPriority) -> LayoutModifier {
+        fatalError("Can't modify a `LayoutModifier` after it is assigned")
     }
     
     func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier {
         var modifier = self
         modifier.original = original.setRelation(relation)
-        return modifier
-    }
-    
-    func setPriority(_ priority: UILayoutPriority) -> LayoutModifier {
-        var modifier = self
-        modifier.original = original.setPriority(priority)
         return modifier
     }
 }

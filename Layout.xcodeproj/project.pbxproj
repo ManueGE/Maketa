@@ -13,7 +13,7 @@
 		323FF54A211ED09600780D11 /* NSLayoutConstraint+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323FF549211ED09600780D11 /* NSLayoutConstraint+Layout.swift */; };
 		3241AE6421222C88002879C0 /* LayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE6321222C88002879C0 /* LayoutTests.swift */; };
 		3241AE6621222C88002879C0 /* Layout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3285E90320F96334004A4BB4 /* Layout.framework */; };
-		3241AE6D21222E23002879C0 /* LayoutModifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE6C21222E23002879C0 /* LayoutModifierTests.swift */; };
+		3241AE6D21222E23002879C0 /* ModifiersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE6C21222E23002879C0 /* ModifiersTests.swift */; };
 		3241AE6F21223024002879C0 /* SizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE6E21223024002879C0 /* SizeTests.swift */; };
 		3241AE73212233C4002879C0 /* ConstraintsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE72212233C4002879C0 /* ConstraintsTestCase.swift */; };
 		3241AE75212239D6002879C0 /* CenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE74212239D6002879C0 /* CenterTests.swift */; };
@@ -72,7 +72,7 @@
 		3241AE6121222C88002879C0 /* LayoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LayoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3241AE6321222C88002879C0 /* LayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutTests.swift; sourceTree = "<group>"; };
 		3241AE6521222C88002879C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3241AE6C21222E23002879C0 /* LayoutModifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutModifierTests.swift; sourceTree = "<group>"; };
+		3241AE6C21222E23002879C0 /* ModifiersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiersTests.swift; sourceTree = "<group>"; };
 		3241AE6E21223024002879C0 /* SizeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeTests.swift; sourceTree = "<group>"; };
 		3241AE72212233C4002879C0 /* ConstraintsTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsTestCase.swift; sourceTree = "<group>"; };
 		3241AE74212239D6002879C0 /* CenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterTests.swift; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 			children = (
 				3241AE6321222C88002879C0 /* LayoutTests.swift */,
 				3241AE72212233C4002879C0 /* ConstraintsTestCase.swift */,
-				3241AE6C21222E23002879C0 /* LayoutModifierTests.swift */,
+				3241AE6C21222E23002879C0 /* ModifiersTests.swift */,
 				3241AE74212239D6002879C0 /* CenterTests.swift */,
 				3241AE6E21223024002879C0 /* SizeTests.swift */,
 				3241AE6521222C88002879C0 /* Info.plist */,
@@ -330,7 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3241AE73212233C4002879C0 /* ConstraintsTestCase.swift in Sources */,
-				3241AE6D21222E23002879C0 /* LayoutModifierTests.swift in Sources */,
+				3241AE6D21222E23002879C0 /* ModifiersTests.swift in Sources */,
 				3241AE6421222C88002879C0 /* LayoutTests.swift in Sources */,
 				3241AE6F21223024002879C0 /* SizeTests.swift in Sources */,
 				3241AE75212239D6002879C0 /* CenterTests.swift in Sources */,

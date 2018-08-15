@@ -86,7 +86,7 @@ private struct SizeConstraintSetter: Size {
     }
     
     func add(_ offset: UIOffset) -> Size {
-        fatalError("Can't change a `Size` after it is assigned")
+        fatalError("Can't modify a `Size` after it is assigned")
     }
 }
 

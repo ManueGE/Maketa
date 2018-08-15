@@ -60,8 +60,6 @@ class ViewController: UIViewController {
         view4.backgroundColor = .white
         view4.layout.center = (view3.layout.center + 20) => globalCenterConstraints
         view4.layout.size = (view2.layout.size - 10) => sizeConstraints
-        print("\(sizeConstraints)")
-        
     }
 
     override func didReceiveMemoryWarning() {
