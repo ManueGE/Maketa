@@ -1,6 +1,6 @@
 //
 //  CenterTests.swift
-//  LayoutTests
+//  MaketaTests
 //
 //  Created by Manuel García-Estañ on 14/8/18.
 //  Copyright © 2018 Manue. All rights reserved.

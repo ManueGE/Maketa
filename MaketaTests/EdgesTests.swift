@@ -1,6 +1,6 @@
 //
 //  EdgesTests.swift
-//  LayoutTests
+//  MaketaTests
 //
 //  Created by Manuel García-Estañ on 15/8/18.
 //  Copyright © 2018 Manue. All rights reserved.

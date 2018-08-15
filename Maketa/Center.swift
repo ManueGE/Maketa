@@ -1,6 +1,6 @@
 //
 //  Center.swift
-//  Layout
+//  Maketa
 //
 //  Created by Manuel García-Estañ on 14/7/18.
 //  Copyright © 2018 Manue. All rights reserved.
