@@ -17,9 +17,9 @@ public struct Edges {
     
     fileprivate var edges: [Edge]
     fileprivate var insets = UIEdgeInsets.zero
-    fileprivate var constraintsPointer: MultiTypePointer<[NSLayoutConstraint]>?
     fileprivate var relation = Maketa.Defaults.relation
     fileprivate var priority = Maketa.Defaults.priority
+    fileprivate var constraintsPointer: MultiTypePointer<[NSLayoutConstraint]>?
     
     fileprivate init(view: UIView, kind: Kind, edges: [Edge]) {
         self.view = view

@@ -85,6 +85,68 @@ class CenterTests: ConstraintsTestCase {
         XCTAssertEqual(constraints.count, 2)
     }
     
+    // MARK: - Relations
+    func testEqualRelationship() {
+        // given
+        var constraints = [NSLayoutConstraint]()
+        let view = UIView()
+        superview.addSubview(view)
+        
+        // when
+        view.mkt.center = superview.mkt.center => constraints
+        
+        // then
+        XCTAssertEqual(constraints.count, 2)
+        XCTAssertEqual(constraints[0].relation, .equal)
+        XCTAssertEqual(constraints[1].relation, .equal)
+    }
+    
+    func testLessThanRelationship() {
+        // given
+        var constraints = [NSLayoutConstraint]()
+        let view = UIView()
+        superview.addSubview(view)
+        
+        // when
+        view.mkt.center < superview.mkt.center => constraints
+        
+        // then
+        XCTAssertEqual(constraints.count, 2)
+        XCTAssertEqual(constraints[0].relation, .lessThanOrEqual)
+        XCTAssertEqual(constraints[1].relation, .lessThanOrEqual)
+    }
+    
+    func testGreaterThanRelationship() {
+        // given
+        var constraints = [NSLayoutConstraint]()
+        let view = UIView()
+        superview.addSubview(view)
+        
+        // when
+        view.mkt.center > superview.mkt.center => constraints
+        
+        // then
+        XCTAssertEqual(constraints.count, 2)
+        XCTAssertEqual(constraints[0].relation, .greaterThanOrEqual)
+        XCTAssertEqual(constraints[1].relation, .greaterThanOrEqual)
+    }
+    
+    // MARK: - Priority
+    func testCustomPriority() {
+        // given
+        var constraints = [NSLayoutConstraint]()
+        let view = UIView()
+        superview.addSubview(view)
+        
+        // when
+        view.mkt.center = (superview.mkt.center & .defaultLow) => constraints
+        
+        // then
+        XCTAssertEqual(constraints.count, 2)
+        XCTAssertEqual(constraints[0].priority, .defaultLow)
+        XCTAssertEqual(constraints[1].priority, .defaultLow)
+    }
+    
     // MARK: - Operations
     func testOffsetCanBeSubstractedFromCenter() {
         // given
