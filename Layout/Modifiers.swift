@@ -173,17 +173,11 @@ struct LayoutConstraintSetter: LayoutModifier {
         return constraint
     }
     
-    func add(_ constant: CGFloat) -> LayoutModifier {
-        fatalError("Can't modify a `LayoutModifier` after it is assigned")
-    }
+    func add(_ constant: CGFloat) -> LayoutModifier { fatalError("Can't modify a `LayoutModifier` after it is assigned") }
     
-    func multiply(by multiplier: CGFloat) -> LayoutModifier {
-        fatalError("Can't modify a `LayoutModifier` after it is assigned")
-    }
+    func multiply(by multiplier: CGFloat) -> LayoutModifier { fatalError("Can't modify a `LayoutModifier` after it is assigned") }
     
-    func setPriority(_ priority: UILayoutPriority) -> LayoutModifier {
-        fatalError("Can't modify a `LayoutModifier` after it is assigned")
-    }
+    func setPriority(_ priority: UILayoutPriority) -> LayoutModifier { fatalError("Can't modify a `LayoutModifier` after it is assigned") }
     
     func setRelation(_ relation: NSLayoutRelation) -> LayoutModifier {
         var modifier = self
