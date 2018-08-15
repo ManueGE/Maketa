@@ -1,5 +1,5 @@
 //
-//  UIView+Layout.swift
+//  UIView+Maketa.swift
 //  Maketa
 //
 //  Created by Manuel García-Estañ on 14/7/18.
