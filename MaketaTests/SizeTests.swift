@@ -20,7 +20,7 @@ class SizeTests: ConstraintsTestCase {
         let view = UIView()
         
         // when
-        view.layout.size = 30 => constraints
+        view.mkt.size = 30 => constraints
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
@@ -43,7 +43,7 @@ class SizeTests: ConstraintsTestCase {
         let view = UIView()
         
         // when
-        view.layout.size = CGSize(width: 10, height: 20) => constraints
+        view.mkt.size = CGSize(width: 10, height: 20) => constraints
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
@@ -65,13 +65,13 @@ class SizeTests: ConstraintsTestCase {
         var constraints = [NSLayoutConstraint]()
         let view0 = UIView()
         superview.addSubview(view0)
-        view0.layout.size = CGSize(width: 10, height: 20)
+        view0.mkt.size = CGSize(width: 10, height: 20)
         
         let view = UIView()
         superview.addSubview(view)
         
         // when
-        view.layout.size = view0.layout.size => constraints
+        view.mkt.size = view0.mkt.size => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
@@ -101,7 +101,7 @@ class SizeTests: ConstraintsTestCase {
         let view = UIView()
         
         // when
-        view.layout.size = 30
+        view.mkt.size = 30
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
@@ -114,7 +114,7 @@ class SizeTests: ConstraintsTestCase {
         let view = UIView()
         
         // when
-        view.layout.size = 30 => constraints
+        view.mkt.size = 30 => constraints
         
         // then
         XCTAssertEqual(constraints!.count, 2)
@@ -127,7 +127,7 @@ class SizeTests: ConstraintsTestCase {
         let view = UIView()
         
         // when
-        view.layout.size = 30 => constraints
+        view.mkt.size = 30 => constraints
         
         // then
         XCTAssertEqual(constraints.count, 2)
@@ -140,7 +140,7 @@ class SizeTests: ConstraintsTestCase {
         let view = UIView()
         
         // when
-        view.layout.size = (30 - UIOffset(horizontal: 5, vertical: 10)) => constraints
+        view.mkt.size = (30 - UIOffset(horizontal: 5, vertical: 10)) => constraints
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
@@ -163,7 +163,7 @@ class SizeTests: ConstraintsTestCase {
         let view = UIView()
         
         // when
-        view.layout.size = (CGSize(width: 10, height: 20) - UIOffset(horizontal: 5, vertical: 10)) => constraints
+        view.mkt.size = (CGSize(width: 10, height: 20) - UIOffset(horizontal: 5, vertical: 10)) => constraints
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
@@ -185,13 +185,13 @@ class SizeTests: ConstraintsTestCase {
         var constraints = [NSLayoutConstraint]()
         let view0 = UIView()
         superview.addSubview(view0)
-        view0.layout.size = CGSize(width: 10, height: 20)
+        view0.mkt.size = CGSize(width: 10, height: 20)
         
         let view = UIView()
         superview.addSubview(view)
         
         // when
-        view.layout.size = (view0.layout.size - UIOffset(horizontal: 5, vertical: 10)) => constraints
+        view.mkt.size = (view0.mkt.size - UIOffset(horizontal: 5, vertical: 10)) => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
@@ -220,7 +220,7 @@ class SizeTests: ConstraintsTestCase {
         let view = UIView()
         
         // when
-        view.layout.size = (UIOffset(horizontal: 5, vertical: 10) + 30) => constraints
+        view.mkt.size = (UIOffset(horizontal: 5, vertical: 10) + 30) => constraints
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
@@ -243,7 +243,7 @@ class SizeTests: ConstraintsTestCase {
         let view = UIView()
         
         // when
-        view.layout.size = (30 - 10) => constraints
+        view.mkt.size = (30 - 10) => constraints
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
@@ -266,7 +266,7 @@ class SizeTests: ConstraintsTestCase {
         let view = UIView()
         
         // when
-        view.layout.size = (CGSize(width: 10, height: 20) - 5) => constraints
+        view.mkt.size = (CGSize(width: 10, height: 20) - 5) => constraints
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
@@ -288,13 +288,13 @@ class SizeTests: ConstraintsTestCase {
         var constraints = [NSLayoutConstraint]()
         let view0 = UIView()
         superview.addSubview(view0)
-        view0.layout.size = CGSize(width: 10, height: 20)
+        view0.mkt.size = CGSize(width: 10, height: 20)
         
         let view = UIView()
         superview.addSubview(view)
         
         // when
-        view.layout.size = (view0.layout.size - 5) => constraints
+        view.mkt.size = (view0.mkt.size - 5) => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
@@ -323,7 +323,7 @@ class SizeTests: ConstraintsTestCase {
         let view = UIView()
         
         // when
-        view.layout.size = (10 + CGSize(width: 30, height: 40)) => constraints
+        view.mkt.size = (10 + CGSize(width: 30, height: 40)) => constraints
         
         // then
         XCTAssertEqual(view.constraints.count, 2)

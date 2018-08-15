@@ -65,17 +65,17 @@ public func => (center: Center, constraints: inout [NSLayoutConstraint]!) -> Cen
     return center
 }
 
-public extension Layout {
+public extension Maketa {
     public var center: Center {
         get {
             return Center(view: view)
         }
         set {
             var xConstraint = NSLayoutConstraint.empty
-            view.layout.centerX = (newValue.view.layout.centerX + newValue.offset.horizontal) => xConstraint
+            view.mkt.centerX = (newValue.view.mkt.centerX + newValue.offset.horizontal) => xConstraint
             
             var yConstraint = NSLayoutConstraint.empty
-            view.layout.centerY = (newValue.view.layout.centerY + newValue.offset.vertical) => yConstraint
+            view.mkt.centerY = (newValue.view.mkt.centerY + newValue.offset.vertical) => yConstraint
             
             newValue.constraintsPointer?.setPointee([xConstraint, yConstraint])
         }

@@ -98,8 +98,8 @@ struct LayoutAttribute: LayoutModifier {
     
     init(view: UIView?,
                      attribute: NSLayoutAttribute,
-                     relation: NSLayoutRelation = Layout.Defaults.relation,
-                     priority: UILayoutPriority = Layout.Defaults.priority,
+                     relation: NSLayoutRelation = Maketa.Defaults.relation,
+                     priority: UILayoutPriority = Maketa.Defaults.priority,
                      constant: CGFloat = 0,
                      multiplier: CGFloat = 1) {
         

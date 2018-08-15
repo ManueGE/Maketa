@@ -15,28 +15,23 @@ import ObjectiveC
  */
 public extension UIView {
     
-    private static var layoutKey: UInt8 = 0
+    private static var key: UInt8 = 0
     
     /// Returns the layout object associated to the view
-    public private(set) var layout: Layout {
+    public private(set) var mkt: Maketa {
         get {
-            let layout: Layout
-            if let lyt = objc_getAssociatedObject(self, &UIView.layoutKey) as? Layout {
-                layout = lyt
+            let maketa: Maketa
+            if let mkt = objc_getAssociatedObject(self, &UIView.key) as? Maketa {
+                maketa = mkt
             } else {
-                layout = Layout(view: self)
-                self.layout = layout
+                maketa = Maketa(view: self)
+                self.mkt = maketa
             }
-            return layout
+            return maketa
         }
         set {
-            objc_setAssociatedObject(self, &UIView.layoutKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(self, &UIView.key, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
-    }
-    
-    /// Returns the layout object associated to the receiver's superview. It throws a fatal error if view has not a superview
-    public var superLayout: Layout {
-        return layout.superLayout
     }
     
     /// Adjust the needed properties to be able to use the view in autolayout and returns the view itself.

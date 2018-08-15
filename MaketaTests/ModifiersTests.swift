@@ -18,7 +18,7 @@ class ModifiersTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.left = superview.layout.left
+        view.mkt.left = superview.mkt.left
         
         // then
         XCTAssertEqual(superview.constraints.count, 1)
@@ -31,7 +31,7 @@ class ModifiersTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.left = superview.layout.left => constraint
+        view.mkt.left = superview.mkt.left => constraint
         
         // then
         XCTAssertNotNil(constraint)
@@ -44,7 +44,7 @@ class ModifiersTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.left = superview.layout.left => constraint
+        view.mkt.left = superview.mkt.left => constraint
         
         // then
         XCTAssertNotNil(constraint)
@@ -58,7 +58,7 @@ class ModifiersTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.left = superview.layout.left => constraint
+        view.mkt.left = superview.mkt.left => constraint
         
         // then
         XCTAssertEqual(constraint.relation, .equal)
@@ -71,7 +71,7 @@ class ModifiersTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.left < superview.layout.left => constraint
+        view.mkt.left < superview.mkt.left => constraint
         
         // then
         XCTAssertEqual(constraint.relation, .lessThanOrEqual)
@@ -84,7 +84,7 @@ class ModifiersTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.left > superview.layout.left => constraint
+        view.mkt.left > superview.mkt.left => constraint
         
         // then
         XCTAssertEqual(constraint.relation, .greaterThanOrEqual)
@@ -98,7 +98,7 @@ class ModifiersTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.left = (superview.layout.right - 10) => constraint
+        view.mkt.left = (superview.mkt.right - 10) => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -117,7 +117,7 @@ class ModifiersTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.left = (10 + superview.layout.right) => constraint
+        view.mkt.left = (10 + superview.mkt.right) => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -136,7 +136,7 @@ class ModifiersTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.height = (superview.layout.width / 2) => constraint
+        view.mkt.height = (superview.mkt.width / 2) => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -155,7 +155,7 @@ class ModifiersTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.height = (0.5 * superview.layout.width) => constraint
+        view.mkt.height = (0.5 * superview.mkt.width) => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -174,7 +174,7 @@ class ModifiersTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.height = (superview.layout.height & .defaultLow) => constraint
+        view.mkt.height = (superview.mkt.height & .defaultLow) => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -195,7 +195,7 @@ class ModifiersTests: ConstraintsTestCase {
         
         // when
         let value: LayoutModifier = -10
-        view.layout.height = (value - 10) => constraint
+        view.mkt.height = (value - 10) => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -214,7 +214,7 @@ class ModifiersTests: ConstraintsTestCase {
         
         // when
         let value: LayoutModifier = 10
-        view.layout.height = (value * 10) => constraint
+        view.mkt.height = (value * 10) => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -233,7 +233,7 @@ class ModifiersTests: ConstraintsTestCase {
         
         // when
         let value: LayoutModifier = 10
-        view.layout.height = (value & .defaultLow) => constraint
+        view.mkt.height = (value & .defaultLow) => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -252,7 +252,7 @@ class ModifiersTests: ConstraintsTestCase {
         
         // when
         let value: LayoutModifier = Float(10)
-        view.layout.height < value => constraint
+        view.mkt.height < value => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)

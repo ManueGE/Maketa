@@ -32,7 +32,7 @@ class LayoutModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.layout.left = superview.layout.left => constraint
+        view.mkt.left = superview.mkt.left => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -51,7 +51,7 @@ class LayoutModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.layout.right = superview.layout.right => constraint
+        view.mkt.right = superview.mkt.right => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -70,7 +70,7 @@ class LayoutModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.layout.top = superview.layout.top => constraint
+        view.mkt.top = superview.mkt.top => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -89,7 +89,7 @@ class LayoutModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.layout.bottom = superview.layout.bottom => constraint
+        view.mkt.bottom = superview.mkt.bottom => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -108,7 +108,7 @@ class LayoutModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.layout.leading = superview.layout.leading => constraint
+        view.mkt.leading = superview.mkt.leading => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -127,7 +127,7 @@ class LayoutModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.layout.trailing = superview.layout.trailing => constraint
+        view.mkt.trailing = superview.mkt.trailing => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -146,7 +146,7 @@ class LayoutModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.layout.width = superview.layout.width => constraint
+        view.mkt.width = superview.mkt.width => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -165,7 +165,7 @@ class LayoutModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.layout.height = superview.layout.height => constraint
+        view.mkt.height = superview.mkt.height => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -184,7 +184,7 @@ class LayoutModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.layout.centerX = superview.layout.centerX => constraint
+        view.mkt.centerX = superview.mkt.centerX => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -203,7 +203,7 @@ class LayoutModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.layout.centerY = superview.layout.centerY => constraint
+        view.mkt.centerY = superview.mkt.centerY => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -222,7 +222,7 @@ class LayoutModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.layout.lastBaseline = superview.layout.lastBaseline => constraint
+        view.mkt.lastBaseline = superview.mkt.lastBaseline => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -241,7 +241,7 @@ class LayoutModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.layout.firstBaseline = superview.layout.firstBaseline => constraint
+        view.mkt.firstBaseline = superview.mkt.firstBaseline => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -260,7 +260,7 @@ class LayoutModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.layout.leftMargin = superview.layout.leftMargin => constraint
+        view.mkt.leftMargin = superview.mkt.leftMargin => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -279,7 +279,7 @@ class LayoutModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.layout.rightMargin = superview.layout.rightMargin => constraint
+        view.mkt.rightMargin = superview.mkt.rightMargin => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -298,7 +298,7 @@ class LayoutModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.layout.topMargin = superview.layout.topMargin => constraint
+        view.mkt.topMargin = superview.mkt.topMargin => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -317,7 +317,7 @@ class LayoutModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.layout.bottomMargin = superview.layout.bottomMargin => constraint
+        view.mkt.bottomMargin = superview.mkt.bottomMargin => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -336,7 +336,7 @@ class LayoutModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.layout.leadingMargin = superview.layout.leadingMargin => constraint
+        view.mkt.leadingMargin = superview.mkt.leadingMargin => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -355,7 +355,7 @@ class LayoutModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.layout.trailingMargin = superview.layout.trailingMargin => constraint
+        view.mkt.trailingMargin = superview.mkt.trailingMargin => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -374,7 +374,7 @@ class LayoutModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.layout.centerXWithinMargins = superview.layout.centerXWithinMargins => constraint
+        view.mkt.centerXWithinMargins = superview.mkt.centerXWithinMargins => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -393,7 +393,7 @@ class LayoutModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.layout.centerYWithinMargins = superview.layout.centerYWithinMargins => constraint
+        view.mkt.centerYWithinMargins = superview.mkt.centerYWithinMargins => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -410,7 +410,7 @@ class LayoutModifierTests: ConstraintsTestCase {
     
     func testSetAspectRatio() {
         // when
-        view.layout.aspectRatio = 2
+        view.mkt.aspectRatio = 2
         
         // then
         let constraint = view.constraints.first!
@@ -426,11 +426,11 @@ class LayoutModifierTests: ConstraintsTestCase {
     
     func testGetAspectRatio() {
         // when
-        view.layout.width = 100
-        view.layout.aspectRatio = 2
+        view.mkt.width = 100
+        view.mkt.aspectRatio = 2
         view.layoutIfNeeded()
         
         // then
-        XCTAssertEqual(view.layout.aspectRatio, 2)
+        XCTAssertEqual(view.mkt.aspectRatio, 2)
     }
 }

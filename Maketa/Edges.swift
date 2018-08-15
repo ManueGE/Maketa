@@ -32,50 +32,50 @@ public enum Edge: Equatable {
     static fileprivate let allRelativeToLayoutDirection = [Edge.leading, .trailing, .top, .bottom]
     
     fileprivate func constraint(view: UIView, with edges: Edges) -> NSLayoutConstraint {
-        let layout = view.layout
+        let layout = view.mkt
         var constraint = NSLayoutConstraint.empty
         switch (self, edges.kind) {
         // Left
         case (.left, .edges):
-            layout.left = (edges.view.layout.left - edges.insets.left) => constraint
+            layout.left = (edges.view.mkt.left - edges.insets.left) => constraint
         
         case (.left, .margins):
-            layout.leftMargin = (edges.view.layout.leftMargin - edges.insets.left) => constraint
+            layout.leftMargin = (edges.view.mkt.leftMargin - edges.insets.left) => constraint
             
         // Right
         case (.right, .edges):
-            layout.right = (edges.view.layout.right + edges.insets.right) => constraint
+            layout.right = (edges.view.mkt.right + edges.insets.right) => constraint
             
         case (.right, .margins):
-            layout.rightMargin = (edges.view.layout.rightMargin + edges.insets.right) => constraint
+            layout.rightMargin = (edges.view.mkt.rightMargin + edges.insets.right) => constraint
             
         // Leading
         case (.leading, .edges):
-            layout.leading = (edges.view.layout.leading - edges.insets.left) => constraint
+            layout.leading = (edges.view.mkt.leading - edges.insets.left) => constraint
             
         case (.leading, .margins):
-            layout.leadingMargin = (edges.view.layout.leadingMargin - edges.insets.left) => constraint
+            layout.leadingMargin = (edges.view.mkt.leadingMargin - edges.insets.left) => constraint
             
         // Trailing
         case (.trailing, .edges):
-            layout.trailing = (edges.view.layout.trailing + edges.insets.right) => constraint
+            layout.trailing = (edges.view.mkt.trailing + edges.insets.right) => constraint
             
         case (.trailing, .margins):
-            layout.trailingMargin = (edges.view.layout.trailingMargin + edges.insets.right) => constraint
+            layout.trailingMargin = (edges.view.mkt.trailingMargin + edges.insets.right) => constraint
             
         // Top
         case (.top, .edges):
-            layout.top = (edges.view.layout.top - edges.insets.top) => constraint
+            layout.top = (edges.view.mkt.top - edges.insets.top) => constraint
             
         case (.top, .margins):
-            layout.topMargin = (edges.view.layout.topMargin - edges.insets.top) => constraint
+            layout.topMargin = (edges.view.mkt.topMargin - edges.insets.top) => constraint
             
         // Bottom
         case (.bottom, .edges):
-            layout.bottom = (edges.view.layout.bottom + edges.insets.bottom) => constraint
+            layout.bottom = (edges.view.mkt.bottom + edges.insets.bottom) => constraint
             
         case (.bottom, .margins):
-            layout.bottomMargin = (edges.view.layout.bottomMargin + edges.insets.bottom) => constraint
+            layout.bottomMargin = (edges.view.mkt.bottomMargin + edges.insets.bottom) => constraint
         }
         
         return constraint
@@ -130,7 +130,7 @@ public func => (edges: Edges, constraints: inout [NSLayoutConstraint]!) -> Edges
     return edges
 }
 
-public extension Layout {
+public extension Maketa {
     public var edges: Edges {
         get {
             return Edges(view: view, kind: .edges, edges: Edge.all)

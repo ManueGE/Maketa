@@ -20,7 +20,7 @@ class CenterTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.center = superview.layout.center => constraints
+        view.mkt.center = superview.mkt.center => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
@@ -51,7 +51,7 @@ class CenterTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.center = superview.layout.center
+        view.mkt.center = superview.mkt.center
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
@@ -65,7 +65,7 @@ class CenterTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.center = superview.layout.center => constraints
+        view.mkt.center = superview.mkt.center => constraints
         
         // then
         XCTAssertEqual(constraints!.count, 2)
@@ -79,7 +79,7 @@ class CenterTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.center = superview.layout.center => constraints
+        view.mkt.center = superview.mkt.center => constraints
         
         // then
         XCTAssertEqual(constraints.count, 2)
@@ -94,7 +94,7 @@ class CenterTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.center = (superview.layout.center - UIOffset(horizontal: 10, vertical: 5)) => constraints
+        view.mkt.center = (superview.mkt.center - UIOffset(horizontal: 10, vertical: 5)) => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
@@ -125,7 +125,7 @@ class CenterTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.center = (superview.layout.center - 5) => constraints
+        view.mkt.center = (superview.mkt.center - 5) => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
@@ -156,7 +156,7 @@ class CenterTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.center = (UIOffset(horizontal: 10, vertical: 5) + superview.layout.center) => constraints
+        view.mkt.center = (UIOffset(horizontal: 10, vertical: 5) + superview.mkt.center) => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
@@ -187,7 +187,7 @@ class CenterTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.center = (5.5 + superview.layout.center) => constraints
+        view.mkt.center = (5.5 + superview.mkt.center) => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)

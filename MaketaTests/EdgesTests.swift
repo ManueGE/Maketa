@@ -19,7 +19,7 @@ class EdgesTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.edges = superview.layout.edges => constraints
+        view.mkt.edges = superview.mkt.edges => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 4)
@@ -72,7 +72,7 @@ class EdgesTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.edges = superview.layout.margins => constraints
+        view.mkt.edges = superview.mkt.margins => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 4)
@@ -126,7 +126,7 @@ class EdgesTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.edges = superview.layout.layoutDirectionEdges => constraints
+        view.mkt.edges = superview.mkt.layoutDirectionEdges => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 4)
@@ -179,7 +179,7 @@ class EdgesTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.edges = superview.layout.layoutDirectionMargins => constraints
+        view.mkt.edges = superview.mkt.layoutDirectionMargins => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 4)
@@ -234,7 +234,7 @@ class EdgesTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.edges = superview.layout.edges
+        view.mkt.edges = superview.mkt.edges
         
         // then
         XCTAssertEqual(superview.constraints.count, 4)
@@ -248,7 +248,7 @@ class EdgesTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.edges = superview.layout.edges => constraints
+        view.mkt.edges = superview.mkt.edges => constraints
         
         // then
         XCTAssertEqual(constraints!.count, 4)
@@ -262,7 +262,7 @@ class EdgesTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.edges = superview.layout.edges => constraints
+        view.mkt.edges = superview.mkt.edges => constraints
         
         // then
         XCTAssertEqual(constraints.count, 4)
@@ -276,7 +276,7 @@ class EdgesTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.edges = (superview.layout.edges - .left) => constraints
+        view.mkt.edges = (superview.mkt.edges - .left) => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 3)
@@ -298,7 +298,7 @@ class EdgesTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.edges = (superview.layout.margins - .left) => constraints
+        view.mkt.edges = (superview.mkt.margins - .left) => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 3)
@@ -320,7 +320,7 @@ class EdgesTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.edges = (superview.layout.layoutDirectionEdges - .leading) => constraints
+        view.mkt.edges = (superview.mkt.layoutDirectionEdges - .leading) => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 3)
@@ -342,7 +342,7 @@ class EdgesTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.edges = (superview.layout.layoutDirectionMargins - .leading) => constraints
+        view.mkt.edges = (superview.mkt.layoutDirectionMargins - .leading) => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 3)
@@ -364,7 +364,7 @@ class EdgesTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.edges = (superview.layout.edges - .left - .left) => constraints
+        view.mkt.edges = (superview.mkt.edges - .left - .left) => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 3)
@@ -387,7 +387,7 @@ class EdgesTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.edges = (superview.layout.edges - 20) => constraints
+        view.mkt.edges = (superview.mkt.edges - 20) => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 4)
@@ -416,7 +416,7 @@ class EdgesTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.edges = (superview.layout.edges - UIEdgeInsets(top: 10, left: 15, bottom: 20, right: 25)) => constraints
+        view.mkt.edges = (superview.mkt.edges - UIEdgeInsets(top: 10, left: 15, bottom: 20, right: 25)) => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 4)
@@ -445,7 +445,7 @@ class EdgesTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.edges = (superview.layout.margins - 20) => constraints
+        view.mkt.edges = (superview.mkt.margins - 20) => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 4)
@@ -474,7 +474,7 @@ class EdgesTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        view.layout.edges = (superview.layout.margins - UIEdgeInsets(top: 10, left: 15, bottom: 20, right: 25)) => constraints
+        view.mkt.edges = (superview.mkt.margins - UIEdgeInsets(top: 10, left: 15, bottom: 20, right: 25)) => constraints
         
         // then
         XCTAssertEqual(superview.constraints.count, 4)

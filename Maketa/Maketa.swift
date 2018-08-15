@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class Layout {
+public class Maketa {
     
     internal struct Defaults {
         static let relation = NSLayoutRelation.equal
@@ -23,8 +23,8 @@ public class Layout {
         view.preparedForAutolayout()
     }
     
-    var superLayout: Layout {
-        guard let superview = view.superview else { fatalError("\(self) has not a superview, so layout.\(#function) can't be used") }
-        return superview.layout
+    public var `super`: Maketa {
+        guard let superview = view.superview else { fatalError("\(self) has not a superview, so mkt.\(#function) can't be used") }
+        return superview.mkt
     }
 }

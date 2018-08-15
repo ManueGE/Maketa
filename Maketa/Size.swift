@@ -35,10 +35,10 @@ public extension Size where Self: LayoutCGFloatConvertible {
 extension CGSize: Size {
     public func constraints(for view: UIView) -> [NSLayoutConstraint] {
         var wConstraint = NSLayoutConstraint.empty
-        view.layout.width = width => wConstraint
+        view.mkt.width = width => wConstraint
         
         var hConstraint = NSLayoutConstraint.empty
-        view.layout.height = height => hConstraint
+        view.mkt.height = height => hConstraint
         
         return [wConstraint, hConstraint]
     }
@@ -59,10 +59,10 @@ private struct ViewSize: Size {
     
     func constraints(for view: UIView) -> [NSLayoutConstraint] {
         var wConstraint = NSLayoutConstraint.empty
-        view.layout.width = (self.view.layout.width + offset.horizontal) => wConstraint
+        view.mkt.width = (self.view.mkt.width + offset.horizontal) => wConstraint
         
         var hConstraint = NSLayoutConstraint.empty
-        view.layout.height = (self.view.layout.height + offset.vertical) => hConstraint
+        view.mkt.height = (self.view.mkt.height + offset.vertical) => hConstraint
         
         return [wConstraint, hConstraint]
     }
@@ -129,7 +129,7 @@ public func => (size: Size, constraints: inout [NSLayoutConstraint]!) -> Size {
 }
 
 // MARK: - Layout extension
-public extension Layout {
+public extension Maketa {
     public var size: Size {
         get { return ViewSize(view: view) }
         set { newValue.constraints(for: view) }

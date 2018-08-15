@@ -16,7 +16,7 @@ public protocol LayoutModifier {
     func setPriority(_ priority: UILayoutPriority) -> LayoutModifier
 }
 
-extension Layout {
+extension Maketa {
     // MARK: Raw attributes
     
     public var left: LayoutModifier {
