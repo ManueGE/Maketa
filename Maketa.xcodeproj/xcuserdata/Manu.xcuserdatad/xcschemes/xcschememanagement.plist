@@ -4,17 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Layout.xcscheme</key>
+		<key>Maketa.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>LayoutApp.xcscheme</key>
+		<key>MaketaApp.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>LayoutTests.xcscheme</key>
+		<key>MaketaTests.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>2</integer>

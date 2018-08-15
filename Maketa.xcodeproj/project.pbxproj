@@ -12,7 +12,7 @@
 		3230416320FAA1E000EA3B42 /* LayoutModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3230416220FAA1E000EA3B42 /* LayoutModifier.swift */; };
 		323FF54A211ED09600780D11 /* NSLayoutConstraint+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323FF549211ED09600780D11 /* NSLayoutConstraint+Layout.swift */; };
 		3241AE6421222C88002879C0 /* LayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE6321222C88002879C0 /* LayoutTests.swift */; };
-		3241AE6621222C88002879C0 /* Layout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3285E90320F96334004A4BB4 /* Layout.framework */; };
+		3241AE6621222C88002879C0 /* Maketa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3285E90320F96334004A4BB4 /* Maketa.framework */; };
 		3241AE6D21222E23002879C0 /* ModifiersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE6C21222E23002879C0 /* ModifiersTests.swift */; };
 		3241AE6F21223024002879C0 /* SizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE6E21223024002879C0 /* SizeTests.swift */; };
 		3241AE73212233C4002879C0 /* ConstraintsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE72212233C4002879C0 /* ConstraintsTestCase.swift */; };
@@ -25,9 +25,9 @@
 		3285E8EF20F7B434004A4BB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3285E8ED20F7B434004A4BB4 /* Main.storyboard */; };
 		3285E8F120F7B439004A4BB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3285E8F020F7B439004A4BB4 /* Assets.xcassets */; };
 		3285E8F420F7B439004A4BB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3285E8F220F7B439004A4BB4 /* LaunchScreen.storyboard */; };
-		3285E90720F96335004A4BB4 /* Layout.h in Headers */ = {isa = PBXBuildFile; fileRef = 3285E90520F96335004A4BB4 /* Layout.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3285E90A20F96335004A4BB4 /* Layout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3285E90320F96334004A4BB4 /* Layout.framework */; };
-		3285E90B20F96335004A4BB4 /* Layout.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3285E90320F96334004A4BB4 /* Layout.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3285E90720F96335004A4BB4 /* Maketa.h in Headers */ = {isa = PBXBuildFile; fileRef = 3285E90520F96335004A4BB4 /* Maketa.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3285E90A20F96335004A4BB4 /* Maketa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3285E90320F96334004A4BB4 /* Maketa.framework */; };
+		3285E90B20F96335004A4BB4 /* Maketa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3285E90320F96334004A4BB4 /* Maketa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3285E91120F96343004A4BB4 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91020F96343004A4BB4 /* Layout.swift */; };
 		3285E91320F9634B004A4BB4 /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91220F9634B004A4BB4 /* UIView+Layout.swift */; };
 		3285E91520F96355004A4BB4 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91420F96355004A4BB4 /* Modifiers.swift */; };
@@ -59,7 +59,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3285E90B20F96335004A4BB4 /* Layout.framework in Embed Frameworks */,
+				3285E90B20F96335004A4BB4 /* Maketa.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,7 +71,7 @@
 		3230416020FA9C4200EA3B42 /* Center.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Center.swift; sourceTree = "<group>"; };
 		3230416220FAA1E000EA3B42 /* LayoutModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutModifier.swift; sourceTree = "<group>"; };
 		323FF549211ED09600780D11 /* NSLayoutConstraint+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Layout.swift"; sourceTree = "<group>"; };
-		3241AE6121222C88002879C0 /* LayoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LayoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3241AE6121222C88002879C0 /* MaketaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MaketaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3241AE6321222C88002879C0 /* LayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutTests.swift; sourceTree = "<group>"; };
 		3241AE6521222C88002879C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3241AE6C21222E23002879C0 /* ModifiersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiersTests.swift; sourceTree = "<group>"; };
@@ -81,15 +81,15 @@
 		3241AE942124698F002879C0 /* LayoutModifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutModifierTests.swift; sourceTree = "<group>"; };
 		3241AE9621246E03002879C0 /* EdgesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgesTests.swift; sourceTree = "<group>"; };
 		32761E552120DE450062BEC4 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
-		3285E8E620F7B434004A4BB4 /* LayoutApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LayoutApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3285E8E620F7B434004A4BB4 /* MaketaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaketaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3285E8E920F7B434004A4BB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3285E8EB20F7B434004A4BB4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3285E8EE20F7B434004A4BB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3285E8F020F7B439004A4BB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3285E8F320F7B439004A4BB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3285E8F520F7B439004A4BB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3285E90320F96334004A4BB4 /* Layout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Layout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3285E90520F96335004A4BB4 /* Layout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Layout.h; sourceTree = "<group>"; };
+		3285E90320F96334004A4BB4 /* Maketa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Maketa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3285E90520F96335004A4BB4 /* Maketa.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Maketa.h; sourceTree = "<group>"; };
 		3285E90620F96335004A4BB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3285E91020F96343004A4BB4 /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		3285E91220F9634B004A4BB4 /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3241AE6621222C88002879C0 /* Layout.framework in Frameworks */,
+				3241AE6621222C88002879C0 /* Maketa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,7 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3285E90A20F96335004A4BB4 /* Layout.framework in Frameworks */,
+				3285E90A20F96335004A4BB4 /* Maketa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,7 +125,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3241AE6221222C88002879C0 /* LayoutTests */ = {
+		3241AE6221222C88002879C0 /* MaketaTests */ = {
 			isa = PBXGroup;
 			children = (
 				3241AE6321222C88002879C0 /* LayoutTests.swift */,
@@ -137,15 +137,15 @@
 				3241AE6E21223024002879C0 /* SizeTests.swift */,
 				3241AE6521222C88002879C0 /* Info.plist */,
 			);
-			path = LayoutTests;
+			path = MaketaTests;
 			sourceTree = "<group>";
 		};
 		3285E8DD20F7B434004A4BB4 = {
 			isa = PBXGroup;
 			children = (
-				3285E8E820F7B434004A4BB4 /* LayoutApp */,
-				3285E90420F96335004A4BB4 /* Layout */,
-				3241AE6221222C88002879C0 /* LayoutTests */,
+				3285E8E820F7B434004A4BB4 /* MaketaApp */,
+				3285E90420F96335004A4BB4 /* Maketa */,
+				3241AE6221222C88002879C0 /* MaketaTests */,
 				3285E8E720F7B434004A4BB4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -153,14 +153,14 @@
 		3285E8E720F7B434004A4BB4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3285E8E620F7B434004A4BB4 /* LayoutApp.app */,
-				3285E90320F96334004A4BB4 /* Layout.framework */,
-				3241AE6121222C88002879C0 /* LayoutTests.xctest */,
+				3285E8E620F7B434004A4BB4 /* MaketaApp.app */,
+				3285E90320F96334004A4BB4 /* Maketa.framework */,
+				3241AE6121222C88002879C0 /* MaketaTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3285E8E820F7B434004A4BB4 /* LayoutApp */ = {
+		3285E8E820F7B434004A4BB4 /* MaketaApp */ = {
 			isa = PBXGroup;
 			children = (
 				3285E8E920F7B434004A4BB4 /* AppDelegate.swift */,
@@ -170,13 +170,13 @@
 				3285E8F220F7B439004A4BB4 /* LaunchScreen.storyboard */,
 				3285E8F520F7B439004A4BB4 /* Info.plist */,
 			);
-			path = LayoutApp;
+			path = MaketaApp;
 			sourceTree = "<group>";
 		};
-		3285E90420F96335004A4BB4 /* Layout */ = {
+		3285E90420F96335004A4BB4 /* Maketa */ = {
 			isa = PBXGroup;
 			children = (
-				3285E90520F96335004A4BB4 /* Layout.h */,
+				3285E90520F96335004A4BB4 /* Maketa.h */,
 				3285E90620F96335004A4BB4 /* Info.plist */,
 				3285E91020F96343004A4BB4 /* Layout.swift */,
 				3230416220FAA1E000EA3B42 /* LayoutModifier.swift */,
@@ -189,7 +189,7 @@
 				323FF549211ED09600780D11 /* NSLayoutConstraint+Layout.swift */,
 				321A5B5420FAA3B500BAF81C /* MultiTypePointer.swift */,
 			);
-			path = Layout;
+			path = Maketa;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,16 +199,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3285E90720F96335004A4BB4 /* Layout.h in Headers */,
+				3285E90720F96335004A4BB4 /* Maketa.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		3241AE6021222C88002879C0 /* LayoutTests */ = {
+		3241AE6021222C88002879C0 /* MaketaTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3241AE6B21222C88002879C0 /* Build configuration list for PBXNativeTarget "LayoutTests" */;
+			buildConfigurationList = 3241AE6B21222C88002879C0 /* Build configuration list for PBXNativeTarget "MaketaTests" */;
 			buildPhases = (
 				3241AE5D21222C88002879C0 /* Sources */,
 				3241AE5E21222C88002879C0 /* Frameworks */,
@@ -219,14 +219,14 @@
 			dependencies = (
 				3241AE6821222C88002879C0 /* PBXTargetDependency */,
 			);
-			name = LayoutTests;
+			name = MaketaTests;
 			productName = LayoutTests;
-			productReference = 3241AE6121222C88002879C0 /* LayoutTests.xctest */;
+			productReference = 3241AE6121222C88002879C0 /* MaketaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		3285E8E520F7B434004A4BB4 /* LayoutApp */ = {
+		3285E8E520F7B434004A4BB4 /* MaketaApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3285E8F820F7B439004A4BB4 /* Build configuration list for PBXNativeTarget "LayoutApp" */;
+			buildConfigurationList = 3285E8F820F7B439004A4BB4 /* Build configuration list for PBXNativeTarget "MaketaApp" */;
 			buildPhases = (
 				3285E8E220F7B434004A4BB4 /* Sources */,
 				3285E8E320F7B434004A4BB4 /* Frameworks */,
@@ -238,14 +238,14 @@
 			dependencies = (
 				3285E90920F96335004A4BB4 /* PBXTargetDependency */,
 			);
-			name = LayoutApp;
+			name = MaketaApp;
 			productName = Layout;
-			productReference = 3285E8E620F7B434004A4BB4 /* LayoutApp.app */;
+			productReference = 3285E8E620F7B434004A4BB4 /* MaketaApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3285E90220F96334004A4BB4 /* Layout */ = {
+		3285E90220F96334004A4BB4 /* Maketa */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3285E90C20F96335004A4BB4 /* Build configuration list for PBXNativeTarget "Layout" */;
+			buildConfigurationList = 3285E90C20F96335004A4BB4 /* Build configuration list for PBXNativeTarget "Maketa" */;
 			buildPhases = (
 				3285E8FE20F96334004A4BB4 /* Sources */,
 				3285E8FF20F96334004A4BB4 /* Frameworks */,
@@ -256,9 +256,9 @@
 			);
 			dependencies = (
 			);
-			name = Layout;
+			name = Maketa;
 			productName = Layout;
-			productReference = 3285E90320F96334004A4BB4 /* Layout.framework */;
+			productReference = 3285E90320F96334004A4BB4 /* Maketa.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -283,7 +283,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3285E8E120F7B434004A4BB4 /* Build configuration list for PBXProject "Layout" */;
+			buildConfigurationList = 3285E8E120F7B434004A4BB4 /* Build configuration list for PBXProject "Maketa" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -296,9 +296,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3285E8E520F7B434004A4BB4 /* LayoutApp */,
-				3285E90220F96334004A4BB4 /* Layout */,
-				3241AE6021222C88002879C0 /* LayoutTests */,
+				3285E8E520F7B434004A4BB4 /* MaketaApp */,
+				3285E90220F96334004A4BB4 /* Maketa */,
+				3241AE6021222C88002879C0 /* MaketaTests */,
 			);
 		};
 /* End PBXProject section */
@@ -376,12 +376,12 @@
 /* Begin PBXTargetDependency section */
 		3241AE6821222C88002879C0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3285E90220F96334004A4BB4 /* Layout */;
+			target = 3285E90220F96334004A4BB4 /* Maketa */;
 			targetProxy = 3241AE6721222C88002879C0 /* PBXContainerItemProxy */;
 		};
 		3285E90920F96335004A4BB4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3285E90220F96334004A4BB4 /* Layout */;
+			target = 3285E90220F96334004A4BB4 /* Maketa */;
 			targetProxy = 3285E90820F96335004A4BB4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -411,13 +411,13 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CF864KN2XE;
-				INFOPLIST_FILE = LayoutTests/Info.plist;
+				INFOPLIST_FILE = MaketaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.manuege.LayoutTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.manuege.MaketaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -429,13 +429,13 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CF864KN2XE;
-				INFOPLIST_FILE = LayoutTests/Info.plist;
+				INFOPLIST_FILE = MaketaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.manuege.LayoutTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.manuege.MaketaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -563,12 +563,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CF864KN2XE;
-				INFOPLIST_FILE = LayoutApp/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MaketaApp/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.manuege.LayoutApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.manuege.maketa-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -582,12 +582,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CF864KN2XE;
-				INFOPLIST_FILE = LayoutApp/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MaketaApp/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.manuege.LayoutApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.manuege.maketa-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -606,14 +606,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Layout/Info.plist;
+				INFOPLIST_FILE = Maketa/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.manuege.Layout;
+				PRODUCT_BUNDLE_IDENTIFIER = com.manuege.maketa;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -636,14 +636,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Layout/Info.plist;
+				INFOPLIST_FILE = Maketa/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.manuege.Layout;
+				PRODUCT_BUNDLE_IDENTIFIER = com.manuege.maketa;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -656,7 +656,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3241AE6B21222C88002879C0 /* Build configuration list for PBXNativeTarget "LayoutTests" */ = {
+		3241AE6B21222C88002879C0 /* Build configuration list for PBXNativeTarget "MaketaTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3241AE6921222C88002879C0 /* Debug */,
@@ -665,7 +665,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3285E8E120F7B434004A4BB4 /* Build configuration list for PBXProject "Layout" */ = {
+		3285E8E120F7B434004A4BB4 /* Build configuration list for PBXProject "Maketa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3285E8F620F7B439004A4BB4 /* Debug */,
@@ -674,7 +674,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3285E8F820F7B439004A4BB4 /* Build configuration list for PBXNativeTarget "LayoutApp" */ = {
+		3285E8F820F7B439004A4BB4 /* Build configuration list for PBXNativeTarget "MaketaApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3285E8F920F7B439004A4BB4 /* Debug */,
@@ -683,7 +683,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3285E90C20F96335004A4BB4 /* Build configuration list for PBXNativeTarget "Layout" */ = {
+		3285E90C20F96335004A4BB4 /* Build configuration list for PBXNativeTarget "Maketa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3285E90D20F96335004A4BB4 /* Debug */,

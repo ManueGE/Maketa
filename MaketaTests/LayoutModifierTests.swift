@@ -9,7 +9,7 @@
 import Foundation
 
 import XCTest
-@testable import Layout
+@testable import Maketa
 
 class LayoutModifierTests: ConstraintsTestCase {
     
