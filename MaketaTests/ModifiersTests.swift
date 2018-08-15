@@ -50,7 +50,7 @@ class ModifiersTests: ConstraintsTestCase {
         XCTAssertNotNil(constraint)
     }
     
-    // MARK: - Relationships
+    // MARK: - Relations
     func testEqualRelationship() {
         // given
         var constraint = NSLayoutConstraint.empty

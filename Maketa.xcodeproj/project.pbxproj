@@ -29,7 +29,7 @@
 		3285E90A20F96335004A4BB4 /* Maketa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3285E90320F96334004A4BB4 /* Maketa.framework */; };
 		3285E90B20F96335004A4BB4 /* Maketa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3285E90320F96334004A4BB4 /* Maketa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3285E91120F96343004A4BB4 /* Maketa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91020F96343004A4BB4 /* Maketa.swift */; };
-		3285E91320F9634B004A4BB4 /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91220F9634B004A4BB4 /* UIView+Layout.swift */; };
+		3285E91320F9634B004A4BB4 /* UIView+Maketa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91220F9634B004A4BB4 /* UIView+Maketa.swift */; };
 		3285E91520F96355004A4BB4 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91420F96355004A4BB4 /* Modifiers.swift */; };
 		3285E91720F964C0004A4BB4 /* LayoutCGFloatConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91620F964C0004A4BB4 /* LayoutCGFloatConvertible.swift */; };
 		3285E91920F9EAA3004A4BB4 /* Edges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91820F9EAA3004A4BB4 /* Edges.swift */; };
@@ -92,7 +92,7 @@
 		3285E90520F96335004A4BB4 /* Maketa.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Maketa.h; sourceTree = "<group>"; };
 		3285E90620F96335004A4BB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3285E91020F96343004A4BB4 /* Maketa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maketa.swift; sourceTree = "<group>"; };
-		3285E91220F9634B004A4BB4 /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
+		3285E91220F9634B004A4BB4 /* UIView+Maketa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Maketa.swift"; sourceTree = "<group>"; };
 		3285E91420F96355004A4BB4 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		3285E91620F964C0004A4BB4 /* LayoutCGFloatConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutCGFloatConvertible.swift; sourceTree = "<group>"; };
 		3285E91820F9EAA3004A4BB4 /* Edges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edges.swift; sourceTree = "<group>"; };
@@ -185,7 +185,7 @@
 				3230416020FA9C4200EA3B42 /* Center.swift */,
 				32761E552120DE450062BEC4 /* Size.swift */,
 				3285E91620F964C0004A4BB4 /* LayoutCGFloatConvertible.swift */,
-				3285E91220F9634B004A4BB4 /* UIView+Layout.swift */,
+				3285E91220F9634B004A4BB4 /* UIView+Maketa.swift */,
 				323FF549211ED09600780D11 /* NSLayoutConstraint+Layout.swift */,
 				321A5B5420FAA3B500BAF81C /* MultiTypePointer.swift */,
 			);
@@ -360,7 +360,7 @@
 			files = (
 				3285E91920F9EAA3004A4BB4 /* Edges.swift in Sources */,
 				3230416320FAA1E000EA3B42 /* LayoutModifier.swift in Sources */,
-				3285E91320F9634B004A4BB4 /* UIView+Layout.swift in Sources */,
+				3285E91320F9634B004A4BB4 /* UIView+Maketa.swift in Sources */,
 				32761E562120DE450062BEC4 /* Size.swift in Sources */,
 				3285E91520F96355004A4BB4 /* Modifiers.swift in Sources */,
 				323FF54A211ED09600780D11 /* NSLayoutConstraint+Layout.swift in Sources */,

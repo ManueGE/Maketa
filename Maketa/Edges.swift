@@ -18,6 +18,8 @@ public struct Edges {
     fileprivate var edges: [Edge]
     fileprivate var insets = UIEdgeInsets.zero
     fileprivate var constraintsPointer: MultiTypePointer<[NSLayoutConstraint]>?
+    fileprivate var relation = Maketa.Defaults.relation
+    fileprivate var priority = Maketa.Defaults.priority
     
     fileprivate init(view: UIView, kind: Kind, edges: [Edge]) {
         self.view = view
@@ -34,52 +36,102 @@ public enum Edge: Equatable {
     fileprivate func constraint(view: UIView, with edges: Edges) -> NSLayoutConstraint {
         let layout = view.mkt
         var constraint = NSLayoutConstraint.empty
+        let relation = edges.relation
+        
         switch (self, edges.kind) {
         // Left
         case (.left, .edges):
-            layout.left = (edges.view.mkt.left - edges.insets.left) => constraint
-        
+            set(&layout.left,
+                to: (edges.view.mkt.left - edges.insets.left) => constraint,
+                with: relation)
+            
         case (.left, .margins):
-            layout.leftMargin = (edges.view.mkt.leftMargin - edges.insets.left) => constraint
+            set(&layout.leftMargin,
+                to: (edges.view.mkt.leftMargin - edges.insets.left) => constraint,
+                with: relation)
             
         // Right
         case (.right, .edges):
-            layout.right = (edges.view.mkt.right + edges.insets.right) => constraint
+            set(&layout.right,
+                to: (edges.view.mkt.right + edges.insets.right) => constraint,
+                with: relation)
             
         case (.right, .margins):
-            layout.rightMargin = (edges.view.mkt.rightMargin + edges.insets.right) => constraint
+            set(&layout.rightMargin,
+                to: (edges.view.mkt.rightMargin + edges.insets.right) => constraint,
+                with: relation)
             
         // Leading
         case (.leading, .edges):
-            layout.leading = (edges.view.mkt.leading - edges.insets.left) => constraint
+            set(&layout.leading,
+                to: (edges.view.mkt.leading - edges.insets.left) => constraint,
+                with: relation)
             
         case (.leading, .margins):
-            layout.leadingMargin = (edges.view.mkt.leadingMargin - edges.insets.left) => constraint
+            set(&layout.leadingMargin,
+                to: (edges.view.mkt.leadingMargin - edges.insets.left) => constraint,
+                with: relation)
             
         // Trailing
         case (.trailing, .edges):
-            layout.trailing = (edges.view.mkt.trailing + edges.insets.right) => constraint
+            set(&layout.trailing,
+                to: (edges.view.mkt.trailing + edges.insets.right) => constraint,
+                with: relation)
             
         case (.trailing, .margins):
-            layout.trailingMargin = (edges.view.mkt.trailingMargin + edges.insets.right) => constraint
+            set(&layout.trailingMargin,
+                to: (edges.view.mkt.trailingMargin + edges.insets.right) => constraint,
+                with: relation)
             
         // Top
         case (.top, .edges):
-            layout.top = (edges.view.mkt.top - edges.insets.top) => constraint
+            set(&layout.top,
+                to: (edges.view.mkt.top - edges.insets.top) => constraint,
+                with: relation)
             
         case (.top, .margins):
-            layout.topMargin = (edges.view.mkt.topMargin - edges.insets.top) => constraint
+            set(&layout.topMargin,
+                to: (edges.view.mkt.topMargin - edges.insets.top) => constraint,
+                with: relation)
             
         // Bottom
         case (.bottom, .edges):
-            layout.bottom = (edges.view.mkt.bottom + edges.insets.bottom) => constraint
+            set(&layout.bottom,
+                to: (edges.view.mkt.bottom + edges.insets.bottom) => constraint,
+                with: relation)
             
         case (.bottom, .margins):
-            layout.bottomMargin = (edges.view.mkt.bottomMargin + edges.insets.bottom) => constraint
+            set(&layout.bottomMargin,
+                to: (edges.view.mkt.bottomMargin + edges.insets.bottom) => constraint,
+                with: relation)
         }
         
         return constraint
     }
+    
+    private func set(_ modifier: inout LayoutModifier, to value: LayoutModifier, with relation: NSLayoutRelation) {
+        switch relation {
+        case .equal:
+            modifier = value
+        case .lessThanOrEqual:
+            modifier < value
+        case .greaterThanOrEqual:
+            modifier > value
+        }
+    }
+}
+
+// MARK: - Operators
+public func < (left: inout Edges, right: Edges) {
+    var newValue = right
+    newValue.relation = .lessThanOrEqual
+    left = newValue
+}
+
+public func > (left: inout Edges, right: Edges) {
+    var newValue = right
+    newValue.relation = .greaterThanOrEqual
+    left = newValue
 }
 
 public func - (edges: Edges, excluded: Edge) -> Edges {
@@ -129,6 +181,8 @@ public func => (edges: Edges, constraints: inout [NSLayoutConstraint]!) -> Edges
     edges.constraintsPointer = MultiTypePointer(withForcedUnwrapped: &constraints)
     return edges
 }
+
+// MARK: - Maketa extension
 
 public extension Maketa {
     public var edges: Edges {
