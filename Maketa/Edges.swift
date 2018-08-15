@@ -37,72 +37,73 @@ public enum Edge: Equatable {
         let layout = view.mkt
         var constraint = NSLayoutConstraint.empty
         let relation = edges.relation
+        let priority = edges.priority
         
         switch (self, edges.kind) {
         // Left
         case (.left, .edges):
             set(&layout.left,
-                to: (edges.view.mkt.left - edges.insets.left) => constraint,
+                to: ((edges.view.mkt.left - edges.insets.left) & priority) => constraint,
                 with: relation)
             
         case (.left, .margins):
             set(&layout.leftMargin,
-                to: (edges.view.mkt.leftMargin - edges.insets.left) => constraint,
+                to: ((edges.view.mkt.leftMargin - edges.insets.left) & priority) => constraint,
                 with: relation)
             
         // Right
         case (.right, .edges):
             set(&layout.right,
-                to: (edges.view.mkt.right + edges.insets.right) => constraint,
+                to: ((edges.view.mkt.right + edges.insets.right) & priority) => constraint,
                 with: relation)
             
         case (.right, .margins):
             set(&layout.rightMargin,
-                to: (edges.view.mkt.rightMargin + edges.insets.right) => constraint,
+                to: ((edges.view.mkt.rightMargin + edges.insets.right) & priority) => constraint,
                 with: relation)
             
         // Leading
         case (.leading, .edges):
             set(&layout.leading,
-                to: (edges.view.mkt.leading - edges.insets.left) => constraint,
+                to: ((edges.view.mkt.leading - edges.insets.left) & priority) => constraint,
                 with: relation)
             
         case (.leading, .margins):
             set(&layout.leadingMargin,
-                to: (edges.view.mkt.leadingMargin - edges.insets.left) => constraint,
+                to: ((edges.view.mkt.leadingMargin - edges.insets.left) & priority) => constraint,
                 with: relation)
             
         // Trailing
         case (.trailing, .edges):
             set(&layout.trailing,
-                to: (edges.view.mkt.trailing + edges.insets.right) => constraint,
+                to: ((edges.view.mkt.trailing + edges.insets.right) & priority) => constraint,
                 with: relation)
             
         case (.trailing, .margins):
             set(&layout.trailingMargin,
-                to: (edges.view.mkt.trailingMargin + edges.insets.right) => constraint,
+                to: ((edges.view.mkt.trailingMargin + edges.insets.right) & priority) => constraint,
                 with: relation)
             
         // Top
         case (.top, .edges):
             set(&layout.top,
-                to: (edges.view.mkt.top - edges.insets.top) => constraint,
+                to: ((edges.view.mkt.top - edges.insets.top) & priority) => constraint,
                 with: relation)
             
         case (.top, .margins):
             set(&layout.topMargin,
-                to: (edges.view.mkt.topMargin - edges.insets.top) => constraint,
+                to: ((edges.view.mkt.topMargin - edges.insets.top) & priority) => constraint,
                 with: relation)
             
         // Bottom
         case (.bottom, .edges):
             set(&layout.bottom,
-                to: (edges.view.mkt.bottom + edges.insets.bottom) => constraint,
+                to: ((edges.view.mkt.bottom + edges.insets.bottom) & priority) => constraint,
                 with: relation)
             
         case (.bottom, .margins):
             set(&layout.bottomMargin,
-                to: (edges.view.mkt.bottomMargin + edges.insets.bottom) => constraint,
+                to: ((edges.view.mkt.bottomMargin + edges.insets.bottom) & priority) => constraint,
                 with: relation)
         }
         
@@ -132,6 +133,12 @@ public func > (left: inout Edges, right: Edges) {
     var newValue = right
     newValue.relation = .greaterThanOrEqual
     left = newValue
+}
+
+public func & (edges: Edges, priority: UILayoutPriority) -> Edges {
+    var newValue = edges
+    newValue.priority = priority
+    return newValue
 }
 
 public func - (edges: Edges, excluded: Edge) -> Edges {

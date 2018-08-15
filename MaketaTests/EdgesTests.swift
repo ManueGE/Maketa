@@ -277,6 +277,24 @@ class EdgesTests: ConstraintsTestCase {
         XCTAssertEqual(constraints[3].relation, .greaterThanOrEqual)
     }
     
+    // MARK: - Priority
+    func testCustomPriority() {
+        // given
+        var constraints = [NSLayoutConstraint]()
+        let view = UIView()
+        superview.addSubview(view)
+        
+        // when
+        view.mkt.edges = (superview.mkt.edges & .defaultLow) => constraints
+        
+        // then
+        XCTAssertEqual(constraints.count, 4)
+        XCTAssertEqual(constraints[0].priority, .defaultLow)
+        XCTAssertEqual(constraints[1].priority, .defaultLow)
+        XCTAssertEqual(constraints[2].priority, .defaultLow)
+        XCTAssertEqual(constraints[3].priority, .defaultLow)
+    }
+    
     // MARK: - Assignement
     func testCenterConstraintsCanBeAddedWithoutAssignment() {
         
