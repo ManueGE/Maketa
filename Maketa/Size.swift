@@ -12,6 +12,8 @@ public protocol Size {
     @discardableResult
     func constraints(for view: UIView) -> [NSLayoutConstraint]
     func add(_ offset: UIOffset) -> Size
+    func setRelation(_ relation: NSLayoutRelation) -> Size
+    func setPriority(_ priority: UILayoutPriority) -> Size
 }
 
 // MARK: - Constants
@@ -29,22 +31,77 @@ public extension Size where Self: LayoutCGFloatConvertible {
     func add(_ offset: UIOffset) -> Size {
         return CGSize(width: layoutCGFloat + offset.horizontal, height: layoutCGFloat + offset.vertical)
     }
+    
+    public func setRelation(_ relation: NSLayoutRelation) -> Size {
+        let size = CGSize(width: layoutCGFloat, height: layoutCGFloat)
+        return FixedSize(size: size, relation: relation, priority: Maketa.Defaults.priority)
+    }
+    
+    public func setPriority(_ priority: UILayoutPriority) -> Size {
+        let size = CGSize(width: layoutCGFloat, height: layoutCGFloat)
+        return FixedSize(size: size, relation: Maketa.Defaults.relation, priority: priority)
+    }
 }
 
 // MARK: - CGSize
 extension CGSize: Size {
     public func constraints(for view: UIView) -> [NSLayoutConstraint] {
-        var wConstraint = NSLayoutConstraint.empty
-        view.mkt.width = width => wConstraint
-        
-        var hConstraint = NSLayoutConstraint.empty
-        view.mkt.height = height => hConstraint
-        
-        return [wConstraint, hConstraint]
+        let size = FixedSize(size: self, relation: Maketa.Defaults.relation, priority: Maketa.Defaults.priority)
+        return size.constraints(for: view)
     }
     
     public func add(_ offset: UIOffset) -> Size {
         return CGSize(width: width + offset.horizontal, height: height + offset.vertical)
+    }
+    
+    public func setRelation(_ relation: NSLayoutRelation) -> Size {
+        return FixedSize(size: self, relation: relation, priority: Maketa.Defaults.priority)
+    }
+    
+    public func setPriority(_ priority: UILayoutPriority) -> Size {
+        return FixedSize(size: self, relation: Maketa.Defaults.relation, priority: priority)
+    }
+}
+
+// MARK: - FixedSize
+private struct FixedSize: Size {
+    let size: CGSize
+    let relation: NSLayoutRelation
+    let priority: UILayoutPriority
+    
+    func constraints(for view: UIView) -> [NSLayoutConstraint] {
+        var wConstraint = NSLayoutConstraint.empty
+        let wValue = (size.width & priority) => wConstraint
+        
+        var hConstraint = NSLayoutConstraint.empty
+        let hValue = (size.height & priority) => hConstraint
+        
+        switch relation {
+        case .equal:
+            view.mkt.width = wValue
+            view.mkt.height = hValue
+        case .lessThanOrEqual:
+            view.mkt.width < wValue
+            view.mkt.height < hValue
+        case .greaterThanOrEqual:
+            view.mkt.width > wValue
+            view.mkt.height > hValue
+        }
+        
+        return [wConstraint, hConstraint]
+    }
+    
+    func add(_ offset: UIOffset) -> Size {
+        let size = CGSize(width: self.size.width + offset.horizontal, height: self.size.height + offset.vertical)
+        return FixedSize(size: size, relation: relation, priority: priority)
+    }
+    
+    func setRelation(_ relation: NSLayoutRelation) -> Size {
+        return FixedSize(size: size, relation: relation, priority: priority)
+    }
+    
+    func setPriority(_ priority: UILayoutPriority) -> Size {
+        return FixedSize(size: size, relation: relation, priority: priority)
     }
 }
 
@@ -52,6 +109,8 @@ extension CGSize: Size {
 private struct ViewSize: Size {
     let view: UIView
     var offset: UIOffset = UIOffset(horizontal: 0, vertical: 0)
+    private(set) var relation = Maketa.Defaults.relation
+    private(set) var priority = Maketa.Defaults.priority
     
     init(view: UIView) {
         self.view = view
@@ -59,10 +118,22 @@ private struct ViewSize: Size {
     
     func constraints(for view: UIView) -> [NSLayoutConstraint] {
         var wConstraint = NSLayoutConstraint.empty
-        view.mkt.width = (self.view.mkt.width + offset.horizontal) => wConstraint
+        let wValue = ((self.view.mkt.width + offset.horizontal) & priority) => wConstraint
         
         var hConstraint = NSLayoutConstraint.empty
-        view.mkt.height = (self.view.mkt.height + offset.vertical) => hConstraint
+        let hValue = ((self.view.mkt.height + offset.vertical) & priority) => hConstraint
+        
+        switch relation {
+        case .equal:
+            view.mkt.width = wValue
+            view.mkt.height = hValue
+        case .lessThanOrEqual:
+            view.mkt.width < wValue
+            view.mkt.height < hValue
+        case .greaterThanOrEqual:
+            view.mkt.width > wValue
+            view.mkt.height > hValue
+        }
         
         return [wConstraint, hConstraint]
     }
@@ -71,6 +142,18 @@ private struct ViewSize: Size {
         var size = self
         size.offset = UIOffset(horizontal: self.offset.horizontal + offset.horizontal, vertical: self.offset.vertical + offset.vertical)
         return size
+    }
+    
+    func setRelation(_ relation: NSLayoutRelation) -> Size {
+        var value = self
+        value.relation = relation
+        return value
+    }
+    
+    func setPriority(_ priority: UILayoutPriority) -> Size {
+        var value = self
+        value.priority = priority
+        return value
     }
 }
 
@@ -86,9 +169,29 @@ private struct SizeConstraintSetter: Size {
     }
     
     func add(_ offset: UIOffset) -> Size { fatalError("Can't modify a `Size` after it is assigned") }
+    
+    func setRelation(_ relation: NSLayoutRelation) -> Size {
+        var value = self
+        value.original = original.setRelation(relation)
+        return value
+    }
+    
+    func setPriority(_ priority: UILayoutPriority) -> Size { fatalError("Can't modify a `Size` after it is assigned") }
 }
 
 // MARK: - Operators
+public func < (left: inout Size, right: Size) {
+    left = right.setRelation(.lessThanOrEqual)
+}
+
+public func > (left: inout Size, right: Size) {
+    left = right.setRelation(.greaterThanOrEqual)
+}
+
+public func & (modifier: Size, priority: UILayoutPriority) -> Size {
+    return modifier.setPriority(priority)
+}
+
 public func + (size: Size, offset: UIOffset) -> Size {
     return size.add(offset)
 }
