@@ -9,7 +9,7 @@
 import XCTest
 @testable import Layout
 
-class LayoutModifierTests: ConstraintsTestCase {
+class ModifiersTests: ConstraintsTestCase {
 
     // MARK: - Assignements
     func testConstraintCanBeSetWithoutAssign() {
