@@ -11,11 +11,32 @@ import UIKit
 public struct Center {
     fileprivate let view: UIView
     fileprivate var offset = UIOffset.zero
+    fileprivate var relation = Maketa.Defaults.relation
+    fileprivate var priority = Maketa.Defaults.priority
     fileprivate var constraintsPointer: MultiTypePointer<[NSLayoutConstraint]>?
     
     fileprivate init(view: UIView) {
         self.view = view
     }
+}
+
+// MARK: - Operators
+public func < (left: inout Center, right: Center) {
+    var newValue = right
+    newValue.relation = .lessThanOrEqual
+    left = newValue
+}
+
+public func > (left: inout Center, right: Center) {
+    var newValue = right
+    newValue.relation = .greaterThanOrEqual
+    left = newValue
+}
+
+public func & (edges: Center, priority: UILayoutPriority) -> Center {
+    var newValue = edges
+    newValue.priority = priority
+    return newValue
 }
 
 public func + (center: Center, offset: UIOffset) -> Center {
@@ -72,10 +93,24 @@ public extension Maketa {
         }
         set {
             var xConstraint = NSLayoutConstraint.empty
-            view.mkt.centerX = (newValue.view.mkt.centerX + newValue.offset.horizontal) => xConstraint
+            let xValue = ((newValue.view.mkt.centerX + newValue.offset.horizontal) & newValue.priority) => xConstraint
             
             var yConstraint = NSLayoutConstraint.empty
-            view.mkt.centerY = (newValue.view.mkt.centerY + newValue.offset.vertical) => yConstraint
+            let yValue = ((newValue.view.mkt.centerY + newValue.offset.vertical) & newValue.priority) => yConstraint
+            
+            switch newValue.relation {
+            case .equal:
+                view.mkt.centerX = xValue
+                view.mkt.centerY = yValue
+                
+            case .lessThanOrEqual:
+                view.mkt.centerX < xValue
+                view.mkt.centerY < yValue
+                
+            case .greaterThanOrEqual:
+                view.mkt.centerX > xValue
+                view.mkt.centerY > yValue
+            }
             
             newValue.constraintsPointer?.setPointee([xConstraint, yConstraint])
         }

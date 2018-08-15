@@ -19,6 +19,10 @@ public func > (left: inout LayoutModifier, right: LayoutModifier) {
     left = right.setRelation(.greaterThanOrEqual)
 }
 
+public func & (modifier: LayoutModifier, priority: UILayoutPriority) -> LayoutModifier {
+    return modifier.setPriority(priority)
+}
+
 public func + (modifier: LayoutModifier, constant: CGFloat) -> LayoutModifier {
     return modifier.add(constant)
 }
@@ -41,10 +45,6 @@ public func * (multiplier: CGFloat, modifier: LayoutModifier) -> LayoutModifier 
 
 public func / (modifier: LayoutModifier, multiplier: CGFloat) -> LayoutModifier {
     return modifier.multiply(by: 1 / multiplier)
-}
-
-public func & (modifier: LayoutModifier, priority: UILayoutPriority) -> LayoutModifier {
-    return modifier.setPriority(priority)
 }
 
 public func => (modifier: LayoutModifier, constraint: inout NSLayoutConstraint) -> LayoutModifier {
