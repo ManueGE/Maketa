@@ -11,13 +11,13 @@ import ObjectiveC
 
 // MARK: UIView extension
 /**
- An extension to have access to the layout object associated to the view
+ An extension to have access to the `Maketa` object associated to the view
  */
 public extension UIView {
     
     private static var key: UInt8 = 0
     
-    /// Returns the layout object associated to the view
+    /// Returns the `Maketa` object associated to the view
     public private(set) var mkt: Maketa {
         get {
             let maketa: Maketa

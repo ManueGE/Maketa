@@ -194,7 +194,7 @@ class ModifiersTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        let value: LayoutModifier = -10
+        let value: AttributeModifier = -10
         view.mkt.height = (value - 10) => constraint
         
         // then
@@ -213,7 +213,7 @@ class ModifiersTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        let value: LayoutModifier = 10
+        let value: AttributeModifier = 10
         view.mkt.height = (value * 10) => constraint
         
         // then
@@ -232,7 +232,7 @@ class ModifiersTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        let value: LayoutModifier = 10
+        let value: AttributeModifier = 10
         view.mkt.height = (value & .defaultLow) => constraint
         
         // then
@@ -251,7 +251,7 @@ class ModifiersTests: ConstraintsTestCase {
         superview.addSubview(view)
         
         // when
-        let value: LayoutModifier = Float(10)
+        let value: AttributeModifier = Float(10)
         view.mkt.height < value => constraint
         
         // then

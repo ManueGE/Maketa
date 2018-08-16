@@ -9,16 +9,17 @@
 /* Begin PBXBuildFile section */
 		321A5B5520FAA3B500BAF81C /* MultiTypePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321A5B5420FAA3B500BAF81C /* MultiTypePointer.swift */; };
 		3230416120FA9C4200EA3B42 /* Center.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3230416020FA9C4200EA3B42 /* Center.swift */; };
-		3230416320FAA1E000EA3B42 /* LayoutModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3230416220FAA1E000EA3B42 /* LayoutModifier.swift */; };
-		323FF54A211ED09600780D11 /* NSLayoutConstraint+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323FF549211ED09600780D11 /* NSLayoutConstraint+Layout.swift */; };
+		3230416320FAA1E000EA3B42 /* AttributeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3230416220FAA1E000EA3B42 /* AttributeModifier.swift */; };
+		323FF54A211ED09600780D11 /* NSLayoutConstraint+Maketa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323FF549211ED09600780D11 /* NSLayoutConstraint+Maketa.swift */; };
 		3241AE6421222C88002879C0 /* MaketaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE6321222C88002879C0 /* MaketaTests.swift */; };
 		3241AE6621222C88002879C0 /* Maketa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3285E90320F96334004A4BB4 /* Maketa.framework */; };
 		3241AE6D21222E23002879C0 /* ModifiersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE6C21222E23002879C0 /* ModifiersTests.swift */; };
 		3241AE6F21223024002879C0 /* SizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE6E21223024002879C0 /* SizeTests.swift */; };
 		3241AE73212233C4002879C0 /* ConstraintsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE72212233C4002879C0 /* ConstraintsTestCase.swift */; };
 		3241AE75212239D6002879C0 /* CenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE74212239D6002879C0 /* CenterTests.swift */; };
-		3241AE952124698F002879C0 /* LayoutModifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE942124698F002879C0 /* LayoutModifierTests.swift */; };
+		3241AE952124698F002879C0 /* AttributeModifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE942124698F002879C0 /* AttributeModifierTests.swift */; };
 		3241AE9721246E03002879C0 /* EdgesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE9621246E03002879C0 /* EdgesTests.swift */; };
+		3241AE992125653C002879C0 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3241AE982125653C002879C0 /* Operators.swift */; };
 		32761E562120DE450062BEC4 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32761E552120DE450062BEC4 /* Size.swift */; };
 		3285E8EA20F7B434004A4BB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E8E920F7B434004A4BB4 /* AppDelegate.swift */; };
 		3285E8EC20F7B434004A4BB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E8EB20F7B434004A4BB4 /* ViewController.swift */; };
@@ -31,7 +32,7 @@
 		3285E91120F96343004A4BB4 /* Maketa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91020F96343004A4BB4 /* Maketa.swift */; };
 		3285E91320F9634B004A4BB4 /* UIView+Maketa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91220F9634B004A4BB4 /* UIView+Maketa.swift */; };
 		3285E91520F96355004A4BB4 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91420F96355004A4BB4 /* Modifiers.swift */; };
-		3285E91720F964C0004A4BB4 /* LayoutCGFloatConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91620F964C0004A4BB4 /* LayoutCGFloatConvertible.swift */; };
+		3285E91720F964C0004A4BB4 /* MaketaCGFloatConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91620F964C0004A4BB4 /* MaketaCGFloatConvertible.swift */; };
 		3285E91920F9EAA3004A4BB4 /* Edges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91820F9EAA3004A4BB4 /* Edges.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,8 +70,8 @@
 /* Begin PBXFileReference section */
 		321A5B5420FAA3B500BAF81C /* MultiTypePointer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiTypePointer.swift; sourceTree = "<group>"; };
 		3230416020FA9C4200EA3B42 /* Center.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Center.swift; sourceTree = "<group>"; };
-		3230416220FAA1E000EA3B42 /* LayoutModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutModifier.swift; sourceTree = "<group>"; };
-		323FF549211ED09600780D11 /* NSLayoutConstraint+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Layout.swift"; sourceTree = "<group>"; };
+		3230416220FAA1E000EA3B42 /* AttributeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeModifier.swift; sourceTree = "<group>"; };
+		323FF549211ED09600780D11 /* NSLayoutConstraint+Maketa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Maketa.swift"; sourceTree = "<group>"; };
 		3241AE6121222C88002879C0 /* MaketaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MaketaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3241AE6321222C88002879C0 /* MaketaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaketaTests.swift; sourceTree = "<group>"; };
 		3241AE6521222C88002879C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,8 +79,9 @@
 		3241AE6E21223024002879C0 /* SizeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeTests.swift; sourceTree = "<group>"; };
 		3241AE72212233C4002879C0 /* ConstraintsTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsTestCase.swift; sourceTree = "<group>"; };
 		3241AE74212239D6002879C0 /* CenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterTests.swift; sourceTree = "<group>"; };
-		3241AE942124698F002879C0 /* LayoutModifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutModifierTests.swift; sourceTree = "<group>"; };
+		3241AE942124698F002879C0 /* AttributeModifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeModifierTests.swift; sourceTree = "<group>"; };
 		3241AE9621246E03002879C0 /* EdgesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgesTests.swift; sourceTree = "<group>"; };
+		3241AE982125653C002879C0 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		32761E552120DE450062BEC4 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		3285E8E620F7B434004A4BB4 /* MaketaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaketaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3285E8E920F7B434004A4BB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,7 +96,7 @@
 		3285E91020F96343004A4BB4 /* Maketa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maketa.swift; sourceTree = "<group>"; };
 		3285E91220F9634B004A4BB4 /* UIView+Maketa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Maketa.swift"; sourceTree = "<group>"; };
 		3285E91420F96355004A4BB4 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
-		3285E91620F964C0004A4BB4 /* LayoutCGFloatConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutCGFloatConvertible.swift; sourceTree = "<group>"; };
+		3285E91620F964C0004A4BB4 /* MaketaCGFloatConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaketaCGFloatConvertible.swift; sourceTree = "<group>"; };
 		3285E91820F9EAA3004A4BB4 /* Edges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edges.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,7 +132,7 @@
 			children = (
 				3241AE6321222C88002879C0 /* MaketaTests.swift */,
 				3241AE72212233C4002879C0 /* ConstraintsTestCase.swift */,
-				3241AE942124698F002879C0 /* LayoutModifierTests.swift */,
+				3241AE942124698F002879C0 /* AttributeModifierTests.swift */,
 				3241AE6C21222E23002879C0 /* ModifiersTests.swift */,
 				3241AE9621246E03002879C0 /* EdgesTests.swift */,
 				3241AE74212239D6002879C0 /* CenterTests.swift */,
@@ -179,15 +181,16 @@
 				3285E90520F96335004A4BB4 /* Maketa.h */,
 				3285E90620F96335004A4BB4 /* Info.plist */,
 				3285E91020F96343004A4BB4 /* Maketa.swift */,
-				3230416220FAA1E000EA3B42 /* LayoutModifier.swift */,
+				3230416220FAA1E000EA3B42 /* AttributeModifier.swift */,
 				3285E91420F96355004A4BB4 /* Modifiers.swift */,
 				3285E91820F9EAA3004A4BB4 /* Edges.swift */,
 				3230416020FA9C4200EA3B42 /* Center.swift */,
 				32761E552120DE450062BEC4 /* Size.swift */,
-				3285E91620F964C0004A4BB4 /* LayoutCGFloatConvertible.swift */,
+				3285E91620F964C0004A4BB4 /* MaketaCGFloatConvertible.swift */,
 				3285E91220F9634B004A4BB4 /* UIView+Maketa.swift */,
-				323FF549211ED09600780D11 /* NSLayoutConstraint+Layout.swift */,
+				323FF549211ED09600780D11 /* NSLayoutConstraint+Maketa.swift */,
 				321A5B5420FAA3B500BAF81C /* MultiTypePointer.swift */,
+				3241AE982125653C002879C0 /* Operators.swift */,
 			);
 			path = Maketa;
 			sourceTree = "<group>";
@@ -340,7 +343,7 @@
 				3241AE9721246E03002879C0 /* EdgesTests.swift in Sources */,
 				3241AE6421222C88002879C0 /* MaketaTests.swift in Sources */,
 				3241AE6F21223024002879C0 /* SizeTests.swift in Sources */,
-				3241AE952124698F002879C0 /* LayoutModifierTests.swift in Sources */,
+				3241AE952124698F002879C0 /* AttributeModifierTests.swift in Sources */,
 				3241AE75212239D6002879C0 /* CenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,14 +362,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				3285E91920F9EAA3004A4BB4 /* Edges.swift in Sources */,
-				3230416320FAA1E000EA3B42 /* LayoutModifier.swift in Sources */,
+				3230416320FAA1E000EA3B42 /* AttributeModifier.swift in Sources */,
 				3285E91320F9634B004A4BB4 /* UIView+Maketa.swift in Sources */,
 				32761E562120DE450062BEC4 /* Size.swift in Sources */,
 				3285E91520F96355004A4BB4 /* Modifiers.swift in Sources */,
-				323FF54A211ED09600780D11 /* NSLayoutConstraint+Layout.swift in Sources */,
+				323FF54A211ED09600780D11 /* NSLayoutConstraint+Maketa.swift in Sources */,
+				3241AE992125653C002879C0 /* Operators.swift in Sources */,
 				3285E91120F96343004A4BB4 /* Maketa.swift in Sources */,
 				3230416120FA9C4200EA3B42 /* Center.swift in Sources */,
-				3285E91720F964C0004A4BB4 /* LayoutCGFloatConvertible.swift in Sources */,
+				3285E91720F964C0004A4BB4 /* MaketaCGFloatConvertible.swift in Sources */,
 				321A5B5520FAA3B500BAF81C /* MultiTypePointer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

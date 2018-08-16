@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A struct used to match the constraints associated to the center of a `UIView` to the center of another `UIView`.
 public struct Center {
     fileprivate let view: UIView
     fileprivate var offset = UIOffset.zero
@@ -21,24 +22,28 @@ public struct Center {
 }
 
 // MARK: - Operators
+/// Set the center on the left to the center on the right with a `.lessThanOrEqual` relation.
 public func < (left: inout Center, right: Center) {
     var newValue = right
     newValue.relation = .lessThanOrEqual
     left = newValue
 }
 
+/// Set the center on the left to the center on the right with a `.greaterThanOrEqual` relation.
 public func > (left: inout Center, right: Center) {
     var newValue = right
     newValue.relation = .greaterThanOrEqual
     left = newValue
 }
 
-public func & (edges: Center, priority: UILayoutPriority) -> Center {
-    var newValue = edges
+/// Set the priority of the given center to the given priority
+public func & (center: Center, priority: UILayoutPriority) -> Center {
+    var newValue = center
     newValue.priority = priority
     return newValue
 }
 
+/// Adds an offset to the given center.
 public func + (center: Center, offset: UIOffset) -> Center {
     var center = center
     center.offset.horizontal += offset.horizontal
@@ -46,40 +51,48 @@ public func + (center: Center, offset: UIOffset) -> Center {
     return center
 }
 
+/// Adds an offset to the given center.
 public func + (offset: UIOffset, center: Center) -> Center {
     return center + offset
 }
 
+/// Substract an offset from the given center.
 public func - (center: Center, offset: UIOffset) -> Center {
     return center + UIOffset(horizontal: -offset.horizontal, vertical: -offset.vertical)
 }
 
-public func + (center: Center, offset: LayoutCGFloatConvertible) -> Center {
-    let value = offset.layoutCGFloat
+/// Adds an offset to the given center.
+public func + (center: Center, offset: MaketaCGFloatConvertible) -> Center {
+    let value = offset.mktCGFloat
     let offset = UIOffset(horizontal: value, vertical: value)
     return center + offset
 }
 
-public func + (offset: LayoutCGFloatConvertible, center: Center) -> Center {
+/// Adds an offset to the given center.
+public func + (offset: MaketaCGFloatConvertible, center: Center) -> Center {
     return center + offset
 }
 
-public func - (center: Center, offset: LayoutCGFloatConvertible) -> Center {
-    return  center + -offset.layoutCGFloat
+/// Substract an offset from the given center.
+public func - (center: Center, offset: MaketaCGFloatConvertible) -> Center {
+    return  center + -offset.mktCGFloat
 }
 
+/// Saves the constraints added when the center is applied into the given pointer
 public func => (center: Center, constraints: inout [NSLayoutConstraint]) -> Center {
     var center = center
     center.constraintsPointer = MultiTypePointer(&constraints)
     return center
 }
 
+/// Saves the constraints added when the center is applied into the given pointer
 public func => (center: Center, constraints: inout [NSLayoutConstraint]?) -> Center {
     var center = center
     center.constraintsPointer = MultiTypePointer(withOptional: &constraints)
     return center
 }
 
+/// Saves the constraints added when the center is applied into the given pointer
 public func => (center: Center, constraints: inout [NSLayoutConstraint]!) -> Center {
     var center = center
     center.constraintsPointer = MultiTypePointer(withForcedUnwrapped: &constraints)
@@ -87,6 +100,7 @@ public func => (center: Center, constraints: inout [NSLayoutConstraint]!) -> Cen
 }
 
 public extension Maketa {
+    /// returns the center of the receiver
     public var center: Center {
         get {
             return Center(view: view)
