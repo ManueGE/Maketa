@@ -837,4 +837,150 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintHeight.relation, .equal)
         XCTAssertEqual(constraintHeight.priority, .required)
     }
+    
+    func testConstantCanBeDivided() {
+        // given
+        var constraints = [NSLayoutConstraint]()
+        let view = UIView()
+        
+        // when
+        let size: Size = 30
+        view.mkt.size = (size / 2) => constraints
+        
+        // then
+        XCTAssertEqual(view.constraints.count, 2)
+        XCTAssertEqual(constraints.count, 2)
+        
+        let constraintWidth = constraints[0]
+        XCTAssertTrue(constraintWidth.firstItem === view)
+        XCTAssertEqual(constraintWidth.firstAttribute, .width)
+        XCTAssertEqual(constraintWidth.constant, 15)
+        XCTAssertEqual(constraintWidth.multiplier, 1)
+        
+        let constraintHeight = constraints[1]
+        XCTAssertTrue(constraintHeight.firstItem === view)
+        XCTAssertEqual(constraintHeight.firstAttribute, .height)
+        XCTAssertEqual(constraintHeight.constant, 15)
+        XCTAssertEqual(constraintHeight.multiplier, 1)
+    }
+    
+    func testCGSizeCanBeDivided() {
+        // given
+        var constraints = [NSLayoutConstraint]()
+        let view = UIView()
+        
+        // when
+        view.mkt.size = (CGSize(width: 10, height: 20) / 2) => constraints
+        
+        // then
+        XCTAssertEqual(view.constraints.count, 2)
+        XCTAssertEqual(constraints.count, 2)
+        
+        let constraintWidth = constraints[0]
+        XCTAssertTrue(constraintWidth.firstItem === view)
+        XCTAssertEqual(constraintWidth.firstAttribute, .width)
+        XCTAssertEqual(constraintWidth.constant, 5)
+        XCTAssertEqual(constraintWidth.multiplier, 1)
+        
+        let constraintHeight = constraints[1]
+        XCTAssertTrue(constraintHeight.firstItem === view)
+        XCTAssertEqual(constraintHeight.firstAttribute, .height)
+        XCTAssertEqual(constraintHeight.constant, 10)
+        XCTAssertEqual(constraintHeight.multiplier, 1)
+    }
+    
+    func testFixedSizeCanBeDivided() {
+        // given
+        var constraints = [NSLayoutConstraint]()
+        let view = UIView()
+        
+        // when
+        let size = CGSize(width: 10, height: 20) & .defaultLow
+        view.mkt.size = (size / 2) => constraints
+        
+        // then
+        XCTAssertEqual(view.constraints.count, 2)
+        XCTAssertEqual(constraints.count, 2)
+        
+        let constraintWidth = constraints[0]
+        XCTAssertTrue(constraintWidth.firstItem === view)
+        XCTAssertEqual(constraintWidth.firstAttribute, .width)
+        XCTAssertEqual(constraintWidth.constant, 5)
+        XCTAssertEqual(constraintWidth.multiplier, 1)
+
+        
+        let constraintHeight = constraints[1]
+        XCTAssertTrue(constraintHeight.firstItem === view)
+        XCTAssertEqual(constraintHeight.firstAttribute, .height)
+        XCTAssertEqual(constraintHeight.constant, 10)
+        XCTAssertEqual(constraintHeight.multiplier, 1)
+
+    }
+    
+    func testOtherViewSizeCanBeDivided() {
+        // given
+        var constraints = [NSLayoutConstraint]()
+        let view0 = UIView()
+        superview.addSubview(view0)
+        view0.mkt.size = CGSize(width: 10, height: 20)
+        
+        let view = UIView()
+        superview.addSubview(view)
+        
+        // when
+        view.mkt.size = (view0.mkt.size / 2) => constraints
+        
+        // then
+        XCTAssertEqual(superview.constraints.count, 2)
+        XCTAssertEqual(constraints.count, 2)
+        
+        let constraintWidth = constraints[0]
+        XCTAssertTrue(constraintWidth.firstItem === view)
+        XCTAssertTrue(constraintWidth.secondItem === view0)
+        XCTAssertEqual(constraintWidth.firstAttribute, .width)
+        XCTAssertEqual(constraintWidth.secondAttribute, .width)
+        XCTAssertEqual(constraintWidth.constant, 0)
+        XCTAssertEqual(constraintWidth.multiplier, 0.5)
+        XCTAssertEqual(constraintWidth.relation, .equal)
+        XCTAssertEqual(constraintWidth.priority, .required)
+        
+        let constraintHeight = constraints[1]
+        XCTAssertTrue(constraintHeight.firstItem === view)
+        XCTAssertTrue(constraintHeight.secondItem === view0)
+        XCTAssertEqual(constraintHeight.firstAttribute, .height)
+        XCTAssertEqual(constraintHeight.secondAttribute, .height)
+        XCTAssertEqual(constraintHeight.constant, 0)
+        XCTAssertEqual(constraintHeight.multiplier, 0.5)
+        XCTAssertEqual(constraintHeight.relation, .equal)
+        XCTAssertEqual(constraintHeight.priority, .required)
+    }
+    
+    func testSizeProductCommutativeProperty() {
+        // given
+        var constraints = [NSLayoutConstraint]()
+        let view = UIView()
+        
+        // when
+        view.mkt.size = (10 * CGSize(width: 30, height: 40)) => constraints
+        
+        // then
+        XCTAssertEqual(view.constraints.count, 2)
+        XCTAssertEqual(constraints.count, 2)
+        
+        let constraintWidth = constraints[0]
+        XCTAssertTrue(constraintWidth.firstItem === view)
+        XCTAssertEqual(constraintWidth.firstAttribute, .width)
+        XCTAssertEqual(constraintWidth.constant, 300)
+        XCTAssertEqual(constraintWidth.multiplier, 1)
+        XCTAssertEqual(constraintWidth.relation, .equal)
+        XCTAssertEqual(constraintWidth.priority, .required)
+        
+        let constraintHeight = constraints[1]
+        XCTAssertTrue(constraintHeight.firstItem === view)
+        XCTAssertEqual(constraintHeight.firstAttribute, .height)
+        XCTAssertEqual(constraintHeight.constant, 400)
+         XCTAssertEqual(constraintHeight.multiplier, 1)
+        XCTAssertEqual(constraintHeight.relation, .equal)
+        XCTAssertEqual(constraintHeight.priority, .required)
+    }
 }

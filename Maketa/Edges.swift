@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A struct used to match the constraints associated to the edges of a `UIView` to the edges of another `UIView`.
 public struct Edges {
     fileprivate enum Kind {
         case edges, margins
@@ -28,6 +29,7 @@ public struct Edges {
     }
 }
 
+/// Each one of the possible edges of a `UIView`.
 public enum Edge: Equatable {
     case left, right, leading, trailing, top, bottom
     static fileprivate let all = [Edge.left, .right, .top, .bottom]
@@ -110,7 +112,7 @@ public enum Edge: Equatable {
         return constraint
     }
     
-    private func set(_ modifier: inout LayoutModifier, to value: LayoutModifier, with relation: NSLayoutRelation) {
+    private func set(_ modifier: inout AttributeModifier, to value: AttributeModifier, with relation: NSLayoutRelation) {
         switch relation {
         case .equal:
             modifier = value
@@ -123,24 +125,29 @@ public enum Edge: Equatable {
 }
 
 // MARK: - Operators
+
+/// Set the edges on the left to the edges on the right with a `.lessThanOrEqual` relation.
 public func < (left: inout Edges, right: Edges) {
     var newValue = right
     newValue.relation = .lessThanOrEqual
     left = newValue
 }
 
+/// Set the edges on the left to the edges on the right with a `.greaterThanOrEqual` relation.
 public func > (left: inout Edges, right: Edges) {
     var newValue = right
     newValue.relation = .greaterThanOrEqual
     left = newValue
 }
 
+/// Set the priority of the given edges to the given priority
 public func & (edges: Edges, priority: UILayoutPriority) -> Edges {
     var newValue = edges
     newValue.priority = priority
     return newValue
 }
 
+/// Excludes the edge on the right from the edges on the left
 public func - (edges: Edges, excluded: Edge) -> Edges {
     guard let index = edges.edges.index(of: excluded) else { return edges }
     var edges = edges
@@ -148,6 +155,7 @@ public func - (edges: Edges, excluded: Edge) -> Edges {
     return edges
 }
 
+/// Adds an inset to the given edge.
 public func + (edges: Edges, insets: UIEdgeInsets) -> Edges {
     var edges = edges
     edges.insets.left += insets.left
@@ -157,32 +165,38 @@ public func + (edges: Edges, insets: UIEdgeInsets) -> Edges {
     return edges
 }
 
+/// Substracts an inset from the given edge.
 public func - (edges: Edges, insets: UIEdgeInsets) -> Edges {
     return edges + UIEdgeInsets(top: -insets.top, left: -insets.left, bottom: -insets.bottom, right: -insets.right)
 }
 
-public func + (edges: Edges, inset: LayoutCGFloatConvertible) -> Edges {
-    let value = inset.layoutCGFloat
+/// Adds an inset to the given edge.
+public func + (edges: Edges, inset: MaketaCGFloatConvertible) -> Edges {
+    let value = inset.mktCGFloat
     let insets = UIEdgeInsets(top: value, left: value, bottom: value, right: value)
     return edges + insets
 }
 
-public func - (edges: Edges, inset: LayoutCGFloatConvertible) -> Edges {
-    return edges + -inset.layoutCGFloat
+/// Substracts an inset from the given edge.
+public func - (edges: Edges, inset: MaketaCGFloatConvertible) -> Edges {
+    return edges + -inset.mktCGFloat
 }
 
+/// Saves the constraints added when the edge is applied into the given pointer
 public func => (edges: Edges, constraints: inout [NSLayoutConstraint]) -> Edges {
     var edges = edges
     edges.constraintsPointer = MultiTypePointer(&constraints)
     return edges
 }
 
+/// Saves the constraints added when the edge is applied into the given pointer
 public func => (edges: Edges, constraints: inout [NSLayoutConstraint]?) -> Edges {
     var edges = edges
     edges.constraintsPointer = MultiTypePointer(withOptional: &constraints)
     return edges
 }
 
+/// Saves the constraints added when the edge is applied into the given pointer
 public func => (edges: Edges, constraints: inout [NSLayoutConstraint]!) -> Edges {
     var edges = edges
     edges.constraintsPointer = MultiTypePointer(withForcedUnwrapped: &constraints)
@@ -192,6 +206,8 @@ public func => (edges: Edges, constraints: inout [NSLayoutConstraint]!) -> Edges
 // MARK: - Maketa extension
 
 public extension Maketa {
+    
+    /// returns the edges of the receiver (left, right, top, bottom)
     public var edges: Edges {
         get {
             return Edges(view: view, kind: .edges, edges: Edge.all)
@@ -201,14 +217,16 @@ public extension Maketa {
         }
     }
     
+    /// returns the edges of the receiver relative to the view margins (left, right, top, bottom)
     public var margins: Edges {
         return Edges(view: view, kind: .margins, edges: Edge.all)
     }
     
+    /// returns the edges of the receiver using the interface layout direction (leading, trailing, top, bottom)
     public var layoutDirectionEdges: Edges {
         return Edges(view: view, kind: .edges, edges: Edge.allRelativeToLayoutDirection)
     }
-    
+    /// returns the margins of the receiver using the interface layout direction (leading, trailing, top, bottom)
     public var layoutDirectionMargins: Edges {
         return Edges(view: view, kind: .margins, edges: Edge.allRelativeToLayoutDirection)
     }
