@@ -1,5 +1,5 @@
 //
-//  MaketaModifierTesta.swift
+//  AttributeModifierTests.swift
 //  MaketaTests
 //
 //  Created by Manuel García-Estañ on 15/8/18.
@@ -11,7 +11,7 @@ import Foundation
 import XCTest
 @testable import Maketa
 
-class LayoutModifierTests: ConstraintsTestCase {
+class AttributeModifierTests: ConstraintsTestCase {
     
     var view = UIView()
     
@@ -428,7 +428,6 @@ class LayoutModifierTests: ConstraintsTestCase {
         // when
         view.mkt.width = 100
         view.mkt.aspectRatio = 2
-        view.layoutIfNeeded()
         
         // then
         XCTAssertEqual(view.mkt.aspectRatio, 2)

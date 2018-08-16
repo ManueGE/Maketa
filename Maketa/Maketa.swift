@@ -8,6 +8,8 @@
 
 import UIKit
 
+/// An object which is associated to a `UIView` and is used to modify its layout constraints
+/// It can't be instantiated directly, to access the `Maketa` object of a `view` do `view.mkt`
 public class Maketa {
     
     internal struct Defaults {
@@ -18,11 +20,12 @@ public class Maketa {
     weak var view: UIView!
     
     // MARK: Inits
-    init(view: UIView) {
+    internal init(view: UIView) {
         self.view = view
         view.preparedForAutolayout()
     }
     
+    /// Returns the `Maketa` object associated to the superview. If the view is not added to a superview, it throws a fatal error. 
     public var `super`: Maketa {
         guard let superview = view.superview else { fatalError("\(self) has not a superview, so mkt.\(#function) can't be used") }
         return superview.mkt
