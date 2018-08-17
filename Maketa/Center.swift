@@ -14,7 +14,7 @@ public struct Center {
     fileprivate var offset = UIOffset.zero
     fileprivate var relation = Maketa.Defaults.relation
     fileprivate var priority = Maketa.Defaults.priority
-    fileprivate var constraintsPointer: MultiTypePointer<[NSLayoutConstraint]>?
+    fileprivate var constraintsPointer: MultiTypePointer<CenterConstraints>?
     
     fileprivate init(view: UIView) {
         self.view = view
@@ -79,21 +79,21 @@ public func - (center: Center, offset: MaketaCGFloatConvertible) -> Center {
 }
 
 /// Saves the constraints added when the center is applied into the given pointer
-public func => (center: Center, constraints: inout [NSLayoutConstraint]) -> Center {
+public func => (center: Center, constraints: inout CenterConstraints) -> Center {
     var center = center
     center.constraintsPointer = MultiTypePointer(&constraints)
     return center
 }
 
 /// Saves the constraints added when the center is applied into the given pointer
-public func => (center: Center, constraints: inout [NSLayoutConstraint]?) -> Center {
+public func => (center: Center, constraints: inout CenterConstraints?) -> Center {
     var center = center
     center.constraintsPointer = MultiTypePointer(withOptional: &constraints)
     return center
 }
 
 /// Saves the constraints added when the center is applied into the given pointer
-public func => (center: Center, constraints: inout [NSLayoutConstraint]!) -> Center {
+public func => (center: Center, constraints: inout CenterConstraints!) -> Center {
     var center = center
     center.constraintsPointer = MultiTypePointer(withForcedUnwrapped: &constraints)
     return center
@@ -126,7 +126,31 @@ public extension Maketa {
                 view.mkt.centerY > yValue
             }
             
-            newValue.constraintsPointer?.setPointee([xConstraint, yConstraint])
+            newValue.constraintsPointer?.setPointee(CenterConstraints(x: xConstraint, y: yConstraint))
         }
+    }
+}
+
+/// The object returned when the center constraints are assigned.
+public struct CenterConstraints {
+    
+    /// The constraint added for the x attribute
+    public let x: NSLayoutConstraint
+    
+    /// The constraint added for the y attribute
+    public let y: NSLayoutConstraint
+    
+    /// An array with all the constraints. The order will be x, y
+    public var array: [NSLayoutConstraint] { return [x, y] }
+    
+    /// Creates a new instance
+    public init() {
+        x = .empty
+        y = .empty
+    }
+    
+    fileprivate init(x: NSLayoutConstraint, y: NSLayoutConstraint) {
+        self.x = x
+        self.y = y
     }
 }
