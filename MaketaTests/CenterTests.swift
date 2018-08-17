@@ -86,7 +86,7 @@ class CenterTests: ConstraintsTestCase {
         XCTAssertEqual(superview.constraints.count, 2)
     }
     
-    func testCenterConstraintsCanBeAssignedToOptionalArray() {
+    func testCenterConstraintsCanBeAssignedToOptionalConstraints() {
         
         // given
         var constraints: CenterConstraints?
@@ -97,10 +97,10 @@ class CenterTests: ConstraintsTestCase {
         view.mkt.center = superview.mkt.center => constraints
         
         // then
-        XCTAssertEqual(constraints!.array.count, 2)
+        XCTAssertNotNil(constraints)
     }
     
-    func testCenterConstraintsCanBeAssignedToForcedUnwrappedArray() {
+    func testCenterConstraintsCanBeAssignedToForcedUnwrappedConstraints() {
         
         // given
         var constraints: CenterConstraints!
@@ -111,7 +111,7 @@ class CenterTests: ConstraintsTestCase {
         view.mkt.center = superview.mkt.center => constraints
         
         // then
-        XCTAssertEqual(constraints.array.count, 2)
+        XCTAssertNotNil(constraints)
     }
     
     // MARK: - Relations
@@ -182,8 +182,6 @@ class CenterTests: ConstraintsTestCase {
         view.mkt.center < superview.mkt.centerWithinMargins => constraints
         
         // then
-        XCTAssertEqual(constraints.array.count, 2)
-        
         XCTAssertEqual(constraints.x.firstAttribute, .centerXWithinMargins)
         XCTAssertEqual(constraints.x.secondAttribute, .centerXWithinMargins)
         XCTAssertEqual(constraints.x.relation, .lessThanOrEqual)
@@ -242,7 +240,6 @@ class CenterTests: ConstraintsTestCase {
         view.mkt.center = (superview.mkt.center & .defaultLow) => constraints
         
         // then
-        XCTAssertEqual(constraints.array.count, 2)
         XCTAssertEqual(constraints.x.priority, .defaultLow)
         XCTAssertEqual(constraints.y.priority, .defaultLow)
     }
@@ -260,7 +257,6 @@ class CenterTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintX = constraints.x
         XCTAssertTrue(constraintX.firstItem === view)
@@ -321,7 +317,6 @@ class CenterTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintX = constraints.x
         XCTAssertTrue(constraintX.firstItem === view)
@@ -352,7 +347,6 @@ class CenterTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintX = constraints.x
         XCTAssertTrue(constraintX.firstItem === view)

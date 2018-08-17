@@ -253,12 +253,6 @@ public struct EdgesConstraints {
     /// The constraint added for the bottom edge, if any
     public let bottom: NSLayoutConstraint?
     
-    /// An array with all the constraints. It will just contain the no-null values.
-    /// The order will be left, right, leading, trailing, top, bottom
-    public var array: [NSLayoutConstraint] {
-        return [left, right, leading, trailing, top, bottom].compactMap { $0 }
-    }
-    
     /// Creates a new instance
     public init() {
         self.left = nil
