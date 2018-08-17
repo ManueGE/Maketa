@@ -95,17 +95,8 @@ private struct FixedSize: Size {
         var hConstraint = NSLayoutConstraint.empty
         let hValue = (size.height & priority) => hConstraint
         
-        switch relation {
-        case .equal:
-            view.mkt.width = wValue
-            view.mkt.height = hValue
-        case .lessThanOrEqual:
-            view.mkt.width < wValue
-            view.mkt.height < hValue
-        case .greaterThanOrEqual:
-            view.mkt.width > wValue
-            view.mkt.height > hValue
-        }
+        assign(&view.mkt.width, to: wValue, with: relation)
+        assign(&view.mkt.height, to: hValue, with: relation)
         
         return SizeConstraints(width: wConstraint, height: hConstraint)
     }
@@ -148,17 +139,8 @@ private struct ViewSize: Size {
         var hConstraint = NSLayoutConstraint.empty
         let hValue = ((self.view.mkt.height * multiplier + offset.vertical) & priority) => hConstraint
         
-        switch relation {
-        case .equal:
-            view.mkt.width = wValue
-            view.mkt.height = hValue
-        case .lessThanOrEqual:
-            view.mkt.width < wValue
-            view.mkt.height < hValue
-        case .greaterThanOrEqual:
-            view.mkt.width > wValue
-            view.mkt.height > hValue
-        }
+        assign(&view.mkt.width, to: wValue, with: relation)
+        assign(&view.mkt.height, to: hValue, with: relation)
         
         return SizeConstraints(width: wConstraint, height: hConstraint)
     }

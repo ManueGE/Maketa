@@ -42,6 +42,36 @@ class CenterTests: ConstraintsTestCase {
         XCTAssertEqual(constraintY.multiplier, 1)
     }
     
+    func testCenterWithinMarginCanBeSet() {
+        // given
+        var constraints = CenterConstraints()
+        
+        let view = UIView()
+        superview.addSubview(view)
+        
+        // when
+        view.mkt.center = superview.mkt.centerWithinMargins => constraints
+        
+        // then
+        XCTAssertEqual(superview.constraints.count, 2)
+        
+        let constraintX = constraints.x
+        XCTAssertTrue(constraintX.firstItem === view)
+        XCTAssertTrue(constraintX.secondItem === superview)
+        XCTAssertEqual(constraintX.firstAttribute, .centerXWithinMargins)
+        XCTAssertEqual(constraintX.secondAttribute, .centerXWithinMargins)
+        XCTAssertEqual(constraintX.constant, 0)
+        XCTAssertEqual(constraintX.multiplier, 1)
+        
+        let constraintY = constraints.y
+        XCTAssertTrue(constraintY.firstItem === view)
+        XCTAssertTrue(constraintY.secondItem === superview)
+        XCTAssertEqual(constraintY.firstAttribute, .centerYWithinMargins)
+        XCTAssertEqual(constraintY.secondAttribute, .centerYWithinMargins)
+        XCTAssertEqual(constraintY.constant, 0)
+        XCTAssertEqual(constraintY.multiplier, 1)
+    }
+    
     // MARK: - Assignement
     func testCenterConstraintsCanBeAddedWithoutAssignment() {
         
@@ -95,8 +125,31 @@ class CenterTests: ConstraintsTestCase {
         view.mkt.center = superview.mkt.center => constraints
         
         // then
-        XCTAssertEqual(constraints.array.count, 2)
+        XCTAssertEqual(constraints.x.firstAttribute, .centerX)
+        XCTAssertEqual(constraints.x.secondAttribute, .centerX)
         XCTAssertEqual(constraints.x.relation, .equal)
+        
+        XCTAssertEqual(constraints.y.firstAttribute, .centerY)
+        XCTAssertEqual(constraints.y.secondAttribute, .centerY)
+        XCTAssertEqual(constraints.y.relation, .equal)
+    }
+    
+    func testEqualRelationshipWithinMargins() {
+        // given
+        var constraints = CenterConstraints()
+        let view = UIView()
+        superview.addSubview(view)
+        
+        // when
+        view.mkt.center = superview.mkt.centerWithinMargins => constraints
+        
+        // then
+        XCTAssertEqual(constraints.x.firstAttribute, .centerXWithinMargins)
+        XCTAssertEqual(constraints.x.secondAttribute, .centerXWithinMargins)
+        XCTAssertEqual(constraints.x.relation, .equal)
+        
+        XCTAssertEqual(constraints.y.firstAttribute, .centerYWithinMargins)
+        XCTAssertEqual(constraints.y.secondAttribute, .centerYWithinMargins)
         XCTAssertEqual(constraints.y.relation, .equal)
     }
     
@@ -110,8 +163,33 @@ class CenterTests: ConstraintsTestCase {
         view.mkt.center < superview.mkt.center => constraints
         
         // then
-        XCTAssertEqual(constraints.array.count, 2)
+        XCTAssertEqual(constraints.x.firstAttribute, .centerX)
+        XCTAssertEqual(constraints.x.secondAttribute, .centerX)
         XCTAssertEqual(constraints.x.relation, .lessThanOrEqual)
+        
+        XCTAssertEqual(constraints.y.firstAttribute, .centerY)
+        XCTAssertEqual(constraints.y.secondAttribute, .centerY)
+        XCTAssertEqual(constraints.y.relation, .lessThanOrEqual)
+    }
+    
+    func testLessThanRelationshipWithinMargins() {
+        // given
+        var constraints = CenterConstraints()
+        let view = UIView()
+        superview.addSubview(view)
+        
+        // when
+        view.mkt.center < superview.mkt.centerWithinMargins => constraints
+        
+        // then
+        XCTAssertEqual(constraints.array.count, 2)
+        
+        XCTAssertEqual(constraints.x.firstAttribute, .centerXWithinMargins)
+        XCTAssertEqual(constraints.x.secondAttribute, .centerXWithinMargins)
+        XCTAssertEqual(constraints.x.relation, .lessThanOrEqual)
+        
+        XCTAssertEqual(constraints.y.firstAttribute, .centerYWithinMargins)
+        XCTAssertEqual(constraints.y.secondAttribute, .centerYWithinMargins)
         XCTAssertEqual(constraints.y.relation, .lessThanOrEqual)
     }
     
@@ -125,8 +203,31 @@ class CenterTests: ConstraintsTestCase {
         view.mkt.center > superview.mkt.center => constraints
         
         // then
-        XCTAssertEqual(constraints.array.count, 2)
+        XCTAssertEqual(constraints.x.firstAttribute, .centerX)
+        XCTAssertEqual(constraints.x.secondAttribute, .centerX)
         XCTAssertEqual(constraints.x.relation, .greaterThanOrEqual)
+        
+        XCTAssertEqual(constraints.y.firstAttribute, .centerY)
+        XCTAssertEqual(constraints.y.secondAttribute, .centerY)
+        XCTAssertEqual(constraints.y.relation, .greaterThanOrEqual)
+    }
+    
+    func testGreaterThanRelationshipWithinMargins() {
+        // given
+        var constraints = CenterConstraints()
+        let view = UIView()
+        superview.addSubview(view)
+        
+        // when
+        view.mkt.center > superview.mkt.centerWithinMargins => constraints
+        
+        // then
+        XCTAssertEqual(constraints.x.firstAttribute, .centerXWithinMargins)
+        XCTAssertEqual(constraints.x.secondAttribute, .centerXWithinMargins)
+        XCTAssertEqual(constraints.x.relation, .greaterThanOrEqual)
+        
+        XCTAssertEqual(constraints.y.firstAttribute, .centerYWithinMargins)
+        XCTAssertEqual(constraints.y.secondAttribute, .centerYWithinMargins)
         XCTAssertEqual(constraints.y.relation, .greaterThanOrEqual)
     }
     

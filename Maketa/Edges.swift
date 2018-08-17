@@ -44,83 +44,72 @@ public enum Edge: Equatable {
         switch (self, edges.kind) {
         // Left
         case (.left, .edges):
-            set(&layout.left,
+            assign(&layout.left,
                 to: ((edges.view.mkt.left - edges.insets.left) & priority) => constraint,
                 with: relation)
             
         case (.left, .margins):
-            set(&layout.leftMargin,
+            assign(&layout.leftMargin,
                 to: ((edges.view.mkt.leftMargin - edges.insets.left) & priority) => constraint,
                 with: relation)
             
         // Right
         case (.right, .edges):
-            set(&layout.right,
+            assign(&layout.right,
                 to: ((edges.view.mkt.right + edges.insets.right) & priority) => constraint,
                 with: relation)
             
         case (.right, .margins):
-            set(&layout.rightMargin,
+            assign(&layout.rightMargin,
                 to: ((edges.view.mkt.rightMargin + edges.insets.right) & priority) => constraint,
                 with: relation)
             
         // Leading
         case (.leading, .edges):
-            set(&layout.leading,
+            assign(&layout.leading,
                 to: ((edges.view.mkt.leading - edges.insets.left) & priority) => constraint,
                 with: relation)
             
         case (.leading, .margins):
-            set(&layout.leadingMargin,
+            assign(&layout.leadingMargin,
                 to: ((edges.view.mkt.leadingMargin - edges.insets.left) & priority) => constraint,
                 with: relation)
             
         // Trailing
         case (.trailing, .edges):
-            set(&layout.trailing,
+            assign(&layout.trailing,
                 to: ((edges.view.mkt.trailing + edges.insets.right) & priority) => constraint,
                 with: relation)
             
         case (.trailing, .margins):
-            set(&layout.trailingMargin,
+            assign(&layout.trailingMargin,
                 to: ((edges.view.mkt.trailingMargin + edges.insets.right) & priority) => constraint,
                 with: relation)
             
         // Top
         case (.top, .edges):
-            set(&layout.top,
+            assign(&layout.top,
                 to: ((edges.view.mkt.top - edges.insets.top) & priority) => constraint,
                 with: relation)
             
         case (.top, .margins):
-            set(&layout.topMargin,
+            assign(&layout.topMargin,
                 to: ((edges.view.mkt.topMargin - edges.insets.top) & priority) => constraint,
                 with: relation)
             
         // Bottom
         case (.bottom, .edges):
-            set(&layout.bottom,
+            assign(&layout.bottom,
                 to: ((edges.view.mkt.bottom + edges.insets.bottom) & priority) => constraint,
                 with: relation)
             
         case (.bottom, .margins):
-            set(&layout.bottomMargin,
+            assign(&layout.bottomMargin,
                 to: ((edges.view.mkt.bottomMargin + edges.insets.bottom) & priority) => constraint,
                 with: relation)
         }
         
         return constraint
-    }
-    
-    private func set(_ modifier: inout AttributeModifier, to value: AttributeModifier, with relation: NSLayoutRelation) {
-        switch relation {
-        case .equal:
-            modifier = value
-        case .lessThanOrEqual:
-            modifier < value
-        case .greaterThanOrEqual:
-            modifier > value
-        }
     }
 }
 

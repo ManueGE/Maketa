@@ -166,3 +166,14 @@ extension Maketa {
         modifier.constraint(view: view, layoutAttribute: layoutAttribute).activated()
     }
 }
+
+func assign(_ modifier: inout AttributeModifier, to value: AttributeModifier, with relation: NSLayoutRelation) {
+    switch relation {
+    case .equal:
+        modifier = value
+    case .lessThanOrEqual:
+        modifier < value
+    case .greaterThanOrEqual:
+        modifier > value
+    }
+}
