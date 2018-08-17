@@ -16,7 +16,7 @@ class SizeTests: ConstraintsTestCase {
     func testViewCanSetSizeWithConstant() {
         
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -24,9 +24,8 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertTrue(constraintWidth.secondItem == nil)
@@ -36,7 +35,7 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintWidth.relation, .equal)
         XCTAssertEqual(constraintWidth.priority, .required)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertTrue(constraintHeight.secondItem == nil)
@@ -49,7 +48,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testViewCanSetSizeWithCGSize() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -57,9 +56,8 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertTrue(constraintWidth.secondItem == nil)
@@ -69,7 +67,7 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintWidth.relation, .equal)
         XCTAssertEqual(constraintWidth.priority, .required)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertTrue(constraintHeight.secondItem == nil)
@@ -82,7 +80,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testViewCanSetSizeWithOtherSize() {
         // given        
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view0 = UIView()
         superview.addSubview(view0)
         view0.mkt.size = CGSize(width: 10, height: 20)
@@ -95,9 +93,8 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertTrue(constraintWidth.secondItem === view0)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
@@ -107,7 +104,7 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintWidth.relation, .equal)
         XCTAssertEqual(constraintWidth.priority, .required)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertTrue(constraintHeight.secondItem === view0)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
@@ -121,7 +118,7 @@ class SizeTests: ConstraintsTestCase {
     // MARK: - Relations
     func testLessRelationshipInConstant() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -129,9 +126,8 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertTrue(constraintWidth.secondItem == nil)
@@ -141,7 +137,7 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintWidth.relation, .lessThanOrEqual)
         XCTAssertEqual(constraintWidth.priority, .required)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertTrue(constraintHeight.secondItem == nil)
@@ -154,7 +150,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testGreaterRelationshipInConstant() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -162,9 +158,8 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertTrue(constraintWidth.secondItem == nil)
@@ -174,7 +169,7 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintWidth.relation, .greaterThanOrEqual)
         XCTAssertEqual(constraintWidth.priority, .required)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertTrue(constraintHeight.secondItem == nil)
@@ -187,7 +182,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testLessRelationWithCGSize() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -195,9 +190,8 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertTrue(constraintWidth.secondItem == nil)
@@ -207,7 +201,7 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintWidth.relation, .lessThanOrEqual)
         XCTAssertEqual(constraintWidth.priority, .required)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertTrue(constraintHeight.secondItem == nil)
@@ -220,7 +214,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testGreaterRelationWithCGSize() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -228,9 +222,8 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertTrue(constraintWidth.secondItem == nil)
@@ -240,7 +233,7 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintWidth.relation, .greaterThanOrEqual)
         XCTAssertEqual(constraintWidth.priority, .required)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertTrue(constraintHeight.secondItem == nil)
@@ -253,7 +246,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testLessRelationWithFixedSize() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -261,9 +254,8 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertTrue(constraintWidth.secondItem == nil)
@@ -273,7 +265,7 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintWidth.relation, .lessThanOrEqual)
         XCTAssertEqual(constraintWidth.priority, .defaultLow)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertTrue(constraintHeight.secondItem == nil)
@@ -286,7 +278,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testGreaterRelationWithFixedSize() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -294,9 +286,8 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertTrue(constraintWidth.secondItem == nil)
@@ -306,7 +297,7 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintWidth.relation, .greaterThanOrEqual)
         XCTAssertEqual(constraintWidth.priority, .defaultLow)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertTrue(constraintHeight.secondItem == nil)
@@ -319,7 +310,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testLessRelationWithOtherSize() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view0 = UIView()
         superview.addSubview(view0)
         view0.mkt.size = CGSize(width: 10, height: 20)
@@ -332,9 +323,8 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertTrue(constraintWidth.secondItem === view0)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
@@ -344,7 +334,7 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintWidth.relation, .lessThanOrEqual)
         XCTAssertEqual(constraintWidth.priority, .required)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertTrue(constraintHeight.secondItem === view0)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
@@ -357,7 +347,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testGreaterRelationWithOtherSize() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view0 = UIView()
         superview.addSubview(view0)
         view0.mkt.size = CGSize(width: 10, height: 20)
@@ -370,9 +360,8 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertTrue(constraintWidth.secondItem === view0)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
@@ -382,7 +371,7 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintWidth.relation, .greaterThanOrEqual)
         XCTAssertEqual(constraintWidth.priority, .required)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertTrue(constraintHeight.secondItem === view0)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
@@ -397,7 +386,7 @@ class SizeTests: ConstraintsTestCase {
     func testViewCanSetCustomPriorityWithConstant() {
         
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -405,9 +394,8 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertTrue(constraintWidth.secondItem == nil)
@@ -417,7 +405,7 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintWidth.relation, .equal)
         XCTAssertEqual(constraintWidth.priority, .defaultLow)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertTrue(constraintHeight.secondItem == nil)
@@ -430,7 +418,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testViewCanSetCustomPriorityWithCGSize() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -438,9 +426,8 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertTrue(constraintWidth.secondItem == nil)
@@ -450,7 +437,7 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintWidth.relation, .equal)
         XCTAssertEqual(constraintWidth.priority, .defaultLow)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertTrue(constraintHeight.secondItem == nil)
@@ -463,7 +450,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testCanSetCustomPriorityWithFixedSize() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -471,9 +458,8 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertTrue(constraintWidth.secondItem == nil)
@@ -483,7 +469,7 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintWidth.relation, .equal)
         XCTAssertEqual(constraintWidth.priority, .defaultHigh)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertTrue(constraintHeight.secondItem == nil)
@@ -496,7 +482,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testViewCanSetCustomPriorityWithOtherSize() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view0 = UIView()
         superview.addSubview(view0)
         view0.mkt.size = CGSize(width: 10, height: 20)
@@ -509,9 +495,8 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertTrue(constraintWidth.secondItem === view0)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
@@ -521,7 +506,7 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintWidth.relation, .equal)
         XCTAssertEqual(constraintWidth.priority, .defaultLow)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertTrue(constraintHeight.secondItem === view0)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
@@ -545,36 +530,36 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(view.constraints.count, 2)
     }
     
-    func testSizeConstraintsCanBeAssignedToOptionalArray() {
+    func testSizeConstraintsCanBeAssignedToOptionalConstraints() {
         
         // given
-        var constraints: [NSLayoutConstraint]?
+        var constraints: SizeConstraints?
         let view = UIView()
         
         // when
         view.mkt.size = 30 => constraints
         
         // then
-        XCTAssertEqual(constraints!.count, 2)
+        XCTAssertNotNil(constraints)
     }
     
-    func testSizeConstraintsCanBeAssignedToForcedUnwrappedArray() {
+    func testSizeConstraintsCanBeAssignedToForcedUnwrappedConstraints() {
         
         // given
-        var constraints: [NSLayoutConstraint]!
+        var constraints: SizeConstraints!
         let view = UIView()
         
         // when
         view.mkt.size = 30 => constraints
         
         // then
-        XCTAssertEqual(constraints.count, 2)
+        XCTAssertNotNil(constraints)
     }
     
     // MARK: - Operations
     func testOffsetCanBeSubstractedFromConstant() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -582,14 +567,13 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertEqual(constraintWidth.constant, 25)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertEqual(constraintHeight.constant, 20)
@@ -597,7 +581,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testOffsetCanBeSustractedFromCGSize() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -605,14 +589,13 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertEqual(constraintWidth.constant, 5)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertEqual(constraintHeight.constant, 10)
@@ -620,7 +603,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testOffsetCanBeSustractedFromFixedSize() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -629,14 +612,13 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertEqual(constraintWidth.constant, 5)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertEqual(constraintHeight.constant, 10)
@@ -644,7 +626,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testOffsetCanBeSubstractedFromOtherSize() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view0 = UIView()
         superview.addSubview(view0)
         view0.mkt.size = CGSize(width: 10, height: 20)
@@ -657,9 +639,8 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertTrue(constraintWidth.secondItem === view0)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
@@ -669,7 +650,7 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintWidth.relation, .equal)
         XCTAssertEqual(constraintWidth.priority, .required)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertTrue(constraintHeight.secondItem === view0)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
@@ -682,7 +663,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testAddOffsetCommutativeProperty() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -690,14 +671,13 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertEqual(constraintWidth.constant, 35)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertEqual(constraintHeight.constant, 40)
@@ -705,7 +685,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testConstantCanBeSubstractedFromConstant() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -713,14 +693,13 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertEqual(constraintWidth.constant, 20)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertEqual(constraintHeight.constant, 20)
@@ -728,7 +707,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testConstantCanBeSustractedFromCGSize() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -736,14 +715,13 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertEqual(constraintWidth.constant, 5)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertEqual(constraintHeight.constant, 15)
@@ -751,7 +729,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testConstantCanBeSustractedFromFixedSize() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -760,14 +738,13 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertEqual(constraintWidth.constant, 5)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertEqual(constraintHeight.constant, 15)
@@ -775,7 +752,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testConstantCanBeSubstractedFromOtherSize() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view0 = UIView()
         superview.addSubview(view0)
         view0.mkt.size = CGSize(width: 10, height: 20)
@@ -788,9 +765,8 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertTrue(constraintWidth.secondItem === view0)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
@@ -800,7 +776,7 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintWidth.relation, .equal)
         XCTAssertEqual(constraintWidth.priority, .required)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertTrue(constraintHeight.secondItem === view0)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
@@ -813,7 +789,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testAddConstantCommutativeProperty() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -821,16 +797,15 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertEqual(constraintWidth.constant, 40)
         XCTAssertEqual(constraintWidth.relation, .equal)
         XCTAssertEqual(constraintWidth.priority, .required)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertEqual(constraintHeight.constant, 50)
@@ -840,7 +815,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testConstantCanBeDivided() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -849,15 +824,14 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertEqual(constraintWidth.constant, 15)
         XCTAssertEqual(constraintWidth.multiplier, 1)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertEqual(constraintHeight.constant, 15)
@@ -866,7 +840,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testCGSizeCanBeDivided() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -874,15 +848,14 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertEqual(constraintWidth.constant, 5)
         XCTAssertEqual(constraintWidth.multiplier, 1)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertEqual(constraintHeight.constant, 10)
@@ -891,7 +864,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testFixedSizeCanBeDivided() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -900,16 +873,15 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertEqual(constraintWidth.constant, 5)
         XCTAssertEqual(constraintWidth.multiplier, 1)
 
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertEqual(constraintHeight.constant, 10)
@@ -919,7 +891,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testOtherViewSizeCanBeDivided() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view0 = UIView()
         superview.addSubview(view0)
         view0.mkt.size = CGSize(width: 10, height: 20)
@@ -932,9 +904,8 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertTrue(constraintWidth.secondItem === view0)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
@@ -944,7 +915,7 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintWidth.relation, .equal)
         XCTAssertEqual(constraintWidth.priority, .required)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertTrue(constraintHeight.secondItem === view0)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
@@ -957,7 +928,7 @@ class SizeTests: ConstraintsTestCase {
     
     func testSizeProductCommutativeProperty() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = SizeConstraints()
         let view = UIView()
         
         // when
@@ -965,9 +936,8 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
+        let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
         XCTAssertEqual(constraintWidth.firstAttribute, .width)
         XCTAssertEqual(constraintWidth.constant, 300)
@@ -975,7 +945,7 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintWidth.relation, .equal)
         XCTAssertEqual(constraintWidth.priority, .required)
         
-        let constraintHeight = constraints[1]
+        let constraintHeight = constraints.height
         XCTAssertTrue(constraintHeight.firstItem === view)
         XCTAssertEqual(constraintHeight.firstAttribute, .height)
         XCTAssertEqual(constraintHeight.constant, 400)

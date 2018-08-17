@@ -14,7 +14,7 @@ class CenterTests: ConstraintsTestCase {
     // MARK: - Basic
     func testCenterCanBeSet() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = CenterConstraints()
         
         let view = UIView()
         superview.addSubview(view)
@@ -24,23 +24,52 @@ class CenterTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
-        XCTAssertTrue(constraintWidth.firstItem === view)
-        XCTAssertTrue(constraintWidth.secondItem === superview)
-        XCTAssertEqual(constraintWidth.firstAttribute, .centerX)
-        XCTAssertEqual(constraintWidth.secondAttribute, .centerX)
-        XCTAssertEqual(constraintWidth.constant, 0)
-        XCTAssertEqual(constraintWidth.multiplier, 1)
+        let constraintX = constraints.x
+        XCTAssertTrue(constraintX.firstItem === view)
+        XCTAssertTrue(constraintX.secondItem === superview)
+        XCTAssertEqual(constraintX.firstAttribute, .centerX)
+        XCTAssertEqual(constraintX.secondAttribute, .centerX)
+        XCTAssertEqual(constraintX.constant, 0)
+        XCTAssertEqual(constraintX.multiplier, 1)
         
-        let constraintHeight = constraints[1]
-        XCTAssertTrue(constraintHeight.firstItem === view)
-        XCTAssertTrue(constraintHeight.secondItem === superview)
-        XCTAssertEqual(constraintHeight.firstAttribute, .centerY)
-        XCTAssertEqual(constraintHeight.secondAttribute, .centerY)
-        XCTAssertEqual(constraintHeight.constant, 0)
-        XCTAssertEqual(constraintHeight.multiplier, 1)
+        let constraintY = constraints.y
+        XCTAssertTrue(constraintY.firstItem === view)
+        XCTAssertTrue(constraintY.secondItem === superview)
+        XCTAssertEqual(constraintY.firstAttribute, .centerY)
+        XCTAssertEqual(constraintY.secondAttribute, .centerY)
+        XCTAssertEqual(constraintY.constant, 0)
+        XCTAssertEqual(constraintY.multiplier, 1)
+    }
+    
+    func testCenterWithinMarginCanBeSet() {
+        // given
+        var constraints = CenterConstraints()
+        
+        let view = UIView()
+        superview.addSubview(view)
+        
+        // when
+        view.mkt.center = superview.mkt.centerWithinMargins => constraints
+        
+        // then
+        XCTAssertEqual(superview.constraints.count, 2)
+        
+        let constraintX = constraints.x
+        XCTAssertTrue(constraintX.firstItem === view)
+        XCTAssertTrue(constraintX.secondItem === superview)
+        XCTAssertEqual(constraintX.firstAttribute, .centerXWithinMargins)
+        XCTAssertEqual(constraintX.secondAttribute, .centerXWithinMargins)
+        XCTAssertEqual(constraintX.constant, 0)
+        XCTAssertEqual(constraintX.multiplier, 1)
+        
+        let constraintY = constraints.y
+        XCTAssertTrue(constraintY.firstItem === view)
+        XCTAssertTrue(constraintY.secondItem === superview)
+        XCTAssertEqual(constraintY.firstAttribute, .centerYWithinMargins)
+        XCTAssertEqual(constraintY.secondAttribute, .centerYWithinMargins)
+        XCTAssertEqual(constraintY.constant, 0)
+        XCTAssertEqual(constraintY.multiplier, 1)
     }
     
     // MARK: - Assignement
@@ -57,10 +86,10 @@ class CenterTests: ConstraintsTestCase {
         XCTAssertEqual(superview.constraints.count, 2)
     }
     
-    func testCenterConstraintsCanBeAssignedToOptionalArray() {
+    func testCenterConstraintsCanBeAssignedToOptionalConstraints() {
         
         // given
-        var constraints: [NSLayoutConstraint]?
+        var constraints: CenterConstraints?
         let view = UIView()
         superview.addSubview(view)
         
@@ -68,13 +97,13 @@ class CenterTests: ConstraintsTestCase {
         view.mkt.center = superview.mkt.center => constraints
         
         // then
-        XCTAssertEqual(constraints!.count, 2)
+        XCTAssertNotNil(constraints)
     }
     
-    func testCenterConstraintsCanBeAssignedToForcedUnwrappedArray() {
+    func testCenterConstraintsCanBeAssignedToForcedUnwrappedConstraints() {
         
         // given
-        var constraints: [NSLayoutConstraint]!
+        var constraints: CenterConstraints!
         let view = UIView()
         superview.addSubview(view)
         
@@ -82,13 +111,13 @@ class CenterTests: ConstraintsTestCase {
         view.mkt.center = superview.mkt.center => constraints
         
         // then
-        XCTAssertEqual(constraints.count, 2)
+        XCTAssertNotNil(constraints)
     }
     
     // MARK: - Relations
     func testEqualRelationship() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = CenterConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -96,14 +125,37 @@ class CenterTests: ConstraintsTestCase {
         view.mkt.center = superview.mkt.center => constraints
         
         // then
-        XCTAssertEqual(constraints.count, 2)
-        XCTAssertEqual(constraints[0].relation, .equal)
-        XCTAssertEqual(constraints[1].relation, .equal)
+        XCTAssertEqual(constraints.x.firstAttribute, .centerX)
+        XCTAssertEqual(constraints.x.secondAttribute, .centerX)
+        XCTAssertEqual(constraints.x.relation, .equal)
+        
+        XCTAssertEqual(constraints.y.firstAttribute, .centerY)
+        XCTAssertEqual(constraints.y.secondAttribute, .centerY)
+        XCTAssertEqual(constraints.y.relation, .equal)
+    }
+    
+    func testEqualRelationshipWithinMargins() {
+        // given
+        var constraints = CenterConstraints()
+        let view = UIView()
+        superview.addSubview(view)
+        
+        // when
+        view.mkt.center = superview.mkt.centerWithinMargins => constraints
+        
+        // then
+        XCTAssertEqual(constraints.x.firstAttribute, .centerXWithinMargins)
+        XCTAssertEqual(constraints.x.secondAttribute, .centerXWithinMargins)
+        XCTAssertEqual(constraints.x.relation, .equal)
+        
+        XCTAssertEqual(constraints.y.firstAttribute, .centerYWithinMargins)
+        XCTAssertEqual(constraints.y.secondAttribute, .centerYWithinMargins)
+        XCTAssertEqual(constraints.y.relation, .equal)
     }
     
     func testLessThanRelationship() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = CenterConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -111,14 +163,37 @@ class CenterTests: ConstraintsTestCase {
         view.mkt.center < superview.mkt.center => constraints
         
         // then
-        XCTAssertEqual(constraints.count, 2)
-        XCTAssertEqual(constraints[0].relation, .lessThanOrEqual)
-        XCTAssertEqual(constraints[1].relation, .lessThanOrEqual)
+        XCTAssertEqual(constraints.x.firstAttribute, .centerX)
+        XCTAssertEqual(constraints.x.secondAttribute, .centerX)
+        XCTAssertEqual(constraints.x.relation, .lessThanOrEqual)
+        
+        XCTAssertEqual(constraints.y.firstAttribute, .centerY)
+        XCTAssertEqual(constraints.y.secondAttribute, .centerY)
+        XCTAssertEqual(constraints.y.relation, .lessThanOrEqual)
+    }
+    
+    func testLessThanRelationshipWithinMargins() {
+        // given
+        var constraints = CenterConstraints()
+        let view = UIView()
+        superview.addSubview(view)
+        
+        // when
+        view.mkt.center < superview.mkt.centerWithinMargins => constraints
+        
+        // then
+        XCTAssertEqual(constraints.x.firstAttribute, .centerXWithinMargins)
+        XCTAssertEqual(constraints.x.secondAttribute, .centerXWithinMargins)
+        XCTAssertEqual(constraints.x.relation, .lessThanOrEqual)
+        
+        XCTAssertEqual(constraints.y.firstAttribute, .centerYWithinMargins)
+        XCTAssertEqual(constraints.y.secondAttribute, .centerYWithinMargins)
+        XCTAssertEqual(constraints.y.relation, .lessThanOrEqual)
     }
     
     func testGreaterThanRelationship() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = CenterConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -126,15 +201,38 @@ class CenterTests: ConstraintsTestCase {
         view.mkt.center > superview.mkt.center => constraints
         
         // then
-        XCTAssertEqual(constraints.count, 2)
-        XCTAssertEqual(constraints[0].relation, .greaterThanOrEqual)
-        XCTAssertEqual(constraints[1].relation, .greaterThanOrEqual)
+        XCTAssertEqual(constraints.x.firstAttribute, .centerX)
+        XCTAssertEqual(constraints.x.secondAttribute, .centerX)
+        XCTAssertEqual(constraints.x.relation, .greaterThanOrEqual)
+        
+        XCTAssertEqual(constraints.y.firstAttribute, .centerY)
+        XCTAssertEqual(constraints.y.secondAttribute, .centerY)
+        XCTAssertEqual(constraints.y.relation, .greaterThanOrEqual)
+    }
+    
+    func testGreaterThanRelationshipWithinMargins() {
+        // given
+        var constraints = CenterConstraints()
+        let view = UIView()
+        superview.addSubview(view)
+        
+        // when
+        view.mkt.center > superview.mkt.centerWithinMargins => constraints
+        
+        // then
+        XCTAssertEqual(constraints.x.firstAttribute, .centerXWithinMargins)
+        XCTAssertEqual(constraints.x.secondAttribute, .centerXWithinMargins)
+        XCTAssertEqual(constraints.x.relation, .greaterThanOrEqual)
+        
+        XCTAssertEqual(constraints.y.firstAttribute, .centerYWithinMargins)
+        XCTAssertEqual(constraints.y.secondAttribute, .centerYWithinMargins)
+        XCTAssertEqual(constraints.y.relation, .greaterThanOrEqual)
     }
     
     // MARK: - Priority
     func testCustomPriority() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = CenterConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -142,15 +240,14 @@ class CenterTests: ConstraintsTestCase {
         view.mkt.center = (superview.mkt.center & .defaultLow) => constraints
         
         // then
-        XCTAssertEqual(constraints.count, 2)
-        XCTAssertEqual(constraints[0].priority, .defaultLow)
-        XCTAssertEqual(constraints[1].priority, .defaultLow)
+        XCTAssertEqual(constraints.x.priority, .defaultLow)
+        XCTAssertEqual(constraints.y.priority, .defaultLow)
     }
     
     // MARK: - Operations
     func testOffsetCanBeSubstractedFromCenter() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = CenterConstraints()
         
         let view = UIView()
         superview.addSubview(view)
@@ -160,28 +257,27 @@ class CenterTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
-        XCTAssertTrue(constraintWidth.firstItem === view)
-        XCTAssertTrue(constraintWidth.secondItem === superview)
-        XCTAssertEqual(constraintWidth.firstAttribute, .centerX)
-        XCTAssertEqual(constraintWidth.secondAttribute, .centerX)
-        XCTAssertEqual(constraintWidth.constant, -10)
-        XCTAssertEqual(constraintWidth.multiplier, 1)
+        let constraintX = constraints.x
+        XCTAssertTrue(constraintX.firstItem === view)
+        XCTAssertTrue(constraintX.secondItem === superview)
+        XCTAssertEqual(constraintX.firstAttribute, .centerX)
+        XCTAssertEqual(constraintX.secondAttribute, .centerX)
+        XCTAssertEqual(constraintX.constant, -10)
+        XCTAssertEqual(constraintX.multiplier, 1)
         
-        let constraintHeight = constraints[1]
-        XCTAssertTrue(constraintHeight.firstItem === view)
-        XCTAssertTrue(constraintHeight.secondItem === superview)
-        XCTAssertEqual(constraintHeight.firstAttribute, .centerY)
-        XCTAssertEqual(constraintHeight.secondAttribute, .centerY)
-        XCTAssertEqual(constraintHeight.constant, -5)
-        XCTAssertEqual(constraintHeight.multiplier, 1)
+        let constraintY = constraints.y
+        XCTAssertTrue(constraintY.firstItem === view)
+        XCTAssertTrue(constraintY.secondItem === superview)
+        XCTAssertEqual(constraintY.firstAttribute, .centerY)
+        XCTAssertEqual(constraintY.secondAttribute, .centerY)
+        XCTAssertEqual(constraintY.constant, -5)
+        XCTAssertEqual(constraintY.multiplier, 1)
     }
     
     func testConstantCanBeSubstractedFromCenter() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = CenterConstraints()
         
         let view = UIView()
         superview.addSubview(view)
@@ -191,28 +287,27 @@ class CenterTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
-        XCTAssertTrue(constraintWidth.firstItem === view)
-        XCTAssertTrue(constraintWidth.secondItem === superview)
-        XCTAssertEqual(constraintWidth.firstAttribute, .centerX)
-        XCTAssertEqual(constraintWidth.secondAttribute, .centerX)
-        XCTAssertEqual(constraintWidth.constant, -5)
-        XCTAssertEqual(constraintWidth.multiplier, 1)
+        let constraintX = constraints.x
+        XCTAssertTrue(constraintX.firstItem === view)
+        XCTAssertTrue(constraintX.secondItem === superview)
+        XCTAssertEqual(constraintX.firstAttribute, .centerX)
+        XCTAssertEqual(constraintX.secondAttribute, .centerX)
+        XCTAssertEqual(constraintX.constant, -5)
+        XCTAssertEqual(constraintX.multiplier, 1)
         
-        let constraintHeight = constraints[1]
-        XCTAssertTrue(constraintHeight.firstItem === view)
-        XCTAssertTrue(constraintHeight.secondItem === superview)
-        XCTAssertEqual(constraintHeight.firstAttribute, .centerY)
-        XCTAssertEqual(constraintHeight.secondAttribute, .centerY)
-        XCTAssertEqual(constraintHeight.constant, -5)
-        XCTAssertEqual(constraintHeight.multiplier, 1)
+        let constraintY = constraints.y
+        XCTAssertTrue(constraintY.firstItem === view)
+        XCTAssertTrue(constraintY.secondItem === superview)
+        XCTAssertEqual(constraintY.firstAttribute, .centerY)
+        XCTAssertEqual(constraintY.secondAttribute, .centerY)
+        XCTAssertEqual(constraintY.constant, -5)
+        XCTAssertEqual(constraintY.multiplier, 1)
     }
     
     func testAddOffsetCommutateProperty() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = CenterConstraints()
         
         let view = UIView()
         superview.addSubview(view)
@@ -222,28 +317,27 @@ class CenterTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
-        XCTAssertTrue(constraintWidth.firstItem === view)
-        XCTAssertTrue(constraintWidth.secondItem === superview)
-        XCTAssertEqual(constraintWidth.firstAttribute, .centerX)
-        XCTAssertEqual(constraintWidth.secondAttribute, .centerX)
-        XCTAssertEqual(constraintWidth.constant, 10)
-        XCTAssertEqual(constraintWidth.multiplier, 1)
+        let constraintX = constraints.x
+        XCTAssertTrue(constraintX.firstItem === view)
+        XCTAssertTrue(constraintX.secondItem === superview)
+        XCTAssertEqual(constraintX.firstAttribute, .centerX)
+        XCTAssertEqual(constraintX.secondAttribute, .centerX)
+        XCTAssertEqual(constraintX.constant, 10)
+        XCTAssertEqual(constraintX.multiplier, 1)
         
-        let constraintHeight = constraints[1]
-        XCTAssertTrue(constraintHeight.firstItem === view)
-        XCTAssertTrue(constraintHeight.secondItem === superview)
-        XCTAssertEqual(constraintHeight.firstAttribute, .centerY)
-        XCTAssertEqual(constraintHeight.secondAttribute, .centerY)
-        XCTAssertEqual(constraintHeight.constant, 5)
-        XCTAssertEqual(constraintHeight.multiplier, 1)
+        let constraintY = constraints.y
+        XCTAssertTrue(constraintY.firstItem === view)
+        XCTAssertTrue(constraintY.secondItem === superview)
+        XCTAssertEqual(constraintY.firstAttribute, .centerY)
+        XCTAssertEqual(constraintY.secondAttribute, .centerY)
+        XCTAssertEqual(constraintY.constant, 5)
+        XCTAssertEqual(constraintY.multiplier, 1)
     }
     
     func testAddConstantCommutateProperty() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = CenterConstraints()
         
         let view = UIView()
         superview.addSubview(view)
@@ -253,22 +347,21 @@ class CenterTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.count, 2)
         
-        let constraintWidth = constraints[0]
-        XCTAssertTrue(constraintWidth.firstItem === view)
-        XCTAssertTrue(constraintWidth.secondItem === superview)
-        XCTAssertEqual(constraintWidth.firstAttribute, .centerX)
-        XCTAssertEqual(constraintWidth.secondAttribute, .centerX)
-        XCTAssertEqual(constraintWidth.constant, 5.5)
-        XCTAssertEqual(constraintWidth.multiplier, 1)
+        let constraintX = constraints.x
+        XCTAssertTrue(constraintX.firstItem === view)
+        XCTAssertTrue(constraintX.secondItem === superview)
+        XCTAssertEqual(constraintX.firstAttribute, .centerX)
+        XCTAssertEqual(constraintX.secondAttribute, .centerX)
+        XCTAssertEqual(constraintX.constant, 5.5)
+        XCTAssertEqual(constraintX.multiplier, 1)
         
-        let constraintHeight = constraints[1]
-        XCTAssertTrue(constraintHeight.firstItem === view)
-        XCTAssertTrue(constraintHeight.secondItem === superview)
-        XCTAssertEqual(constraintHeight.firstAttribute, .centerY)
-        XCTAssertEqual(constraintHeight.secondAttribute, .centerY)
-        XCTAssertEqual(constraintHeight.constant, 5.5)
-        XCTAssertEqual(constraintHeight.multiplier, 1)
+        let constraintY = constraints.y
+        XCTAssertTrue(constraintY.firstItem === view)
+        XCTAssertTrue(constraintY.secondItem === superview)
+        XCTAssertEqual(constraintY.firstAttribute, .centerY)
+        XCTAssertEqual(constraintY.secondAttribute, .centerY)
+        XCTAssertEqual(constraintY.constant, 5.5)
+        XCTAssertEqual(constraintY.multiplier, 1)
     }
 }

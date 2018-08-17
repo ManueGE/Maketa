@@ -12,12 +12,14 @@ import UIKit
 public struct Center {
     fileprivate let view: UIView
     fileprivate var offset = UIOffset.zero
+    fileprivate var withinMargins: Bool
     fileprivate var relation = Maketa.Defaults.relation
     fileprivate var priority = Maketa.Defaults.priority
-    fileprivate var constraintsPointer: MultiTypePointer<[NSLayoutConstraint]>?
+    fileprivate var constraintsPointer: MultiTypePointer<CenterConstraints>?
     
-    fileprivate init(view: UIView) {
+    fileprivate init(view: UIView, withinMargins: Bool) {
         self.view = view
+        self.withinMargins = withinMargins
     }
 }
 
@@ -79,54 +81,80 @@ public func - (center: Center, offset: MaketaCGFloatConvertible) -> Center {
 }
 
 /// Saves the constraints added when the center is applied into the given pointer
-public func => (center: Center, constraints: inout [NSLayoutConstraint]) -> Center {
+public func => (center: Center, constraints: inout CenterConstraints) -> Center {
     var center = center
     center.constraintsPointer = MultiTypePointer(&constraints)
     return center
 }
 
 /// Saves the constraints added when the center is applied into the given pointer
-public func => (center: Center, constraints: inout [NSLayoutConstraint]?) -> Center {
+public func => (center: Center, constraints: inout CenterConstraints?) -> Center {
     var center = center
     center.constraintsPointer = MultiTypePointer(withOptional: &constraints)
     return center
 }
 
 /// Saves the constraints added when the center is applied into the given pointer
-public func => (center: Center, constraints: inout [NSLayoutConstraint]!) -> Center {
+public func => (center: Center, constraints: inout CenterConstraints!) -> Center {
     var center = center
     center.constraintsPointer = MultiTypePointer(withForcedUnwrapped: &constraints)
     return center
 }
 
 public extension Maketa {
-    /// returns the center of the receiver
+    /// The center along the x and y axis of the object’s alignment rectangle
     public var center: Center {
         get {
-            return Center(view: view)
+            return Center(view: view, withinMargins: false)
         }
         set {
+            
+            let useMargins = newValue.withinMargins
+            let relation = newValue.relation
+            
             var xConstraint = NSLayoutConstraint.empty
-            let xValue = ((newValue.view.mkt.centerX + newValue.offset.horizontal) & newValue.priority) => xConstraint
+            let xAttribute = useMargins ? newValue.view.mkt.centerXWithinMargins : newValue.view.mkt.centerX
+            let xValue = ((xAttribute + newValue.offset.horizontal) & newValue.priority) => xConstraint
             
             var yConstraint = NSLayoutConstraint.empty
-            let yValue = ((newValue.view.mkt.centerY + newValue.offset.vertical) & newValue.priority) => yConstraint
+            let yAttribute = useMargins ? newValue.view.mkt.centerYWithinMargins : newValue.view.mkt.centerY
+            let yValue = ((yAttribute + newValue.offset.vertical) & newValue.priority) => yConstraint
             
-            switch newValue.relation {
-            case .equal:
-                view.mkt.centerX = xValue
-                view.mkt.centerY = yValue
-                
-            case .lessThanOrEqual:
-                view.mkt.centerX < xValue
-                view.mkt.centerY < yValue
-                
-            case .greaterThanOrEqual:
-                view.mkt.centerX > xValue
-                view.mkt.centerY > yValue
+            if useMargins {
+                assign(&view.mkt.centerXWithinMargins, to: xValue, with: relation)
+                assign(&view.mkt.centerYWithinMargins, to: yValue, with: relation)
+            } else {
+                assign(&view.mkt.centerX, to: xValue, with: relation)
+                assign(&view.mkt.centerY, to: yValue, with: relation)
             }
             
-            newValue.constraintsPointer?.setPointee([xConstraint, yConstraint])
+            newValue.constraintsPointer?.setPointee(CenterConstraints(x: xConstraint, y: yConstraint))
         }
+    }
+    
+    /// The center along the x and y between the object’s left and right margin
+    public var centerWithinMargins: Center {
+        return Center(view: view, withinMargins: true)
+    }
+}
+
+/// The object returned when the center constraints are assigned.
+public struct CenterConstraints {
+    
+    /// The constraint added for the x attribute
+    public let x: NSLayoutConstraint
+    
+    /// The constraint added for the y attribute
+    public let y: NSLayoutConstraint
+    
+    /// Creates a new instance
+    public init() {
+        x = .empty
+        y = .empty
+    }
+    
+    fileprivate init(x: NSLayoutConstraint, y: NSLayoutConstraint) {
+        self.x = x
+        self.y = y
     }
 }

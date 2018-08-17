@@ -14,7 +14,7 @@ class EdgesTests: ConstraintsTestCase {
     // MARK: - Basic
     func testEdgesCanBeSetWithEdges() {
         // given
-        var constraints: [NSLayoutConstraint] = []
+        var constraints = EdgesConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -24,7 +24,7 @@ class EdgesTests: ConstraintsTestCase {
         // then
         XCTAssertEqual(superview.constraints.count, 4)
         
-        let left = constraints[0]
+        let left = constraints.left!
         XCTAssertTrue(left.firstItem === view)
         XCTAssertTrue(left.secondItem === superview)
         XCTAssertEqual(left.firstAttribute, .left)
@@ -34,7 +34,7 @@ class EdgesTests: ConstraintsTestCase {
         XCTAssertEqual(left.relation, .equal)
         XCTAssertEqual(left.priority, .required)
         
-        let right = constraints[1]
+        let right = constraints.right!
         XCTAssertTrue(right.firstItem === view)
         XCTAssertTrue(right.secondItem === superview)
         XCTAssertEqual(right.firstAttribute, .right)
@@ -44,7 +44,11 @@ class EdgesTests: ConstraintsTestCase {
         XCTAssertEqual(right.relation, .equal)
         XCTAssertEqual(right.priority, .required)
         
-        let top = constraints[2]
+        XCTAssertNil(constraints.leading)
+        
+        XCTAssertNil(constraints.trailing)
+        
+        let top = constraints.top!
         XCTAssertTrue(top.firstItem === view)
         XCTAssertTrue(top.secondItem === superview)
         XCTAssertEqual(top.firstAttribute, .top)
@@ -54,7 +58,7 @@ class EdgesTests: ConstraintsTestCase {
         XCTAssertEqual(top.relation, .equal)
         XCTAssertEqual(top.priority, .required)
         
-        let bottom = constraints[3]
+        let bottom = constraints.bottom!
         XCTAssertTrue(bottom.firstItem === view)
         XCTAssertTrue(bottom.secondItem === superview)
         XCTAssertEqual(bottom.firstAttribute, .bottom)
@@ -67,7 +71,7 @@ class EdgesTests: ConstraintsTestCase {
     
     func testEdgesCanBeSetWithMargins() {
         // given
-        var constraints: [NSLayoutConstraint] = []
+        var constraints = EdgesConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -77,7 +81,7 @@ class EdgesTests: ConstraintsTestCase {
         // then
         XCTAssertEqual(superview.constraints.count, 4)
         
-        let left = constraints[0]
+        let left = constraints.left!
         XCTAssertTrue(left.firstItem === view)
         XCTAssertTrue(left.secondItem === superview)
         XCTAssertEqual(left.firstAttribute, .leftMargin)
@@ -87,7 +91,7 @@ class EdgesTests: ConstraintsTestCase {
         XCTAssertEqual(left.relation, .equal)
         XCTAssertEqual(left.priority, .required)
         
-        let right = constraints[1]
+        let right = constraints.right!
         XCTAssertTrue(right.firstItem === view)
         XCTAssertTrue(right.secondItem === superview)
         XCTAssertEqual(right.firstAttribute, .rightMargin)
@@ -97,7 +101,11 @@ class EdgesTests: ConstraintsTestCase {
         XCTAssertEqual(right.relation, .equal)
         XCTAssertEqual(right.priority, .required)
         
-        let top = constraints[2]
+        XCTAssertNil(constraints.leading)
+        
+        XCTAssertNil(constraints.trailing)
+        
+        let top = constraints.top!
         XCTAssertTrue(top.firstItem === view)
         XCTAssertTrue(top.secondItem === superview)
         XCTAssertEqual(top.firstAttribute, .topMargin)
@@ -107,7 +115,7 @@ class EdgesTests: ConstraintsTestCase {
         XCTAssertEqual(top.relation, .equal)
         XCTAssertEqual(top.priority, .required)
         
-        let bottom = constraints[3]
+        let bottom = constraints.bottom!
         XCTAssertTrue(bottom.firstItem === view)
         XCTAssertTrue(bottom.secondItem === superview)
         XCTAssertEqual(bottom.firstAttribute, .bottomMargin)
@@ -121,7 +129,7 @@ class EdgesTests: ConstraintsTestCase {
     // MARK: - Relative to interface layout direnction
     func testEdgesCanBeSetWithEdgesRelativeToInterfaceLayoutDirection() {
         // given
-        var constraints: [NSLayoutConstraint] = []
+        var constraints = EdgesConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -131,7 +139,11 @@ class EdgesTests: ConstraintsTestCase {
         // then
         XCTAssertEqual(superview.constraints.count, 4)
         
-        let leading = constraints[0]
+        XCTAssertNil(constraints.left)
+        
+        XCTAssertNil(constraints.right)
+        
+        let leading = constraints.leading!
         XCTAssertTrue(leading.firstItem === view)
         XCTAssertTrue(leading.secondItem === superview)
         XCTAssertEqual(leading.firstAttribute, .leading)
@@ -141,7 +153,7 @@ class EdgesTests: ConstraintsTestCase {
         XCTAssertEqual(leading.relation, .equal)
         XCTAssertEqual(leading.priority, .required)
         
-        let trailing = constraints[1]
+        let trailing = constraints.trailing!
         XCTAssertTrue(trailing.firstItem === view)
         XCTAssertTrue(trailing.secondItem === superview)
         XCTAssertEqual(trailing.firstAttribute, .trailing)
@@ -151,7 +163,7 @@ class EdgesTests: ConstraintsTestCase {
         XCTAssertEqual(trailing.relation, .equal)
         XCTAssertEqual(trailing.priority, .required)
         
-        let top = constraints[2]
+        let top = constraints.top!
         XCTAssertTrue(top.firstItem === view)
         XCTAssertTrue(top.secondItem === superview)
         XCTAssertEqual(top.firstAttribute, .top)
@@ -161,7 +173,7 @@ class EdgesTests: ConstraintsTestCase {
         XCTAssertEqual(top.relation, .equal)
         XCTAssertEqual(top.priority, .required)
         
-        let bottom = constraints[3]
+        let bottom = constraints.bottom!
         XCTAssertTrue(bottom.firstItem === view)
         XCTAssertTrue(bottom.secondItem === superview)
         XCTAssertEqual(bottom.firstAttribute, .bottom)
@@ -174,7 +186,7 @@ class EdgesTests: ConstraintsTestCase {
     
     func testEdgesCanBeSetWithMarginsRelativeToInterfaceLayoutDirection() {
         // given
-        var constraints: [NSLayoutConstraint] = []
+        var constraints = EdgesConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -184,7 +196,11 @@ class EdgesTests: ConstraintsTestCase {
         // then
         XCTAssertEqual(superview.constraints.count, 4)
         
-        let leading = constraints[0]
+        XCTAssertNil(constraints.left)
+        
+        XCTAssertNil(constraints.right)
+        
+        let leading = constraints.leading!
         XCTAssertTrue(leading.firstItem === view)
         XCTAssertTrue(leading.secondItem === superview)
         XCTAssertEqual(leading.firstAttribute, .leadingMargin)
@@ -194,7 +210,7 @@ class EdgesTests: ConstraintsTestCase {
         XCTAssertEqual(leading.relation, .equal)
         XCTAssertEqual(leading.priority, .required)
         
-        let trailing = constraints[1]
+        let trailing = constraints.trailing!
         XCTAssertTrue(trailing.firstItem === view)
         XCTAssertTrue(trailing.secondItem === superview)
         XCTAssertEqual(trailing.firstAttribute, .trailingMargin)
@@ -204,7 +220,7 @@ class EdgesTests: ConstraintsTestCase {
         XCTAssertEqual(trailing.relation, .equal)
         XCTAssertEqual(trailing.priority, .required)
         
-        let top = constraints[2]
+        let top = constraints.top!
         XCTAssertTrue(top.firstItem === view)
         XCTAssertTrue(top.secondItem === superview)
         XCTAssertEqual(top.firstAttribute, .topMargin)
@@ -214,7 +230,7 @@ class EdgesTests: ConstraintsTestCase {
         XCTAssertEqual(top.relation, .equal)
         XCTAssertEqual(top.priority, .required)
         
-        let bottom = constraints[3]
+        let bottom = constraints.bottom!
         XCTAssertTrue(bottom.firstItem === view)
         XCTAssertTrue(bottom.secondItem === superview)
         XCTAssertEqual(bottom.firstAttribute, .bottomMargin)
@@ -228,7 +244,7 @@ class EdgesTests: ConstraintsTestCase {
     // MARK: - Relations
     func testEqualRelationship() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = EdgesConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -236,16 +252,17 @@ class EdgesTests: ConstraintsTestCase {
         view.mkt.edges = superview.mkt.edges => constraints
         
         // then
-        XCTAssertEqual(constraints.count, 4)
-        XCTAssertEqual(constraints[0].relation, .equal)
-        XCTAssertEqual(constraints[1].relation, .equal)
-        XCTAssertEqual(constraints[2].relation, .equal)
-        XCTAssertEqual(constraints[3].relation, .equal)
+        XCTAssertEqual(constraints.left!.relation, .equal)
+        XCTAssertEqual(constraints.right!.relation, .equal)
+        XCTAssertNil(constraints.leading)
+        XCTAssertNil(constraints.trailing)
+        XCTAssertEqual(constraints.top!.relation, .equal)
+        XCTAssertEqual(constraints.bottom!.relation, .equal)
     }
     
     func testLessThanRelationship() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = EdgesConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -253,16 +270,17 @@ class EdgesTests: ConstraintsTestCase {
         view.mkt.edges < superview.mkt.edges => constraints
         
         // then
-        XCTAssertEqual(constraints.count, 4)
-        XCTAssertEqual(constraints[0].relation, .lessThanOrEqual)
-        XCTAssertEqual(constraints[1].relation, .lessThanOrEqual)
-        XCTAssertEqual(constraints[2].relation, .lessThanOrEqual)
-        XCTAssertEqual(constraints[3].relation, .lessThanOrEqual)
+        XCTAssertEqual(constraints.left!.relation, .lessThanOrEqual)
+        XCTAssertEqual(constraints.right!.relation, .lessThanOrEqual)
+        XCTAssertNil(constraints.leading)
+        XCTAssertNil(constraints.trailing)
+        XCTAssertEqual(constraints.top!.relation, .lessThanOrEqual)
+        XCTAssertEqual(constraints.bottom!.relation, .lessThanOrEqual)
     }
     
     func testGreaterThanRelationship() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = EdgesConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -270,17 +288,18 @@ class EdgesTests: ConstraintsTestCase {
         view.mkt.edges > superview.mkt.edges => constraints
         
         // then
-        XCTAssertEqual(constraints.count, 4)
-        XCTAssertEqual(constraints[0].relation, .greaterThanOrEqual)
-        XCTAssertEqual(constraints[1].relation, .greaterThanOrEqual)
-        XCTAssertEqual(constraints[2].relation, .greaterThanOrEqual)
-        XCTAssertEqual(constraints[3].relation, .greaterThanOrEqual)
+        XCTAssertEqual(constraints.left!.relation, .greaterThanOrEqual)
+        XCTAssertEqual(constraints.right!.relation, .greaterThanOrEqual)
+        XCTAssertNil(constraints.leading)
+        XCTAssertNil(constraints.trailing)
+        XCTAssertEqual(constraints.top!.relation, .greaterThanOrEqual)
+        XCTAssertEqual(constraints.bottom!.relation, .greaterThanOrEqual)
     }
     
     // MARK: - Priority
     func testCustomPriority() {
         // given
-        var constraints = [NSLayoutConstraint]()
+        var constraints = EdgesConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -288,11 +307,12 @@ class EdgesTests: ConstraintsTestCase {
         view.mkt.edges = (superview.mkt.edges & .defaultLow) => constraints
         
         // then
-        XCTAssertEqual(constraints.count, 4)
-        XCTAssertEqual(constraints[0].priority, .defaultLow)
-        XCTAssertEqual(constraints[1].priority, .defaultLow)
-        XCTAssertEqual(constraints[2].priority, .defaultLow)
-        XCTAssertEqual(constraints[3].priority, .defaultLow)
+        XCTAssertEqual(constraints.left!.priority, .defaultLow)
+        XCTAssertEqual(constraints.right!.priority, .defaultLow)
+        XCTAssertNil(constraints.leading)
+        XCTAssertNil(constraints.trailing)
+        XCTAssertEqual(constraints.top!.priority, .defaultLow)
+        XCTAssertEqual(constraints.bottom!.priority, .defaultLow)
     }
     
     // MARK: - Assignement
@@ -309,10 +329,10 @@ class EdgesTests: ConstraintsTestCase {
         XCTAssertEqual(superview.constraints.count, 4)
     }
     
-    func testEdgesConstraintsCanBeAssignedToOptionalArray() {
+    func testEdgesConstraintsCanBeAssignedToOptionalConstraints() {
         
         // given
-        var constraints: [NSLayoutConstraint]?
+        var constraints: EdgesConstraints?
         let view = UIView()
         superview.addSubview(view)
         
@@ -320,13 +340,13 @@ class EdgesTests: ConstraintsTestCase {
         view.mkt.edges = superview.mkt.edges => constraints
         
         // then
-        XCTAssertEqual(constraints!.count, 4)
+        XCTAssertNotNil(constraints)
     }
     
-    func testEdgesConstraintsCanBeAssignedToForcedUnwrappedArray() {
+    func testEdgesConstraintsCanBeAssignedToForcedUnwrappedConstraints() {
         
         // given
-        var constraints: [NSLayoutConstraint]!
+        var constraints: EdgesConstraints!
         let view = UIView()
         superview.addSubview(view)
         
@@ -334,13 +354,13 @@ class EdgesTests: ConstraintsTestCase {
         view.mkt.edges = superview.mkt.edges => constraints
         
         // then
-        XCTAssertEqual(constraints.count, 4)
+        XCTAssertNotNil(constraints)
     }
     
     // MARK: - Exclude edge
     func testEdgesCanExcludeAnEdge() {
         // given
-        var constraints: [NSLayoutConstraint] = []
+        var constraints = EdgesConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -348,21 +368,26 @@ class EdgesTests: ConstraintsTestCase {
         view.mkt.edges = (superview.mkt.edges - .left) => constraints
         
         // then
-        XCTAssertEqual(superview.constraints.count, 3)
         
-        let right = constraints[0]
+        XCTAssertNil(constraints.left)
+        
+        let right = constraints.right!
         XCTAssertEqual(right.firstAttribute, .right)
         
-        let top = constraints[1]
+        XCTAssertNil(constraints.leading)
+        
+        XCTAssertNil(constraints.trailing)
+        
+        let top = constraints.top!
         XCTAssertEqual(top.firstAttribute, .top)
         
-        let bottom = constraints[2]
+        let bottom = constraints.bottom!
         XCTAssertEqual(bottom.firstAttribute, .bottom)
     }
     
     func testMarginsCanExcludeAnEdge() {
         // given
-        var constraints: [NSLayoutConstraint] = []
+        var constraints = EdgesConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -370,21 +395,26 @@ class EdgesTests: ConstraintsTestCase {
         view.mkt.edges = (superview.mkt.margins - .left) => constraints
         
         // then
-        XCTAssertEqual(superview.constraints.count, 3)
         
-        let rigth = constraints[0]
+        XCTAssertNil(constraints.left)
+        
+        let rigth = constraints.right!
         XCTAssertEqual(rigth.firstAttribute, .rightMargin)
         
-        let top = constraints[1]
+        XCTAssertNil(constraints.leading)
+        
+        XCTAssertNil(constraints.trailing)
+        
+        let top = constraints.top!
         XCTAssertEqual(top.firstAttribute, .topMargin)
         
-        let bottom = constraints[2]
+        let bottom = constraints.bottom!
         XCTAssertEqual(bottom.firstAttribute, .bottomMargin)
     }
     
     func testLayoutDirectionEdgesCanExcludeAnEdge() {
         // given
-        var constraints: [NSLayoutConstraint] = []
+        var constraints = EdgesConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -394,19 +424,25 @@ class EdgesTests: ConstraintsTestCase {
         // then
         XCTAssertEqual(superview.constraints.count, 3)
         
-        let trailing = constraints[0]
+        XCTAssertNil(constraints.left)
+        
+        XCTAssertNil(constraints.right)
+        
+        XCTAssertNil(constraints.leading)
+        
+        let trailing = constraints.trailing!
         XCTAssertEqual(trailing.firstAttribute, .trailing)
         
-        let top = constraints[1]
+        let top = constraints.top!
         XCTAssertEqual(top.firstAttribute, .top)
         
-        let bottom = constraints[2]
+        let bottom = constraints.bottom!
         XCTAssertEqual(bottom.firstAttribute, .bottom)
     }
     
     func testLayoutDirectionMarginsCanExcludeAnEdge() {
         // given
-        var constraints: [NSLayoutConstraint] = []
+        var constraints = EdgesConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -416,19 +452,25 @@ class EdgesTests: ConstraintsTestCase {
         // then
         XCTAssertEqual(superview.constraints.count, 3)
         
-        let trailing = constraints[0]
+        XCTAssertNil(constraints.left)
+        
+        XCTAssertNil(constraints.right)
+        
+        XCTAssertNil(constraints.leading)
+        
+        let trailing = constraints.trailing!
         XCTAssertEqual(trailing.firstAttribute, .trailingMargin)
         
-        let top = constraints[1]
+        let top = constraints.top!
         XCTAssertEqual(top.firstAttribute, .topMargin)
         
-        let bottom = constraints[2]
+        let bottom = constraints.bottom!
         XCTAssertEqual(bottom.firstAttribute, .bottomMargin)
     }
     
-    func testEdgesExlcudingAnEdgeTwiceHasNotEffec() {
+    func testEdgesExlcudingAnEdgeTwiceHasNotEffect() {
         // given
-        var constraints: [NSLayoutConstraint] = []
+        var constraints = EdgesConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -438,20 +480,26 @@ class EdgesTests: ConstraintsTestCase {
         // then
         XCTAssertEqual(superview.constraints.count, 3)
         
-        let right = constraints[0]
+        XCTAssertNil(constraints.left)
+        
+        let right = constraints.right!
         XCTAssertEqual(right.firstAttribute, .right)
         
-        let top = constraints[1]
+        XCTAssertNil(constraints.leading)
+        
+        XCTAssertNil(constraints.trailing)
+        
+        let top = constraints.top!
         XCTAssertEqual(top.firstAttribute, .top)
         
-        let bottom = constraints[2]
+        let bottom = constraints.bottom!
         XCTAssertEqual(bottom.firstAttribute, .bottom)
     }
     
     // MARK: - Add padding
     func testCanAddPaddingToEdgesWithConstant() {
         // given
-        var constraints: [NSLayoutConstraint] = []
+        var constraints = EdgesConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -461,26 +509,30 @@ class EdgesTests: ConstraintsTestCase {
         // then
         XCTAssertEqual(superview.constraints.count, 4)
 
-        let left = constraints[0]
+        let left = constraints.left!
         XCTAssertEqual(left.firstAttribute, .left)
         XCTAssertEqual(left.constant, 20)
         
-        let right = constraints[1]
+        let right = constraints.right!
         XCTAssertEqual(right.firstAttribute, .right)
         XCTAssertEqual(right.constant, -20)
         
-        let top = constraints[2]
+        XCTAssertNil(constraints.leading)
+        
+        XCTAssertNil(constraints.trailing)
+        
+        let top = constraints.top!
         XCTAssertEqual(top.firstAttribute, .top)
         XCTAssertEqual(top.constant, 20)
         
-        let bottom = constraints[3]
+        let bottom = constraints.bottom!
         XCTAssertEqual(bottom.firstAttribute, .bottom)
         XCTAssertEqual(bottom.constant, -20)
     }
     
     func testCanAddPaddingToEdgesWithInsets() {
         // given
-        var constraints: [NSLayoutConstraint] = []
+        var constraints = EdgesConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -490,26 +542,30 @@ class EdgesTests: ConstraintsTestCase {
         // then
         XCTAssertEqual(superview.constraints.count, 4)
         
-        let left = constraints[0]
+        let left = constraints.left!
         XCTAssertEqual(left.firstAttribute, .left)
         XCTAssertEqual(left.constant, 15)
         
-        let right = constraints[1]
+        let right = constraints.right!
         XCTAssertEqual(right.firstAttribute, .right)
         XCTAssertEqual(right.constant, -25)
         
-        let top = constraints[2]
+        XCTAssertNil(constraints.leading)
+        
+        XCTAssertNil(constraints.trailing)
+        
+        let top = constraints.top!
         XCTAssertEqual(top.firstAttribute, .top)
         XCTAssertEqual(top.constant, 10)
         
-        let bottom = constraints[3]
+        let bottom = constraints.bottom!
         XCTAssertEqual(bottom.firstAttribute, .bottom)
         XCTAssertEqual(bottom.constant, -20)
     }
     
     func testCanAddPaddingToMarginsWithConstant() {
         // given
-        var constraints: [NSLayoutConstraint] = []
+        var constraints = EdgesConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -519,26 +575,30 @@ class EdgesTests: ConstraintsTestCase {
         // then
         XCTAssertEqual(superview.constraints.count, 4)
         
-        let left = constraints[0]
+        let left = constraints.left!
         XCTAssertEqual(left.firstAttribute, .leftMargin)
         XCTAssertEqual(left.constant, 20)
         
-        let right = constraints[1]
+        let right = constraints.right!
         XCTAssertEqual(right.firstAttribute, .rightMargin)
         XCTAssertEqual(right.constant, -20)
         
-        let top = constraints[2]
+        XCTAssertNil(constraints.leading)
+        
+        XCTAssertNil(constraints.trailing)
+        
+        let top = constraints.top!
         XCTAssertEqual(top.firstAttribute, .topMargin)
         XCTAssertEqual(top.constant, 20)
         
-        let bottom = constraints[3]
+        let bottom = constraints.bottom!
         XCTAssertEqual(bottom.firstAttribute, .bottomMargin)
         XCTAssertEqual(bottom.constant, -20)
     }
     
     func testCanAddPaddingToMarginsWithInsets() {
         // given
-        var constraints: [NSLayoutConstraint] = []
+        var constraints = EdgesConstraints()
         let view = UIView()
         superview.addSubview(view)
         
@@ -548,19 +608,23 @@ class EdgesTests: ConstraintsTestCase {
         // then
         XCTAssertEqual(superview.constraints.count, 4)
         
-        let left = constraints[0]
+        let left = constraints.left!
         XCTAssertEqual(left.firstAttribute, .leftMargin)
         XCTAssertEqual(left.constant, 15)
         
-        let right = constraints[1]
+        let right = constraints.right!
         XCTAssertEqual(right.firstAttribute, .rightMargin)
         XCTAssertEqual(right.constant, -25)
         
-        let top = constraints[2]
+        XCTAssertNil(constraints.leading)
+        
+        XCTAssertNil(constraints.trailing)
+        
+        let top = constraints.top!
         XCTAssertEqual(top.firstAttribute, .topMargin)
         XCTAssertEqual(top.constant, 10)
         
-        let bottom = constraints[3]
+        let bottom = constraints.bottom!
         XCTAssertEqual(bottom.firstAttribute, .bottomMargin)
         XCTAssertEqual(bottom.constant, -20)
     }

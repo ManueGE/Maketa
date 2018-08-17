@@ -12,7 +12,7 @@ import Foundation
 public protocol Size {
     /// returns the constraints that will be applied to modify the size of the given view
     @discardableResult
-    func constraints(for view: UIView) -> [NSLayoutConstraint]
+    func constraints(for view: UIView) -> SizeConstraints
     
     /// returns a new `Size` which is the result of adding a `UIOffset` to the receiver
     func add(_ offset: UIOffset) -> Size
@@ -34,7 +34,7 @@ extension Int: Size {}
 extension Double: Size {}
 
 public extension Size where Self: MaketaCGFloatConvertible {
-    func constraints(for view: UIView) -> [NSLayoutConstraint] {
+    func constraints(for view: UIView) -> SizeConstraints {
         let size = CGSize(width: mktCGFloat, height: mktCGFloat)
         return size.constraints(for: view)
     }
@@ -60,7 +60,7 @@ public extension Size where Self: MaketaCGFloatConvertible {
 
 // MARK: - CGSize
 extension CGSize: Size {
-    public func constraints(for view: UIView) -> [NSLayoutConstraint] {
+    public func constraints(for view: UIView) -> SizeConstraints {
         let size = FixedSize(size: self, relation: Maketa.Defaults.relation, priority: Maketa.Defaults.priority)
         return size.constraints(for: view)
     }
@@ -88,26 +88,17 @@ private struct FixedSize: Size {
     let relation: NSLayoutRelation
     let priority: UILayoutPriority
     
-    func constraints(for view: UIView) -> [NSLayoutConstraint] {
+    func constraints(for view: UIView) -> SizeConstraints {
         var wConstraint = NSLayoutConstraint.empty
         let wValue = (size.width & priority) => wConstraint
         
         var hConstraint = NSLayoutConstraint.empty
         let hValue = (size.height & priority) => hConstraint
         
-        switch relation {
-        case .equal:
-            view.mkt.width = wValue
-            view.mkt.height = hValue
-        case .lessThanOrEqual:
-            view.mkt.width < wValue
-            view.mkt.height < hValue
-        case .greaterThanOrEqual:
-            view.mkt.width > wValue
-            view.mkt.height > hValue
-        }
+        assign(&view.mkt.width, to: wValue, with: relation)
+        assign(&view.mkt.height, to: hValue, with: relation)
         
-        return [wConstraint, hConstraint]
+        return SizeConstraints(width: wConstraint, height: hConstraint)
     }
     
     func add(_ offset: UIOffset) -> Size {
@@ -141,26 +132,17 @@ private struct ViewSize: Size {
         self.view = view
     }
     
-    func constraints(for view: UIView) -> [NSLayoutConstraint] {
+    func constraints(for view: UIView) -> SizeConstraints {
         var wConstraint = NSLayoutConstraint.empty
         let wValue = ((self.view.mkt.width * multiplier + offset.horizontal) & priority) => wConstraint
         
         var hConstraint = NSLayoutConstraint.empty
         let hValue = ((self.view.mkt.height * multiplier + offset.vertical) & priority) => hConstraint
         
-        switch relation {
-        case .equal:
-            view.mkt.width = wValue
-            view.mkt.height = hValue
-        case .lessThanOrEqual:
-            view.mkt.width < wValue
-            view.mkt.height < hValue
-        case .greaterThanOrEqual:
-            view.mkt.width > wValue
-            view.mkt.height > hValue
-        }
+        assign(&view.mkt.width, to: wValue, with: relation)
+        assign(&view.mkt.height, to: hValue, with: relation)
         
-        return [wConstraint, hConstraint]
+        return SizeConstraints(width: wConstraint, height: hConstraint)
     }
     
     func add(_ offset: UIOffset) -> Size {
@@ -191,9 +173,9 @@ private struct ViewSize: Size {
 // MARK: - Setter
 private struct SizeConstraintSetter: Size {
     fileprivate(set) var original: Size
-    fileprivate let constraintPointer: MultiTypePointer<[NSLayoutConstraint]>
+    fileprivate let constraintPointer: MultiTypePointer<SizeConstraints>
     
-    func constraints(for view: UIView) -> [NSLayoutConstraint] {
+    func constraints(for view: UIView) -> SizeConstraints {
         let constraints = original.constraints(for: view)
         constraintPointer.setPointee(constraints)
         return constraints
@@ -275,21 +257,42 @@ public func / (size: Size, divider: MaketaCGFloatConvertible) -> Size {
 }
 
 /// Saves the constraints added when the center is applied into the given pointer
-public func => (size: Size, constraints: inout [NSLayoutConstraint]) -> Size {
+public func => (size: Size, constraints: inout SizeConstraints) -> Size {
     let pointer = MultiTypePointer(&constraints)
     return SizeConstraintSetter(original: size, constraintPointer: pointer)
 }
 
 /// Saves the constraints added when the center is applied into the given pointer
-public func => (size: Size, constraints: inout [NSLayoutConstraint]?) -> Size {
+public func => (size: Size, constraints: inout SizeConstraints?) -> Size {
     let pointer = MultiTypePointer(withOptional: &constraints)
     return SizeConstraintSetter(original: size, constraintPointer: pointer)
 }
 
 /// Saves the constraints added when the center is applied into the given pointer
-public func => (size: Size, constraints: inout [NSLayoutConstraint]!) -> Size {
+public func => (size: Size, constraints: inout SizeConstraints!) -> Size {
     let pointer = MultiTypePointer(withForcedUnwrapped: &constraints)
     return SizeConstraintSetter(original: size, constraintPointer: pointer)
+}
+
+/// The object returned when the size constraints are assigned.
+public struct SizeConstraints {
+    
+    /// The constraint added for the width attribute
+    public let width: NSLayoutConstraint
+    
+    /// The constraint added for the height attribute
+    public let height: NSLayoutConstraint
+    
+    /// Creates a new instance
+    public init() {
+        width = .empty
+        height = .empty
+    }
+    
+    fileprivate init(width: NSLayoutConstraint, height: NSLayoutConstraint) {
+        self.width = width
+        self.height = height
+    }
 }
 
 // MARK: - Layout extension
