@@ -110,6 +110,7 @@ public extension Maketa {
         set {
             
             let useMargins = newValue.withinMargins
+            let relation = newValue.relation
             
             var xConstraint = NSLayoutConstraint.empty
             let xAttribute = useMargins ? newValue.view.mkt.centerXWithinMargins : newValue.view.mkt.centerX
@@ -119,33 +120,12 @@ public extension Maketa {
             let yAttribute = useMargins ? newValue.view.mkt.centerYWithinMargins : newValue.view.mkt.centerY
             let yValue = ((yAttribute + newValue.offset.vertical) & newValue.priority) => yConstraint
             
-            switch newValue.relation {
-            case .equal:
-                if useMargins {
-                    view.mkt.centerXWithinMargins = xValue
-                    view.mkt.centerYWithinMargins = yValue
-                } else {
-                    view.mkt.centerX = xValue
-                    view.mkt.centerY = yValue
-                }
-                
-            case .lessThanOrEqual:
-                if useMargins {
-                    view.mkt.centerXWithinMargins < xValue
-                    view.mkt.centerYWithinMargins < yValue
-                } else {
-                    view.mkt.centerX < xValue
-                    view.mkt.centerY < yValue
-                }
-                
-            case .greaterThanOrEqual:
-                if useMargins {
-                    view.mkt.centerXWithinMargins > xValue
-                    view.mkt.centerYWithinMargins > yValue
-                } else {
-                    view.mkt.centerX > xValue
-                    view.mkt.centerY > yValue
-                }
+            if useMargins {
+                assign(&view.mkt.centerXWithinMargins, to: xValue, with: relation)
+                assign(&view.mkt.centerYWithinMargins, to: yValue, with: relation)
+            } else {
+                assign(&view.mkt.centerX, to: xValue, with: relation)
+                assign(&view.mkt.centerY, to: yValue, with: relation)
             }
             
             newValue.constraintsPointer?.setPointee(CenterConstraints(x: xConstraint, y: yConstraint))
