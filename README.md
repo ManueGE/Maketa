@@ -53,10 +53,10 @@ view.mkt.height = 10 => constraint
 var constraint: NSLayoutConstraint?
 view.mkt.top = (view.mkt.super.top + 50) => constraint
 
-var constraints: [NSLayoutConstraint] = []
+var constraints = CenterConstraints()
 view.mkt.center = view.mkt.super.center => constraints
 
-var constraints: [NSLayoutConstraint]?
+var constraints: EdgesConstraints?
 view.mkt.edges = otherView.mkt.margins => constraints
 ```
 
@@ -91,10 +91,22 @@ You can match the center of a view to the center of another view with a single i
 view.mkt.center = otherView.mkt.center
 ```
 
-Using the `=>` operator will return an array of `NSLayoutConstraint` with 2 elements, the first one for the `centerX` attribute and the second one for the `centerY`.
+You can use four different types of center:
+
+```swift
+// center
+view.mkt.center = otherView.mkt.center
+
+// center within margins
+view.mkt.center = otherView.mkt.centerWithinMargins
+```
+
+Note that on the left side of the expression you **always** use `center`. The right side of the expression is which determines the type of center used. 
+
+Using the `=>` operator will return an instance of `CenterConstraints` which can be used to get the `x` and `y` constraints.
  
 ```swift
-var constraints: [NSLayoutConstraint]?
+var constraints: CenterConstraints?
 view.mkt.center = view.mkt.super.center => constraints
 ```
 
@@ -124,10 +136,10 @@ view.mkt.size = CGSize(width: 100, height: 200)
 view.mkt.size = otherView.mkt.size
 ```
 
-Using the `=>` operator will return an array of `NSLayoutConstraint` with 2 elements, the first one for the `width` attribute and the second one for the `height`.
+Using the `=>` operator will return an instance of `SizeConstraints` which you can use to get the `width` and `height` constraints.
  
 ```swift
-var constraints: [NSLayoutConstraint]?
+var constraints: SizeConstraints?
 view.mkt.size = CGSize(width: 100, height: 200) => constraints
 ```
 #### Add offset
@@ -178,10 +190,10 @@ view.mkt.edges = otherView.mkt.layoutDirectionMargins
 
 Note that on the left side of the expression you **always** use `edges`. The right side of the expression is which determines the type of edge used. 
 
-Using the `=>` operator will return a array of `NSLayoutConstraint` with at most 4 elements, one per each edge used. 
+Using the `=>` operator will return an instance of `EdgesConstraints`. You can get the constraints added for each edge from it.
 
 ```swift
-var constraints: [NSLayoutConstraint]?
+var constraints: EdgesConstraints?
 view.mkt.edges = view.mkt.super.edges => constraints
 ```
 
