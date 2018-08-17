@@ -147,9 +147,6 @@ public struct CenterConstraints {
     /// The constraint added for the y attribute
     public let y: NSLayoutConstraint
     
-    /// An array with all the constraints. The order will be x, y
-    public var array: [NSLayoutConstraint] { return [x, y] }
-    
     /// Creates a new instance
     public init() {
         x = .empty

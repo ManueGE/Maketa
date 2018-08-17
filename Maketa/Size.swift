@@ -283,9 +283,6 @@ public struct SizeConstraints {
     /// The constraint added for the height attribute
     public let height: NSLayoutConstraint
     
-    /// An array with all the constraints. The order will be width, height
-    public var array: [NSLayoutConstraint] { return [width, height] }
-    
     /// Creates a new instance
     public init() {
         width = .empty

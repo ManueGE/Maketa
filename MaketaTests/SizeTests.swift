@@ -24,7 +24,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -57,7 +56,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -95,7 +93,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -129,7 +126,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -162,7 +158,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -195,7 +190,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -228,7 +222,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -261,7 +254,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -294,7 +286,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -332,7 +323,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -370,7 +360,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -405,7 +394,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -438,7 +426,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -471,7 +458,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -509,7 +495,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -545,7 +530,7 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(view.constraints.count, 2)
     }
     
-    func testSizeConstraintsCanBeAssignedToOptionalArray() {
+    func testSizeConstraintsCanBeAssignedToOptionalConstraints() {
         
         // given
         var constraints: SizeConstraints?
@@ -555,10 +540,10 @@ class SizeTests: ConstraintsTestCase {
         view.mkt.size = 30 => constraints
         
         // then
-        XCTAssertEqual(constraints!.array.count, 2)
+        XCTAssertNotNil(constraints)
     }
     
-    func testSizeConstraintsCanBeAssignedToForcedUnwrappedArray() {
+    func testSizeConstraintsCanBeAssignedToForcedUnwrappedConstraints() {
         
         // given
         var constraints: SizeConstraints!
@@ -568,7 +553,7 @@ class SizeTests: ConstraintsTestCase {
         view.mkt.size = 30 => constraints
         
         // then
-        XCTAssertEqual(constraints.array.count, 2)
+        XCTAssertNotNil(constraints)
     }
     
     // MARK: - Operations
@@ -582,7 +567,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -605,7 +589,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -629,7 +612,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -657,7 +639,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -690,7 +671,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -713,7 +693,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -736,7 +715,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -760,7 +738,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -788,7 +765,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -821,7 +797,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -849,7 +824,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -874,7 +848,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -900,7 +873,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -932,7 +904,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(superview.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)
@@ -965,7 +936,6 @@ class SizeTests: ConstraintsTestCase {
         
         // then
         XCTAssertEqual(view.constraints.count, 2)
-        XCTAssertEqual(constraints.array.count, 2)
         
         let constraintWidth = constraints.width
         XCTAssertTrue(constraintWidth.firstItem === view)

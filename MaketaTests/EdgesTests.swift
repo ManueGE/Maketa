@@ -252,11 +252,12 @@ class EdgesTests: ConstraintsTestCase {
         view.mkt.edges = superview.mkt.edges => constraints
         
         // then
-        XCTAssertEqual(constraints.array.count, 4)
-        XCTAssertEqual(constraints.array[0].relation, .equal)
-        XCTAssertEqual(constraints.array[1].relation, .equal)
-        XCTAssertEqual(constraints.array[2].relation, .equal)
-        XCTAssertEqual(constraints.array[3].relation, .equal)
+        XCTAssertEqual(constraints.left!.relation, .equal)
+        XCTAssertEqual(constraints.right!.relation, .equal)
+        XCTAssertNil(constraints.leading)
+        XCTAssertNil(constraints.trailing)
+        XCTAssertEqual(constraints.top!.relation, .equal)
+        XCTAssertEqual(constraints.bottom!.relation, .equal)
     }
     
     func testLessThanRelationship() {
@@ -269,11 +270,12 @@ class EdgesTests: ConstraintsTestCase {
         view.mkt.edges < superview.mkt.edges => constraints
         
         // then
-        XCTAssertEqual(constraints.array.count, 4)
-        XCTAssertEqual(constraints.array[0].relation, .lessThanOrEqual)
-        XCTAssertEqual(constraints.array[1].relation, .lessThanOrEqual)
-        XCTAssertEqual(constraints.array[2].relation, .lessThanOrEqual)
-        XCTAssertEqual(constraints.array[3].relation, .lessThanOrEqual)
+        XCTAssertEqual(constraints.left!.relation, .lessThanOrEqual)
+        XCTAssertEqual(constraints.right!.relation, .lessThanOrEqual)
+        XCTAssertNil(constraints.leading)
+        XCTAssertNil(constraints.trailing)
+        XCTAssertEqual(constraints.top!.relation, .lessThanOrEqual)
+        XCTAssertEqual(constraints.bottom!.relation, .lessThanOrEqual)
     }
     
     func testGreaterThanRelationship() {
@@ -286,11 +288,12 @@ class EdgesTests: ConstraintsTestCase {
         view.mkt.edges > superview.mkt.edges => constraints
         
         // then
-        XCTAssertEqual(constraints.array.count, 4)
-        XCTAssertEqual(constraints.array[0].relation, .greaterThanOrEqual)
-        XCTAssertEqual(constraints.array[1].relation, .greaterThanOrEqual)
-        XCTAssertEqual(constraints.array[2].relation, .greaterThanOrEqual)
-        XCTAssertEqual(constraints.array[3].relation, .greaterThanOrEqual)
+        XCTAssertEqual(constraints.left!.relation, .greaterThanOrEqual)
+        XCTAssertEqual(constraints.right!.relation, .greaterThanOrEqual)
+        XCTAssertNil(constraints.leading)
+        XCTAssertNil(constraints.trailing)
+        XCTAssertEqual(constraints.top!.relation, .greaterThanOrEqual)
+        XCTAssertEqual(constraints.bottom!.relation, .greaterThanOrEqual)
     }
     
     // MARK: - Priority
@@ -304,11 +307,12 @@ class EdgesTests: ConstraintsTestCase {
         view.mkt.edges = (superview.mkt.edges & .defaultLow) => constraints
         
         // then
-        XCTAssertEqual(constraints.array.count, 4)
-        XCTAssertEqual(constraints.array[0].priority, .defaultLow)
-        XCTAssertEqual(constraints.array[1].priority, .defaultLow)
-        XCTAssertEqual(constraints.array[2].priority, .defaultLow)
-        XCTAssertEqual(constraints.array[3].priority, .defaultLow)
+        XCTAssertEqual(constraints.left!.priority, .defaultLow)
+        XCTAssertEqual(constraints.right!.priority, .defaultLow)
+        XCTAssertNil(constraints.leading)
+        XCTAssertNil(constraints.trailing)
+        XCTAssertEqual(constraints.top!.priority, .defaultLow)
+        XCTAssertEqual(constraints.bottom!.priority, .defaultLow)
     }
     
     // MARK: - Assignement
@@ -325,7 +329,7 @@ class EdgesTests: ConstraintsTestCase {
         XCTAssertEqual(superview.constraints.count, 4)
     }
     
-    func testEdgesConstraintsCanBeAssignedToOptionalArray() {
+    func testEdgesConstraintsCanBeAssignedToOptionalConstraints() {
         
         // given
         var constraints: EdgesConstraints?
@@ -336,10 +340,10 @@ class EdgesTests: ConstraintsTestCase {
         view.mkt.edges = superview.mkt.edges => constraints
         
         // then
-        XCTAssertEqual(constraints!.array.count, 4)
+        XCTAssertNotNil(constraints)
     }
     
-    func testEdgesConstraintsCanBeAssignedToForcedUnwrappedArray() {
+    func testEdgesConstraintsCanBeAssignedToForcedUnwrappedConstraints() {
         
         // given
         var constraints: EdgesConstraints!
@@ -350,7 +354,7 @@ class EdgesTests: ConstraintsTestCase {
         view.mkt.edges = superview.mkt.edges => constraints
         
         // then
-        XCTAssertEqual(constraints.array.count, 4)
+        XCTAssertNotNil(constraints)
     }
     
     // MARK: - Exclude edge
