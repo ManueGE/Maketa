@@ -20,7 +20,7 @@ public struct Edges {
     fileprivate var insets = UIEdgeInsets.zero
     fileprivate var relation = Maketa.Defaults.relation
     fileprivate var priority = Maketa.Defaults.priority
-    fileprivate var constraintsPointer: MultiTypePointer<[NSLayoutConstraint]>?
+    fileprivate var constraintsPointer: MultiTypePointer<EdgesConstraints>?
     
     fileprivate init(view: UIView, kind: Kind, edges: [Edge]) {
         self.view = view
@@ -183,21 +183,21 @@ public func - (edges: Edges, inset: MaketaCGFloatConvertible) -> Edges {
 }
 
 /// Saves the constraints added when the edge is applied into the given pointer
-public func => (edges: Edges, constraints: inout [NSLayoutConstraint]) -> Edges {
+public func => (edges: Edges, constraints: inout EdgesConstraints) -> Edges {
     var edges = edges
     edges.constraintsPointer = MultiTypePointer(&constraints)
     return edges
 }
 
 /// Saves the constraints added when the edge is applied into the given pointer
-public func => (edges: Edges, constraints: inout [NSLayoutConstraint]?) -> Edges {
+public func => (edges: Edges, constraints: inout EdgesConstraints?) -> Edges {
     var edges = edges
     edges.constraintsPointer = MultiTypePointer(withOptional: &constraints)
     return edges
 }
 
 /// Saves the constraints added when the edge is applied into the given pointer
-public func => (edges: Edges, constraints: inout [NSLayoutConstraint]!) -> Edges {
+public func => (edges: Edges, constraints: inout EdgesConstraints!) -> Edges {
     var edges = edges
     edges.constraintsPointer = MultiTypePointer(withForcedUnwrapped: &constraints)
     return edges
@@ -232,7 +232,60 @@ public extension Maketa {
     }
     
     private func setEdges(_ newValue: Edges) {
-        let constraints = newValue.edges.map { $0.constraint(view: view, with: newValue) }
+        let dictionary = newValue.edges.reduce([Edge: NSLayoutConstraint]()) { (result, edge) -> [Edge: NSLayoutConstraint] in
+            var result = result
+            result[edge] = edge.constraint(view: view, with: newValue)
+            return result
+        }
+        
+        let constraints = EdgesConstraints(dictionary: dictionary)
         newValue.constraintsPointer?.setPointee(constraints)
+    }
+}
+
+/// The object returned when the edge constraints are assigned.
+public struct EdgesConstraints {
+    
+    /// The constraint added for the left edge, if any
+    public let left: NSLayoutConstraint?
+    
+    /// The constraint added for the right edge, if any
+    public let right: NSLayoutConstraint?
+    
+    /// The constraint added for the leading edge, if any
+    public let leading: NSLayoutConstraint?
+    
+    /// The constraint added for the trailing edge, if any
+    public let trailing: NSLayoutConstraint?
+    
+    /// The constraint added for the top edge, if any
+    public let top: NSLayoutConstraint?
+    
+    /// The constraint added for the bottom edge, if any
+    public let bottom: NSLayoutConstraint?
+    
+    /// An array with all the constraints. It will just contain the no-null values.
+    /// The order will be left, right, leading, trailing, top, bottom
+    public var array: [NSLayoutConstraint] {
+        return [left, right, leading, trailing, top, bottom].compactMap { $0 }
+    }
+    
+    /// Creates a new instance
+    public init() {
+        self.left = nil
+        self.right = nil
+        self.leading = nil
+        self.trailing = nil
+        self.top = nil
+        self.bottom = nil
+    }
+    
+    fileprivate init(dictionary: [Edge: NSLayoutConstraint]) {
+        self.left = dictionary[.left]
+        self.right = dictionary[.right]
+        self.leading = dictionary[.leading]
+        self.trailing = dictionary[.trailing]
+        self.top = dictionary[.top]
+        self.bottom = dictionary[.bottom]
     }
 }
