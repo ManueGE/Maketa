@@ -194,7 +194,7 @@ view.mkt.edges = otherView.mkt.edges - .top
 view.mkt.edges = otherView.mkt.layoutDirectionMargins - .leading - .trailing
 ```
 
-The possible values are:  `.left`, `.right`, `.leading`, `.trailing`,  `.top`,  `.bottom`)
+The possible values are:  `.left`, `.right`, `.leading`, `.trailing`,  `.top`,  `.bottom`.
 
 #### Adding a padding
 You can also add padding into the edges. You can do it with the `-` and `+` operators and with a constant or a `UIEdgeInset`:
@@ -207,6 +207,20 @@ view.mkt.edges = otherView.mkt.edges - 20
 view.mkt.edges = otherView.mkt.layoutDirectionMargins - UIEdgeInsets(top: 10, left: 15, bottom: 20, right: 25)
 ```
 
+## `super`
+When you want to match some properties of a view to its superview, you can use the `super` property of `mkt`:
+
+```
+view.mkt.leading = view.mkt.super.leading
+
+view.mkt.edges = view.mkt.super.margins - 16
+
+view.mkt.size = view.mkt.super.size
+
+view.mkt.center = view.mkt.super.center
+```
+
+`mkt.super` returns a non-optional object so, if at the moment of calling it the view has not been added to a super-view, it will throw a fatal error.
 
 # Installation
 
@@ -227,7 +241,7 @@ import Maketa
 If you don’t have CocoaPods installed or integrated into your project, you can learn how to do so [here](http://cocoapods.org).
 
 ## License
-November is available under the [MIT license](LICENSE.md).
+Maketa is available under the [MIT license](LICENSE.md).
 
 ## Author
 [Manuel García-Estañ Martínez](http://github.com/ManueGE)  
