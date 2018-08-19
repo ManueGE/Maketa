@@ -34,7 +34,7 @@ class ViewController: UIViewController {
         let view1 = UIView()
         view.addSubview(view1)
         view1.backgroundColor = .red
-        view1.mkt.height = (150 & .defaultLow) => heightLayoutConstraint
+        view1.mkt.height = 150 & .defaultLow => heightLayoutConstraint
         view1.mkt.width = view1.mkt.height => constraint
         view1.mkt.centerX = view.mkt.centerX
         view1.mkt.centerY = view.mkt.centerY => centerYConstraint
@@ -59,8 +59,8 @@ class ViewController: UIViewController {
         let view4 = UIView()
         view3.addSubview(view4)
         view4.backgroundColor = .white
-        view4.mkt.center = (view3.mkt.center + 20) => globalCenterConstraints
-        view4.mkt.size = (view2.mkt.size - 10) => sizeConstraints
+        view4.mkt.center = view3.mkt.center + 20 => globalCenterConstraints
+        view4.mkt.size = view2.mkt.size - 10 => sizeConstraints
     }
 }
 

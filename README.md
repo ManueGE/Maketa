@@ -1,10 +1,10 @@
 # Maketa
 
-An operational API to manage *AutoLayout*.
+An operational API to manage **AutoLayout**.
 
 # Quick Start
 
-*Maketa* provides an operational, easy to read, easy to write, API to manage AutoLayout. 
+**Maketa** provides an operational, easy to read, easy to write, API to manage AutoLayout. 
 
 Some examples:
 
