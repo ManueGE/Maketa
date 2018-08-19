@@ -8,5 +8,5 @@
 
 import Foundation
 
-/// Operator that will be used to ssaveet some contraints into a pointer
-infix operator => : BitwiseShiftPrecedence
+/// Operator that will be used to set the contraints into a pointer
+infix operator => : NilCoalescingPrecedence
