@@ -53,7 +53,7 @@ class CenterTests: ConstraintsTestCase {
         view.mkt.center = superview.mkt.centerWithinMargins => constraints
         
         // then
-        XCTAssertEqual(superview.constraints.count, 2)
+        XCTAssertEqual(superview.constraints.count, 6)
         
         let constraintX = constraints.x
         XCTAssertTrue(constraintX.firstItem === view)
