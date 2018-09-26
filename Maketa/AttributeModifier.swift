@@ -11,7 +11,7 @@ import Foundation
 /// A protocol that must implement objects that can modify a layout attribute of a view
 public protocol AttributeModifier {
     /// returns the constraint that will be applied to modify the given attribute of the given view
-    func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint
+    func constraint(view: UIView, layoutAttribute: NSLayoutConstraint.Attribute) -> NSLayoutConstraint
     
     /// returns a new `AttributeModifier` which is the result of adding a constant to the receiver
     func add(_ constant: CGFloat) -> AttributeModifier
@@ -19,8 +19,8 @@ public protocol AttributeModifier {
     /// returns a new `AttributeModifier` which is the result of mutiplying the reciver by a multiplier
     func multiply(by multiplier: CGFloat) -> AttributeModifier
     
-    /// returns a new `AttributeModifier` which is the result of assigning a `NSLayoutRelation` to the receiver
-    func setRelation(_ relation: NSLayoutRelation) -> AttributeModifier
+    /// returns a new `AttributeModifier` which is the result of assigning a `NSLayoutConstraint.Relation` to the receiver
+    func setRelation(_ relation: NSLayoutConstraint.Relation) -> AttributeModifier
     
     /// returns a new `AttributeModifier` which is the result of assigning a `UILayoutPriority` to the receiver
     func setPriority(_ priority: UILayoutPriority) -> AttributeModifier
@@ -162,12 +162,12 @@ extension Maketa {
     
     // MARK: - Helper
     
-    private func constraint(_ modifier: AttributeModifier, with layoutAttribute: NSLayoutAttribute) {
+    private func constraint(_ modifier: AttributeModifier, with layoutAttribute: NSLayoutConstraint.Attribute) {
         modifier.constraint(view: view, layoutAttribute: layoutAttribute).activated()
     }
 }
 
-func assign(_ modifier: inout AttributeModifier, to value: AttributeModifier, with relation: NSLayoutRelation) {
+func assign(_ modifier: inout AttributeModifier, to value: AttributeModifier, with relation: NSLayoutConstraint.Relation) {
     switch relation {
     case .equal:
         modifier = value

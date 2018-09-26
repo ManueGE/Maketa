@@ -20,8 +20,8 @@ public protocol Size {
     /// returns a new `Size` which is the result of mutiplying the reciver by a multiplier
     func multiply(by multiplier: CGFloat) -> Size
     
-    /// returns a new `Size` which is the result of assigning a `NSLayoutRelation` to the receiver
-    func setRelation(_ relation: NSLayoutRelation) -> Size
+    /// returns a new `Size` which is the result of assigning a `NSLayoutConstraint.Relation` to the receiver
+    func setRelation(_ relation: NSLayoutConstraint.Relation) -> Size
     
     /// returns a new `Size` which is the result of assigning a `UILayoutPriority` to the receiver
     func setPriority(_ priority: UILayoutPriority) -> Size
@@ -47,7 +47,7 @@ public extension Size where Self: MaketaCGFloatConvertible {
         return CGSize(width: mktCGFloat * multiplier, height: mktCGFloat * multiplier)
     }
     
-    public func setRelation(_ relation: NSLayoutRelation) -> Size {
+    public func setRelation(_ relation: NSLayoutConstraint.Relation) -> Size {
         let size = CGSize(width: mktCGFloat, height: mktCGFloat)
         return FixedSize(size: size, relation: relation, priority: Maketa.Defaults.priority)
     }
@@ -73,7 +73,7 @@ extension CGSize: Size {
         return CGSize(width: width * multiplier, height: height * multiplier)
     }
     
-    public func setRelation(_ relation: NSLayoutRelation) -> Size {
+    public func setRelation(_ relation: NSLayoutConstraint.Relation) -> Size {
         return FixedSize(size: self, relation: relation, priority: Maketa.Defaults.priority)
     }
     
@@ -85,7 +85,7 @@ extension CGSize: Size {
 // MARK: - FixedSize
 private struct FixedSize: Size {
     let size: CGSize
-    let relation: NSLayoutRelation
+    let relation: NSLayoutConstraint.Relation
     let priority: UILayoutPriority
     
     func constraints(for view: UIView) -> SizeConstraints {
@@ -111,7 +111,7 @@ private struct FixedSize: Size {
         return FixedSize(size: size, relation: relation, priority: priority)
     }
     
-    func setRelation(_ relation: NSLayoutRelation) -> Size {
+    func setRelation(_ relation: NSLayoutConstraint.Relation) -> Size {
         return FixedSize(size: size, relation: relation, priority: priority)
     }
     
@@ -157,7 +157,7 @@ private struct ViewSize: Size {
         return size
     }
     
-    func setRelation(_ relation: NSLayoutRelation) -> Size {
+    func setRelation(_ relation: NSLayoutConstraint.Relation) -> Size {
         var value = self
         value.relation = relation
         return value
@@ -185,7 +185,7 @@ private struct SizeConstraintSetter: Size {
     
     func multiply(by multiplier: CGFloat) -> Size { fatalError("Can't modify a `Size` after it is assigned") }
     
-    func setRelation(_ relation: NSLayoutRelation) -> Size {
+    func setRelation(_ relation: NSLayoutConstraint.Relation) -> Size {
         var value = self
         value.original = original.setRelation(relation)
         return value
@@ -265,12 +265,6 @@ public func => (size: Size, constraints: inout SizeConstraints) -> Size {
 /// Saves the constraints added when the center is applied into the given pointer
 public func => (size: Size, constraints: inout SizeConstraints?) -> Size {
     let pointer = MultiTypePointer(withOptional: &constraints)
-    return SizeConstraintSetter(original: size, constraintPointer: pointer)
-}
-
-/// Saves the constraints added when the center is applied into the given pointer
-public func => (size: Size, constraints: inout SizeConstraints!) -> Size {
-    let pointer = MultiTypePointer(withForcedUnwrapped: &constraints)
     return SizeConstraintSetter(original: size, constraintPointer: pointer)
 }
 
