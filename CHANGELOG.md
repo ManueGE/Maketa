@@ -1,5 +1,8 @@
 # Changelog
 
+### 2.0.0 (25 September 2018)
+- Swift 4.2 
+
 ### 1.1.1 (19 August 2018)
 - Change the precedence of `=>` operator to decrease parenthesis when using it.
 
