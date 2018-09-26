@@ -13,7 +13,7 @@ import UIKit
 public class Maketa {
     
     internal struct Defaults {
-        static let relation = NSLayoutRelation.equal
+        static let relation = NSLayoutConstraint.Relation.equal
         static let priority = UILayoutPriority.required
     }
     

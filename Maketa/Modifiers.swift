@@ -63,11 +63,6 @@ public func => (modifier: AttributeModifier, constraint: inout NSLayoutConstrain
     return LayoutConstraintSetter(original: modifier, optionalConstraint: &constraint)
 }
 
-/// Saves the constraint added when the modifier is applied into the given pointer
-public func => (modifier: AttributeModifier, constraint: inout NSLayoutConstraint!) -> AttributeModifier {
-    return LayoutConstraintSetter(original: modifier, forcedOptionalConstraint: &constraint)
-}
-
 // MARK: - Constants
 extension CGFloat: AttributeModifier {}
 extension Float: AttributeModifier {}
@@ -75,7 +70,7 @@ extension Int: AttributeModifier {}
 extension Double: AttributeModifier {}
 
 public extension AttributeModifier where Self: MaketaCGFloatConvertible {
-    public func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint {
+    public func constraint(view: UIView, layoutAttribute: NSLayoutConstraint.Attribute) -> NSLayoutConstraint {
         let attribute = LayoutAttribute(view: nil, attribute: .notAnAttribute, constant: mktCGFloat)
         return attribute.constraint(view: view, layoutAttribute: layoutAttribute)
     }
@@ -88,7 +83,7 @@ public extension AttributeModifier where Self: MaketaCGFloatConvertible {
         return mktCGFloat * multiplier
     }
     
-    public func setRelation(_ relation: NSLayoutRelation) -> AttributeModifier {
+    public func setRelation(_ relation: NSLayoutConstraint.Relation) -> AttributeModifier {
         return LayoutAttribute(view: nil, attribute: .notAnAttribute, relation: relation, constant: mktCGFloat)
     }
     
@@ -99,15 +94,15 @@ public extension AttributeModifier where Self: MaketaCGFloatConvertible {
 
 struct LayoutAttribute: AttributeModifier {
     let view: UIView?
-    let attribute: NSLayoutAttribute
+    let attribute: NSLayoutConstraint.Attribute
     fileprivate(set) var constant: CGFloat
     fileprivate(set) var multiplier: CGFloat
-    fileprivate(set) var relation: NSLayoutRelation
+    fileprivate(set) var relation: NSLayoutConstraint.Relation
     fileprivate(set) var priority: UILayoutPriority
     
     init(view: UIView?,
-                     attribute: NSLayoutAttribute,
-                     relation: NSLayoutRelation = Maketa.Defaults.relation,
+                     attribute: NSLayoutConstraint.Attribute,
+                     relation: NSLayoutConstraint.Relation = Maketa.Defaults.relation,
                      priority: UILayoutPriority = Maketa.Defaults.priority,
                      constant: CGFloat = 0,
                      multiplier: CGFloat = 1) {
@@ -120,7 +115,7 @@ struct LayoutAttribute: AttributeModifier {
         self.multiplier = multiplier
     }
     
-    func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint {
+    func constraint(view: UIView, layoutAttribute: NSLayoutConstraint.Attribute) -> NSLayoutConstraint {
         let constraint = NSLayoutConstraint(item: view,
                                             attribute: layoutAttribute,
                                             relatedBy: relation,
@@ -144,7 +139,7 @@ struct LayoutAttribute: AttributeModifier {
         return modifier
     }
     
-    func setRelation(_ relation: NSLayoutRelation) -> AttributeModifier {
+    func setRelation(_ relation: NSLayoutConstraint.Relation) -> AttributeModifier {
         var modifier = self
         modifier.relation = relation
         return modifier
@@ -171,12 +166,7 @@ struct LayoutConstraintSetter: AttributeModifier {
         self.constraintPointer = MultiTypePointer(withOptional: &optionalConstraint)
     }
     
-    init(original: AttributeModifier, forcedOptionalConstraint: inout NSLayoutConstraint!) {
-        self.original = original
-        self.constraintPointer = MultiTypePointer(withForcedUnwrapped: &forcedOptionalConstraint)
-    }
-    
-    func constraint(view: UIView, layoutAttribute: NSLayoutAttribute) -> NSLayoutConstraint {
+    func constraint(view: UIView, layoutAttribute: NSLayoutConstraint.Attribute) -> NSLayoutConstraint {
         let constraint = original.constraint(view: view, layoutAttribute: layoutAttribute)
         constraintPointer.setPointee(constraint)
         return constraint
@@ -188,7 +178,7 @@ struct LayoutConstraintSetter: AttributeModifier {
     
     func setPriority(_ priority: UILayoutPriority) -> AttributeModifier { fatalError("Can't modify a `AttributeModifier` after it is assigned") }
     
-    func setRelation(_ relation: NSLayoutRelation) -> AttributeModifier {
+    func setRelation(_ relation: NSLayoutConstraint.Relation) -> AttributeModifier {
         var modifier = self
         modifier.original = original.setRelation(relation)
         return modifier

@@ -94,13 +94,6 @@ public func => (center: Center, constraints: inout CenterConstraints?) -> Center
     return center
 }
 
-/// Saves the constraints added when the center is applied into the given pointer
-public func => (center: Center, constraints: inout CenterConstraints!) -> Center {
-    var center = center
-    center.constraintsPointer = MultiTypePointer(withForcedUnwrapped: &constraints)
-    return center
-}
-
 public extension Maketa {
     /// The center along the x and y axis of the object’s alignment rectangle
     public var center: Center {

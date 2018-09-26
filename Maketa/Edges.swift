@@ -185,13 +185,6 @@ public func => (edges: Edges, constraints: inout EdgesConstraints?) -> Edges {
     return edges
 }
 
-/// Saves the constraints added when the edge is applied into the given pointer
-public func => (edges: Edges, constraints: inout EdgesConstraints!) -> Edges {
-    var edges = edges
-    edges.constraintsPointer = MultiTypePointer(withForcedUnwrapped: &constraints)
-    return edges
-}
-
 // MARK: - Maketa extension
 
 public extension Maketa {
