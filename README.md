@@ -1,5 +1,7 @@
 # Maketa
 
+![](https://cocoapod-badges.herokuapp.com/v/Maketa/badge.png)
+
 An operational API to manage **AutoLayout**.
 
 # Quick Start
@@ -18,10 +20,10 @@ view.mkt.width = otherView.mkt.width
 view.mkt.size = otherView.mkt.size * 0.5
 
 // Center views in another view
-view.center = view.mkt.super.center
+view.center = Supreview.center
 
 // Make edges to match other edges or margins
-view.mkt.edges = view.mkt.super.edges - UIContentInset(top: 16, left: 16, bottom: 16, right: 16)
+view.mkt.edges = Superview.edges - UIContentInset(top: 16, left: 16, bottom: 16, right: 16)
 view.mkt.edges = otherView.mkt.margins - .top
 ```
 
@@ -53,10 +55,10 @@ var constraint = NSLayoutConstraint.empty
 view.mkt.height = 10 => constraint
 
 var constraint: NSLayoutConstraint?
-view.mkt.top = (view.mkt.super.top + 50) => constraint
+view.mkt.top = (Superview.top + 50) => constraint
 
 var constraints = CenterConstraints()
-view.mkt.center = view.mkt.super.center => constraints
+view.mkt.center = Superview.center => constraints
 
 var constraints: EdgesConstraints?
 view.mkt.edges = otherView.mkt.margins => constraints
@@ -109,7 +111,7 @@ Using the `=>` operator will return an instance of `CenterConstraints` which can
  
 ```swift
 var constraints: CenterConstraints?
-view.mkt.center = view.mkt.super.center => constraints
+view.mkt.center = Superview.center => constraints
 ```
 
 #### Adding an offset
@@ -196,7 +198,7 @@ Using the `=>` operator will return an instance of `EdgesConstraints`. You can g
 
 ```swift
 var constraints: EdgesConstraints?
-view.mkt.edges = view.mkt.super.edges => constraints
+view.mkt.edges = Superview.edges => constraints
 ```
 
 #### Excluding edges
