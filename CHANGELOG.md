@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.1.0 (26 October 2018)
+- Deprecated  `mkt.super`, added `Superview` instead. To migrate old code, follow the following pattern:
+    - `view.left = view.mkt.super.left` ->  `view.left = Superview.left`.  
+
 ### 2.0.1 (26 October 2018)
 - Fix bug where `translatesAutoresizingMaskIntoConstraints` is set to false in views that didn't have it enabled before. 
 
