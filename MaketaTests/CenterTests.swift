@@ -406,7 +406,7 @@ class CenterTests: ConstraintsTestCase {
 	}
 	
 	// MARK: - Super
-	func testSuperCenterCanBeSet() {
+	func testCenterCanBeSetWithSuper() {
 		// given
 		var constraints = CenterConstraints()
 		
@@ -436,7 +436,7 @@ class CenterTests: ConstraintsTestCase {
 		XCTAssertEqual(constraintY.multiplier, 1)
 	}
 	
-	func testSuperCenterWithinMarginCanBeSet() {
+	func testCenterWithinMarginCanBeSetWithSuper() {
 		// given
 		var constraints = CenterConstraints()
 		

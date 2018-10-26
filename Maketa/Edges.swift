@@ -13,7 +13,7 @@ public struct Edges {
     fileprivate enum Kind {
         case edges, margins
     }
-    fileprivate let view: UIView
+    fileprivate let view: View
     fileprivate let kind: Kind
     
     fileprivate var edges: [Edge]
@@ -22,7 +22,7 @@ public struct Edges {
     fileprivate var priority = Maketa.Defaults.priority
     fileprivate var constraintsPointer: MultiTypePointer<EdgesConstraints>?
     
-    fileprivate init(view: UIView, kind: Kind, edges: [Edge]) {
+    fileprivate init(view: View, kind: Kind, edges: [Edge]) {
         self.view = view
         self.kind = kind
         self.edges = edges
@@ -36,76 +36,77 @@ public enum Edge: Equatable {
     static fileprivate let allRelativeToLayoutDirection = [Edge.leading, .trailing, .top, .bottom]
     
     fileprivate func constraint(view: UIView, with edges: Edges) -> NSLayoutConstraint {
-        let layout = view.mkt
+        let mkt = view.mkt
         var constraint = NSLayoutConstraint.empty
         let relation = edges.relation
         let priority = edges.priority
+		let targetView = edges.view.view(for: view)
         
         switch (self, edges.kind) {
         // Left
         case (.left, .edges):
-            assign(&layout.left,
-                to: ((edges.view.mkt.left - edges.insets.left) & priority) => constraint,
+            assign(&mkt.left,
+                to: ((targetView.mkt.left - edges.insets.left) & priority) => constraint,
                 with: relation)
             
         case (.left, .margins):
-            assign(&layout.leftMargin,
-                to: ((edges.view.mkt.leftMargin - edges.insets.left) & priority) => constraint,
+            assign(&mkt.leftMargin,
+                to: ((targetView.mkt.leftMargin - edges.insets.left) & priority) => constraint,
                 with: relation)
             
         // Right
         case (.right, .edges):
-            assign(&layout.right,
-                to: ((edges.view.mkt.right + edges.insets.right) & priority) => constraint,
+            assign(&mkt.right,
+                to: ((targetView.mkt.right + edges.insets.right) & priority) => constraint,
                 with: relation)
             
         case (.right, .margins):
-            assign(&layout.rightMargin,
-                to: ((edges.view.mkt.rightMargin + edges.insets.right) & priority) => constraint,
+            assign(&mkt.rightMargin,
+                to: ((targetView.mkt.rightMargin + edges.insets.right) & priority) => constraint,
                 with: relation)
             
         // Leading
         case (.leading, .edges):
-            assign(&layout.leading,
-                to: ((edges.view.mkt.leading - edges.insets.left) & priority) => constraint,
+            assign(&mkt.leading,
+                to: ((targetView.mkt.leading - edges.insets.left) & priority) => constraint,
                 with: relation)
             
         case (.leading, .margins):
-            assign(&layout.leadingMargin,
-                to: ((edges.view.mkt.leadingMargin - edges.insets.left) & priority) => constraint,
+            assign(&mkt.leadingMargin,
+                to: ((targetView.mkt.leadingMargin - edges.insets.left) & priority) => constraint,
                 with: relation)
             
         // Trailing
         case (.trailing, .edges):
-            assign(&layout.trailing,
-                to: ((edges.view.mkt.trailing + edges.insets.right) & priority) => constraint,
+            assign(&mkt.trailing,
+                to: ((targetView.mkt.trailing + edges.insets.right) & priority) => constraint,
                 with: relation)
             
         case (.trailing, .margins):
-            assign(&layout.trailingMargin,
-                to: ((edges.view.mkt.trailingMargin + edges.insets.right) & priority) => constraint,
+            assign(&mkt.trailingMargin,
+                to: ((targetView.mkt.trailingMargin + edges.insets.right) & priority) => constraint,
                 with: relation)
             
         // Top
         case (.top, .edges):
-            assign(&layout.top,
-                to: ((edges.view.mkt.top - edges.insets.top) & priority) => constraint,
+            assign(&mkt.top,
+                to: ((targetView.mkt.top - edges.insets.top) & priority) => constraint,
                 with: relation)
             
         case (.top, .margins):
-            assign(&layout.topMargin,
-                to: ((edges.view.mkt.topMargin - edges.insets.top) & priority) => constraint,
+            assign(&mkt.topMargin,
+                to: ((targetView.mkt.topMargin - edges.insets.top) & priority) => constraint,
                 with: relation)
             
         // Bottom
         case (.bottom, .edges):
-            assign(&layout.bottom,
-                to: ((edges.view.mkt.bottom + edges.insets.bottom) & priority) => constraint,
+            assign(&mkt.bottom,
+                to: ((targetView.mkt.bottom + edges.insets.bottom) & priority) => constraint,
                 with: relation)
             
         case (.bottom, .margins):
-            assign(&layout.bottomMargin,
-                to: ((edges.view.mkt.bottomMargin + edges.insets.bottom) & priority) => constraint,
+            assign(&mkt.bottomMargin,
+                to: ((targetView.mkt.bottomMargin + edges.insets.bottom) & priority) => constraint,
                 with: relation)
         }
         
@@ -192,7 +193,7 @@ public extension Maketa {
     /// returns the edges of the receiver (left, right, top, bottom)
     public var edges: Edges {
         get {
-            return Edges(view: view, kind: .edges, edges: Edge.all)
+            return Edges(view: .view(view), kind: .edges, edges: Edge.all)
         }
         set {
             setEdges(newValue)
@@ -201,16 +202,16 @@ public extension Maketa {
     
     /// returns the edges of the receiver relative to the view margins (left, right, top, bottom)
     public var margins: Edges {
-        return Edges(view: view, kind: .margins, edges: Edge.all)
+        return Edges(view: .view(view), kind: .margins, edges: Edge.all)
     }
     
     /// returns the edges of the receiver using the interface layout direction (leading, trailing, top, bottom)
     public var layoutDirectionEdges: Edges {
-        return Edges(view: view, kind: .edges, edges: Edge.allRelativeToLayoutDirection)
+        return Edges(view: .view(view), kind: .edges, edges: Edge.allRelativeToLayoutDirection)
     }
     /// returns the margins of the receiver using the interface layout direction (leading, trailing, top, bottom)
     public var layoutDirectionMargins: Edges {
-        return Edges(view: view, kind: .margins, edges: Edge.allRelativeToLayoutDirection)
+        return Edges(view: .view(view), kind: .margins, edges: Edge.allRelativeToLayoutDirection)
     }
     
     private func setEdges(_ newValue: Edges) {
@@ -225,6 +226,30 @@ public extension Maketa {
         let constraints = EdgesConstraints(dictionary: dictionary)
         newValue.constraintsPointer?.setPointee(constraints)
     }
+}
+
+// MARK: - Super extension
+
+public extension Super {
+	
+	/// returns the edges of the receiver (left, right, top, bottom)
+	public static var edges: Edges {
+		return Edges(view: .superview, kind: .edges, edges: Edge.all)
+	}
+	
+	/// returns the edges of the receiver relative to the view margins (left, right, top, bottom)
+	public static var margins: Edges {
+		return Edges(view: .superview, kind: .margins, edges: Edge.all)
+	}
+	
+	/// returns the edges of the receiver using the interface layout direction (leading, trailing, top, bottom)
+	public static var layoutDirectionEdges: Edges {
+		return Edges(view: .superview, kind: .edges, edges: Edge.allRelativeToLayoutDirection)
+	}
+	/// returns the margins of the receiver using the interface layout direction (leading, trailing, top, bottom)
+	public static var layoutDirectionMargins: Edges {
+		return Edges(view: .superview, kind: .margins, edges: Edge.allRelativeToLayoutDirection)
+	}
 }
 
 /// The object returned when the edge constraints are assigned.
