@@ -17,14 +17,14 @@ enum View {
 	case superview
 	
 	/// returns the view that must be used
-	func view(for view: UIView) -> UIView {
+	func target(for view: UIView) -> UIView {
 		switch self {
 		case let .view(view):
 			return view
 			
 		case .superview:
 			guard let superview = view.superview else {
-				fatalError("Can't use `Super` on \(view) because it has not a superview")
+				fatalError("Can't use `Superview` on \(view) because it has not a superview")
 			}
 			return superview
 		}

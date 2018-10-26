@@ -1,5 +1,5 @@
 //
-//  Super.swift
+//  Superview.swift
 //  Maketa
 //
 //  Created by Manuel García-Estañ on 26/10/2018.
@@ -8,4 +8,5 @@
 
 import Foundation
 
-public struct Super {}
+/// A struc that can be used to refer the receiver view's superview 
+public struct Superview {}

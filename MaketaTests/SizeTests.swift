@@ -994,7 +994,7 @@ class SizeTests: ConstraintsTestCase {
 		XCTAssertFalse(otherView.translatesAutoresizingMaskIntoConstraints)
 	}
 	
-	// MARK: - Super
+	// MARK: - Superview
 	func testViewCanSetSizeWithSuperSize() {
 		// given
 		var constraints = SizeConstraints()
@@ -1005,7 +1005,7 @@ class SizeTests: ConstraintsTestCase {
 		superview.addSubview(view)
 		
 		// when
-		view.mkt.size = Super.size => constraints
+		view.mkt.size = Superview.size => constraints
 		
 		// then
 		XCTAssertEqual(superview.constraints.count, previousConstraintsCount + 2)

@@ -133,7 +133,7 @@ private struct ViewSize: Size {
     }
     
     func constraints(for view: UIView) -> SizeConstraints {
-		let targetView = self.view.view(for: view)
+		let targetView = self.view.target(for: view)
 		
         var wConstraint = NSLayoutConstraint.empty
         let wValue = ((targetView.mkt.width * multiplier + offset.horizontal) & priority) => wConstraint
@@ -305,8 +305,8 @@ public extension Maketa {
 }
 
 
-// MARK: - Super extension
-public extension Super {
+// MARK: - Superview extension
+public extension Superview {
 	
 	/// returns the size of the receiver
 	public static var size: Size {

@@ -669,7 +669,7 @@ class EdgesTests: ConstraintsTestCase {
 		XCTAssertFalse(otherView.translatesAutoresizingMaskIntoConstraints)
 	}
 	
-	// MARK: - Super
+	// MARK: - Superview
 	func testEdgesCanBeSetWithSuperEdges() {
 		// given
 		var constraints = EdgesConstraints()
@@ -677,7 +677,7 @@ class EdgesTests: ConstraintsTestCase {
 		superview.addSubview(view)
 		
 		// when
-		view.mkt.edges = Super.edges => constraints
+		view.mkt.edges = Superview.edges => constraints
 		
 		// then
 		XCTAssertEqual(superview.constraints.count, 4)
@@ -734,7 +734,7 @@ class EdgesTests: ConstraintsTestCase {
 		superview.addSubview(view)
 		
 		// when
-		view.mkt.edges = Super.margins => constraints
+		view.mkt.edges = Superview.margins => constraints
 		
 		// then
 		XCTAssertEqual(superview.constraints.count, 8)

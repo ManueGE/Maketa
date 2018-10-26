@@ -1,5 +1,5 @@
 //
-//  Super+Modifiers.swift
+//  Superview+Modifiers.swift
 //  Maketa
 //
 //  Created by Manuel García-Estañ on 26/10/2018.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Super {
+extension Superview {
 	/// The left side of the object’s alignment rectangle.
 	public static var left: AttributeModifier {
 		return LayoutAttribute(view: .superview, attribute: .left)

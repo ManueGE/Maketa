@@ -32,7 +32,7 @@ class Super_AttributeModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.mkt.left = Super.left => constraint
+        view.mkt.left = Superview.left => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -51,7 +51,7 @@ class Super_AttributeModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.mkt.right = Super.right => constraint
+        view.mkt.right = Superview.right => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -70,7 +70,7 @@ class Super_AttributeModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.mkt.top = Super.top => constraint
+        view.mkt.top = Superview.top => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -89,7 +89,7 @@ class Super_AttributeModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.mkt.bottom = Super.bottom => constraint
+        view.mkt.bottom = Superview.bottom => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -108,7 +108,7 @@ class Super_AttributeModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.mkt.leading = Super.leading => constraint
+        view.mkt.leading = Superview.leading => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -127,7 +127,7 @@ class Super_AttributeModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.mkt.trailing = Super.trailing => constraint
+        view.mkt.trailing = Superview.trailing => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -146,7 +146,7 @@ class Super_AttributeModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.mkt.width = Super.width => constraint
+        view.mkt.width = Superview.width => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -165,7 +165,7 @@ class Super_AttributeModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.mkt.height = Super.height => constraint
+        view.mkt.height = Superview.height => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -184,7 +184,7 @@ class Super_AttributeModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.mkt.centerX = Super.centerX => constraint
+        view.mkt.centerX = Superview.centerX => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -203,7 +203,7 @@ class Super_AttributeModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.mkt.centerY = Super.centerY => constraint
+        view.mkt.centerY = Superview.centerY => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -222,7 +222,7 @@ class Super_AttributeModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.mkt.lastBaseline = Super.lastBaseline => constraint
+        view.mkt.lastBaseline = Superview.lastBaseline => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -241,7 +241,7 @@ class Super_AttributeModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.mkt.firstBaseline = Super.firstBaseline => constraint
+        view.mkt.firstBaseline = Superview.firstBaseline => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -260,7 +260,7 @@ class Super_AttributeModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.mkt.leftMargin = Super.leftMargin => constraint
+        view.mkt.leftMargin = Superview.leftMargin => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -279,7 +279,7 @@ class Super_AttributeModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.mkt.rightMargin = Super.rightMargin => constraint
+        view.mkt.rightMargin = Superview.rightMargin => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -298,7 +298,7 @@ class Super_AttributeModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.mkt.topMargin = Super.topMargin => constraint
+        view.mkt.topMargin = Superview.topMargin => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -317,7 +317,7 @@ class Super_AttributeModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.mkt.bottomMargin = Super.bottomMargin => constraint
+        view.mkt.bottomMargin = Superview.bottomMargin => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -336,7 +336,7 @@ class Super_AttributeModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.mkt.leadingMargin = Super.leadingMargin => constraint
+        view.mkt.leadingMargin = Superview.leadingMargin => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -355,7 +355,7 @@ class Super_AttributeModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.mkt.trailingMargin = Super.trailingMargin => constraint
+        view.mkt.trailingMargin = Superview.trailingMargin => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -374,7 +374,7 @@ class Super_AttributeModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.mkt.centerXWithinMargins = Super.centerXWithinMargins => constraint
+        view.mkt.centerXWithinMargins = Superview.centerXWithinMargins => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)
@@ -393,7 +393,7 @@ class Super_AttributeModifierTests: ConstraintsTestCase {
         var constraint = NSLayoutConstraint.empty
         
         // when
-        view.mkt.centerYWithinMargins = Super.centerYWithinMargins => constraint
+        view.mkt.centerYWithinMargins = Superview.centerYWithinMargins => constraint
         
         // then
         XCTAssertTrue(constraint.firstItem === view)

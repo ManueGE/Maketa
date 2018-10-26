@@ -40,7 +40,7 @@ public enum Edge: Equatable {
         var constraint = NSLayoutConstraint.empty
         let relation = edges.relation
         let priority = edges.priority
-		let targetView = edges.view.view(for: view)
+		let targetView = edges.view.target(for: view)
         
         switch (self, edges.kind) {
         // Left
@@ -228,9 +228,9 @@ public extension Maketa {
     }
 }
 
-// MARK: - Super extension
+// MARK: - Superview extension
 
-public extension Super {
+public extension Superview {
 	
 	/// returns the edges of the receiver (left, right, top, bottom)
 	public static var edges: Edges {

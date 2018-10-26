@@ -405,7 +405,7 @@ class CenterTests: ConstraintsTestCase {
 		XCTAssertFalse(otherView.translatesAutoresizingMaskIntoConstraints)
 	}
 	
-	// MARK: - Super
+	// MARK: - Superview
 	func testCenterCanBeSetWithSuper() {
 		// given
 		var constraints = CenterConstraints()
@@ -414,7 +414,7 @@ class CenterTests: ConstraintsTestCase {
 		superview.addSubview(view)
 		
 		// when
-		view.mkt.center = Super.center => constraints
+		view.mkt.center = Superview.center => constraints
 		
 		// then
 		XCTAssertEqual(superview.constraints.count, 2)
@@ -444,7 +444,7 @@ class CenterTests: ConstraintsTestCase {
 		superview.addSubview(view)
 		
 		// when
-		view.mkt.center = Super.centerWithinMargins => constraints
+		view.mkt.center = Superview.centerWithinMargins => constraints
 		
 		// then
 		XCTAssertEqual(superview.constraints.count, 6)

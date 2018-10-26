@@ -119,7 +119,7 @@ struct LayoutAttribute: AttributeModifier {
         let constraint = NSLayoutConstraint(item: view,
                                             attribute: layoutAttribute,
                                             relatedBy: relation,
-                                            toItem: self.view?.view(for: view),
+                                            toItem: self.view?.target(for: view),
                                             attribute: attribute,
                                             multiplier: multiplier,
                                             constant: constant)

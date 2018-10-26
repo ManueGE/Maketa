@@ -102,7 +102,7 @@ public extension Maketa {
         }
         set {
             view.preparedForAutolayout()
-			let targetView = newValue.view.view(for: view)
+			let targetView = newValue.view.target(for: view)
 			
             let useMargins = newValue.withinMargins
             let relation = newValue.relation
@@ -133,7 +133,7 @@ public extension Maketa {
     }
 }
 
-extension Super {
+extension Superview {
 	/// The center along the x and y axis of the object’s alignment rectangle
 	public static var center: Center {
 		return Center(view: .superview, withinMargins: false)
