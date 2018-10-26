@@ -214,6 +214,8 @@ public extension Maketa {
     }
     
     private func setEdges(_ newValue: Edges) {
+		view.preparedForAutolayout()
+		
         let dictionary = newValue.edges.reduce([Edge: NSLayoutConstraint]()) { (result, edge) -> [Edge: NSLayoutConstraint] in
             var result = result
             result[edge] = edge.constraint(view: view, with: newValue)

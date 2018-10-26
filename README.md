@@ -15,7 +15,7 @@ view.mkt.left = otherView.mkt.right + 10
 // Set sizing attributes directly or relative to other view size
 view.mkt.height = 100
 view.mkt.width = otherView.mkt.width
-view.size = otherView.mkt.size * 0.5
+view.mkt.size = otherView.mkt.size * 0.5
 
 // Center views in another view
 view.center = view.mkt.super.center
@@ -24,6 +24,8 @@ view.center = view.mkt.super.center
 view.mkt.edges = view.mkt.super.edges - UIContentInset(top: 16, left: 16, bottom: 16, right: 16)
 view.mkt.edges = otherView.mkt.margins - .top
 ```
+
+> **Note**: Autolayout will be automatically activated in writing operations, but not in reading operations. In the examples above, autolayout will be activated in `view` but not in `otherView`.  
 
 ### `greaterOrEqual`  and `lessOrEqual`
 

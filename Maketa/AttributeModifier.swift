@@ -163,6 +163,7 @@ extension Maketa {
     // MARK: - Helper
     
     private func constraint(_ modifier: AttributeModifier, with layoutAttribute: NSLayoutConstraint.Attribute) {
+		view.preparedForAutolayout()
         modifier.constraint(view: view, layoutAttribute: layoutAttribute).activated()
     }
 }

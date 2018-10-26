@@ -1,5 +1,16 @@
 # Changelog
 
+### 2.0.1 (26 October 2018)
+- Fix bug where `translatesAutoresizingMaskIntoConstraints` is set to false in views that didn't have it enabled before. 
+
+From now, if you have this expresion:
+
+```
+aView.mkt.left = otherView.mkt.left
+```
+
+Autolayout will be only activated in `aView`, but `otherView` will remain as it was.
+
 ### 2.0.0 (25 September 2018)
 - Swift 4.2 
 
