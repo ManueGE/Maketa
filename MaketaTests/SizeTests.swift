@@ -953,4 +953,44 @@ class SizeTests: ConstraintsTestCase {
         XCTAssertEqual(constraintHeight.relation, .equal)
         XCTAssertEqual(constraintHeight.priority, .required)
     }
+	
+	// MARK: Autolayout not changed on right side
+	func testAutolayoutIsNotActivatedOnRightView() {
+		// given
+		let view = UIView()
+		superview.addSubview(view)
+		
+		let otherView = UIView()
+		superview.addSubview(otherView)
+		
+		XCTAssertTrue(view.translatesAutoresizingMaskIntoConstraints)
+		XCTAssertTrue(otherView.translatesAutoresizingMaskIntoConstraints)
+		
+		// when
+		view.mkt.size = otherView.mkt.size
+		
+		// then
+		XCTAssertFalse(view.translatesAutoresizingMaskIntoConstraints)
+		XCTAssertTrue(otherView.translatesAutoresizingMaskIntoConstraints)
+	}
+	
+	func testAutolayoutIsNotDeactivatedOnRightView() {
+		// given
+		let view = UIView()
+		superview.addSubview(view)
+		
+		let otherView = UIView()
+		otherView.preparedForAutolayout()
+		superview.addSubview(otherView)
+		
+		XCTAssertTrue(view.translatesAutoresizingMaskIntoConstraints)
+		XCTAssertFalse(otherView.translatesAutoresizingMaskIntoConstraints)
+		
+		// when
+		view.mkt.size = otherView.mkt.size
+		
+		// then
+		XCTAssertFalse(view.translatesAutoresizingMaskIntoConstraints)
+		XCTAssertFalse(otherView.translatesAutoresizingMaskIntoConstraints)
+	}
 }

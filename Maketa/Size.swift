@@ -295,6 +295,9 @@ public extension Maketa {
     /// returns the size of the receiver
     public var size: Size {
         get { return ViewSize(view: view) }
-        set { newValue.constraints(for: view) }
+        set {
+			view.preparedForAutolayout()
+			newValue.constraints(for: view)
+		}
     }
 }
