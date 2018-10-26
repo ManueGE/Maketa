@@ -20,7 +20,8 @@ view.mkt.width = otherView.mkt.width
 view.mkt.size = otherView.mkt.size * 0.5
 
 // Center views in another view
-view.center = Supreview.center
+view.mkt.center = otherView.mkt.center
+view.mkt.center = Superview.center
 
 // Make edges to match other edges or margins
 view.mkt.edges = Superview.edges - UIContentInset(top: 16, left: 16, bottom: 16, right: 16)
