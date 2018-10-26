@@ -404,4 +404,65 @@ class CenterTests: ConstraintsTestCase {
 		XCTAssertFalse(view.translatesAutoresizingMaskIntoConstraints)
 		XCTAssertFalse(otherView.translatesAutoresizingMaskIntoConstraints)
 	}
+	
+	// MARK: - Super
+	func testSuperCenterCanBeSet() {
+		// given
+		var constraints = CenterConstraints()
+		
+		let view = UIView()
+		superview.addSubview(view)
+		
+		// when
+		view.mkt.center = Super.center => constraints
+		
+		// then
+		XCTAssertEqual(superview.constraints.count, 2)
+		
+		let constraintX = constraints.x
+		XCTAssertTrue(constraintX.firstItem === view)
+		XCTAssertTrue(constraintX.secondItem === superview)
+		XCTAssertEqual(constraintX.firstAttribute, .centerX)
+		XCTAssertEqual(constraintX.secondAttribute, .centerX)
+		XCTAssertEqual(constraintX.constant, 0)
+		XCTAssertEqual(constraintX.multiplier, 1)
+		
+		let constraintY = constraints.y
+		XCTAssertTrue(constraintY.firstItem === view)
+		XCTAssertTrue(constraintY.secondItem === superview)
+		XCTAssertEqual(constraintY.firstAttribute, .centerY)
+		XCTAssertEqual(constraintY.secondAttribute, .centerY)
+		XCTAssertEqual(constraintY.constant, 0)
+		XCTAssertEqual(constraintY.multiplier, 1)
+	}
+	
+	func testSuperCenterWithinMarginCanBeSet() {
+		// given
+		var constraints = CenterConstraints()
+		
+		let view = UIView()
+		superview.addSubview(view)
+		
+		// when
+		view.mkt.center = Super.centerWithinMargins => constraints
+		
+		// then
+		XCTAssertEqual(superview.constraints.count, 6)
+		
+		let constraintX = constraints.x
+		XCTAssertTrue(constraintX.firstItem === view)
+		XCTAssertTrue(constraintX.secondItem === superview)
+		XCTAssertEqual(constraintX.firstAttribute, .centerXWithinMargins)
+		XCTAssertEqual(constraintX.secondAttribute, .centerXWithinMargins)
+		XCTAssertEqual(constraintX.constant, 0)
+		XCTAssertEqual(constraintX.multiplier, 1)
+		
+		let constraintY = constraints.y
+		XCTAssertTrue(constraintY.firstItem === view)
+		XCTAssertTrue(constraintY.secondItem === superview)
+		XCTAssertEqual(constraintY.firstAttribute, .centerYWithinMargins)
+		XCTAssertEqual(constraintY.secondAttribute, .centerYWithinMargins)
+		XCTAssertEqual(constraintY.constant, 0)
+		XCTAssertEqual(constraintY.multiplier, 1)
+	}
 }

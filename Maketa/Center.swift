@@ -10,14 +10,14 @@ import UIKit
 
 /// A struct used to match the constraints associated to the center of a `UIView` to the center of another `UIView`.
 public struct Center {
-    fileprivate let view: UIView
+    fileprivate let view: View
     fileprivate var offset = UIOffset.zero
     fileprivate var withinMargins: Bool
     fileprivate var relation = Maketa.Defaults.relation
     fileprivate var priority = Maketa.Defaults.priority
     fileprivate var constraintsPointer: MultiTypePointer<CenterConstraints>?
     
-    fileprivate init(view: UIView, withinMargins: Bool) {
+    fileprivate init(view: View, withinMargins: Bool) {
         self.view = view
         self.withinMargins = withinMargins
     }
@@ -98,20 +98,21 @@ public extension Maketa {
     /// The center along the x and y axis of the object’s alignment rectangle
     public var center: Center {
         get {
-            return Center(view: view, withinMargins: false)
+            return Center(view: .view(view), withinMargins: false)
         }
         set {
             view.preparedForAutolayout()
+			let targetView = newValue.view.view(for: view)
 			
             let useMargins = newValue.withinMargins
             let relation = newValue.relation
             
             var xConstraint = NSLayoutConstraint.empty
-            let xAttribute = useMargins ? newValue.view.mkt.centerXWithinMargins : newValue.view.mkt.centerX
+            let xAttribute = useMargins ? targetView.mkt.centerXWithinMargins : targetView.mkt.centerX
             let xValue = ((xAttribute + newValue.offset.horizontal) & newValue.priority) => xConstraint
             
             var yConstraint = NSLayoutConstraint.empty
-            let yAttribute = useMargins ? newValue.view.mkt.centerYWithinMargins : newValue.view.mkt.centerY
+            let yAttribute = useMargins ? targetView.mkt.centerYWithinMargins : targetView.mkt.centerY
             let yValue = ((yAttribute + newValue.offset.vertical) & newValue.priority) => yConstraint
             
             if useMargins {
@@ -128,8 +129,20 @@ public extension Maketa {
     
     /// The center along the x and y between the object’s left and right margin
     public var centerWithinMargins: Center {
-        return Center(view: view, withinMargins: true)
+        return Center(view: .view(view), withinMargins: true)
     }
+}
+
+extension Super {
+	/// The center along the x and y axis of the object’s alignment rectangle
+	public static var center: Center {
+		return Center(view: .superview, withinMargins: false)
+	}
+	
+	/// The center along the x and y between the object’s left and right margin
+	public static var centerWithinMargins: Center {
+		return Center(view: .superview, withinMargins: true)
+	}
 }
 
 /// The object returned when the center constraints are assigned.
