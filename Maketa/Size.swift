@@ -122,22 +122,24 @@ private struct FixedSize: Size {
 
 // MARK: - Other view
 private struct ViewSize: Size {
-    let view: UIView
+    let view: View
     var offset: UIOffset = UIOffset(horizontal: 0, vertical: 0)
     var multiplier: CGFloat = 1
     private(set) var relation = Maketa.Defaults.relation
     private(set) var priority = Maketa.Defaults.priority
     
-    init(view: UIView) {
+    init(view: View) {
         self.view = view
     }
     
     func constraints(for view: UIView) -> SizeConstraints {
+		let targetView = self.view.view(for: view)
+		
         var wConstraint = NSLayoutConstraint.empty
-        let wValue = ((self.view.mkt.width * multiplier + offset.horizontal) & priority) => wConstraint
+        let wValue = ((targetView.mkt.width * multiplier + offset.horizontal) & priority) => wConstraint
         
         var hConstraint = NSLayoutConstraint.empty
-        let hValue = ((self.view.mkt.height * multiplier + offset.vertical) & priority) => hConstraint
+        let hValue = ((targetView.mkt.height * multiplier + offset.vertical) & priority) => hConstraint
         
         assign(&view.mkt.width, to: wValue, with: relation)
         assign(&view.mkt.height, to: hValue, with: relation)
@@ -289,15 +291,25 @@ public struct SizeConstraints {
     }
 }
 
-// MARK: - Layout extension
+// MARK: - Maketa extension
 public extension Maketa {
     
     /// returns the size of the receiver
     public var size: Size {
-        get { return ViewSize(view: view) }
+        get { return ViewSize(view: .view(view)) }
         set {
 			view.preparedForAutolayout()
 			newValue.constraints(for: view)
 		}
     }
+}
+
+
+// MARK: - Super extension
+public extension Super {
+	
+	/// returns the size of the receiver
+	public static var size: Size {
+		return ViewSize(view: .superview)
+	}
 }
