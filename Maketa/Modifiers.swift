@@ -89,25 +89,25 @@ public extension AttributeModifier where Self: MaketaCGFloatConvertible {
     
     public func setPriority(_ priority: UILayoutPriority) -> AttributeModifier {
         return LayoutAttribute(view: nil, attribute: .notAnAttribute, priority: priority, constant: mktCGFloat)
-    }
+	}
 }
 
 struct LayoutAttribute: AttributeModifier {
-    let view: UIView?
-    let attribute: NSLayoutConstraint.Attribute
-    fileprivate(set) var constant: CGFloat
-    fileprivate(set) var multiplier: CGFloat
-    fileprivate(set) var relation: NSLayoutConstraint.Relation
-    fileprivate(set) var priority: UILayoutPriority
-    
-    init(view: UIView?,
-                     attribute: NSLayoutConstraint.Attribute,
-                     relation: NSLayoutConstraint.Relation = Maketa.Defaults.relation,
-                     priority: UILayoutPriority = Maketa.Defaults.priority,
-                     constant: CGFloat = 0,
-                     multiplier: CGFloat = 1) {
-        
-        self.view = view
+	let view: View?
+	let attribute: NSLayoutConstraint.Attribute
+	fileprivate(set) var constant: CGFloat
+	fileprivate(set) var multiplier: CGFloat
+	fileprivate(set) var relation: NSLayoutConstraint.Relation
+	fileprivate(set) var priority: UILayoutPriority
+	
+	init(view: View?,
+		 attribute: NSLayoutConstraint.Attribute,
+		 relation: NSLayoutConstraint.Relation = Maketa.Defaults.relation,
+		 priority: UILayoutPriority = Maketa.Defaults.priority,
+		 constant: CGFloat = 0,
+		 multiplier: CGFloat = 1) {
+		
+		self.view = view
         self.attribute = attribute
         self.relation = relation
         self.priority = priority
@@ -119,7 +119,7 @@ struct LayoutAttribute: AttributeModifier {
         let constraint = NSLayoutConstraint(item: view,
                                             attribute: layoutAttribute,
                                             relatedBy: relation,
-                                            toItem: self.view,
+                                            toItem: self.view?.view(for: view),
                                             attribute: attribute,
                                             multiplier: multiplier,
                                             constant: constant)

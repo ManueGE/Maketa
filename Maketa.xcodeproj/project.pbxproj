@@ -34,6 +34,10 @@
 		3285E91520F96355004A4BB4 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91420F96355004A4BB4 /* Modifiers.swift */; };
 		3285E91720F964C0004A4BB4 /* MaketaCGFloatConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91620F964C0004A4BB4 /* MaketaCGFloatConvertible.swift */; };
 		3285E91920F9EAA3004A4BB4 /* Edges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3285E91820F9EAA3004A4BB4 /* Edges.swift */; };
+		724F987521835A26007BD045 /* Super.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724F987421835A26007BD045 /* Super.swift */; };
+		724F987721835A60007BD045 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724F987621835A60007BD045 /* View.swift */; };
+		724F987921835E93007BD045 /* Super+Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724F987821835E93007BD045 /* Super+Modifiers.swift */; };
+		724F987D21835F7F007BD045 /* Super_AttributeModifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724F987C21835F7F007BD045 /* Super_AttributeModifierTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +102,10 @@
 		3285E91420F96355004A4BB4 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		3285E91620F964C0004A4BB4 /* MaketaCGFloatConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaketaCGFloatConvertible.swift; sourceTree = "<group>"; };
 		3285E91820F9EAA3004A4BB4 /* Edges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edges.swift; sourceTree = "<group>"; };
+		724F987421835A26007BD045 /* Super.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Super.swift; sourceTree = "<group>"; };
+		724F987621835A60007BD045 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		724F987821835E93007BD045 /* Super+Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Super+Modifiers.swift"; sourceTree = "<group>"; };
+		724F987C21835F7F007BD045 /* Super_AttributeModifierTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Super_AttributeModifierTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +141,7 @@
 				3241AE6321222C88002879C0 /* MaketaTests.swift */,
 				3241AE72212233C4002879C0 /* ConstraintsTestCase.swift */,
 				3241AE942124698F002879C0 /* AttributeModifierTests.swift */,
+				724F987C21835F7F007BD045 /* Super_AttributeModifierTests.swift */,
 				3241AE6C21222E23002879C0 /* ModifiersTests.swift */,
 				3241AE9621246E03002879C0 /* EdgesTests.swift */,
 				3241AE74212239D6002879C0 /* CenterTests.swift */,
@@ -181,11 +190,14 @@
 				3285E90520F96335004A4BB4 /* Maketa.h */,
 				3285E90620F96335004A4BB4 /* Info.plist */,
 				3285E91020F96343004A4BB4 /* Maketa.swift */,
+				724F987421835A26007BD045 /* Super.swift */,
 				3230416220FAA1E000EA3B42 /* AttributeModifier.swift */,
 				3285E91420F96355004A4BB4 /* Modifiers.swift */,
+				724F987821835E93007BD045 /* Super+Modifiers.swift */,
 				3285E91820F9EAA3004A4BB4 /* Edges.swift */,
 				3230416020FA9C4200EA3B42 /* Center.swift */,
 				32761E552120DE450062BEC4 /* Size.swift */,
+				724F987621835A60007BD045 /* View.swift */,
 				3285E91620F964C0004A4BB4 /* MaketaCGFloatConvertible.swift */,
 				3285E91220F9634B004A4BB4 /* UIView+Maketa.swift */,
 				323FF549211ED09600780D11 /* NSLayoutConstraint+Maketa.swift */,
@@ -339,6 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3241AE73212233C4002879C0 /* ConstraintsTestCase.swift in Sources */,
+				724F987D21835F7F007BD045 /* Super_AttributeModifierTests.swift in Sources */,
 				3241AE6D21222E23002879C0 /* ModifiersTests.swift in Sources */,
 				3241AE9721246E03002879C0 /* EdgesTests.swift in Sources */,
 				3241AE6421222C88002879C0 /* MaketaTests.swift in Sources */,
@@ -361,8 +374,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				724F987921835E93007BD045 /* Super+Modifiers.swift in Sources */,
+				724F987721835A60007BD045 /* View.swift in Sources */,
 				3285E91920F9EAA3004A4BB4 /* Edges.swift in Sources */,
 				3230416320FAA1E000EA3B42 /* AttributeModifier.swift in Sources */,
+				724F987521835A26007BD045 /* Super.swift in Sources */,
 				3285E91320F9634B004A4BB4 /* UIView+Maketa.swift in Sources */,
 				32761E562120DE450062BEC4 /* Size.swift in Sources */,
 				3285E91520F96355004A4BB4 /* Modifiers.swift in Sources */,
