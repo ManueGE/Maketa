@@ -668,4 +668,119 @@ class EdgesTests: ConstraintsTestCase {
 		XCTAssertFalse(view.translatesAutoresizingMaskIntoConstraints)
 		XCTAssertFalse(otherView.translatesAutoresizingMaskIntoConstraints)
 	}
+	
+	// MARK: - Superview
+	func testEdgesCanBeSetWithSuperEdges() {
+		// given
+		var constraints = EdgesConstraints()
+		let view = UIView()
+		superview.addSubview(view)
+		
+		// when
+		view.mkt.edges = Superview.edges => constraints
+		
+		// then
+		XCTAssertEqual(superview.constraints.count, 4)
+		
+		let left = constraints.left!
+		XCTAssertTrue(left.firstItem === view)
+		XCTAssertTrue(left.secondItem === superview)
+		XCTAssertEqual(left.firstAttribute, .left)
+		XCTAssertEqual(left.secondAttribute, .left)
+		XCTAssertEqual(left.multiplier, 1)
+		XCTAssertEqual(left.constant, 0)
+		XCTAssertEqual(left.relation, .equal)
+		XCTAssertEqual(left.priority, .required)
+		
+		let right = constraints.right!
+		XCTAssertTrue(right.firstItem === view)
+		XCTAssertTrue(right.secondItem === superview)
+		XCTAssertEqual(right.firstAttribute, .right)
+		XCTAssertEqual(right.secondAttribute, .right)
+		XCTAssertEqual(right.multiplier, 1)
+		XCTAssertEqual(right.constant, 0)
+		XCTAssertEqual(right.relation, .equal)
+		XCTAssertEqual(right.priority, .required)
+		
+		XCTAssertNil(constraints.leading)
+		
+		XCTAssertNil(constraints.trailing)
+		
+		let top = constraints.top!
+		XCTAssertTrue(top.firstItem === view)
+		XCTAssertTrue(top.secondItem === superview)
+		XCTAssertEqual(top.firstAttribute, .top)
+		XCTAssertEqual(top.secondAttribute, .top)
+		XCTAssertEqual(top.multiplier, 1)
+		XCTAssertEqual(top.constant, 0)
+		XCTAssertEqual(top.relation, .equal)
+		XCTAssertEqual(top.priority, .required)
+		
+		let bottom = constraints.bottom!
+		XCTAssertTrue(bottom.firstItem === view)
+		XCTAssertTrue(bottom.secondItem === superview)
+		XCTAssertEqual(bottom.firstAttribute, .bottom)
+		XCTAssertEqual(bottom.secondAttribute, .bottom)
+		XCTAssertEqual(bottom.multiplier, 1)
+		XCTAssertEqual(bottom.constant, 0)
+		XCTAssertEqual(bottom.relation, .equal)
+		XCTAssertEqual(bottom.priority, .required)
+	}
+	
+	func testEdgesCanBeSetWithSuperMargins() {
+		// given
+		var constraints = EdgesConstraints()
+		let view = UIView()
+		superview.addSubview(view)
+		
+		// when
+		view.mkt.edges = Superview.margins => constraints
+		
+		// then
+		XCTAssertEqual(superview.constraints.count, 8)
+		
+		let left = constraints.left!
+		XCTAssertTrue(left.firstItem === view)
+		XCTAssertTrue(left.secondItem === superview)
+		XCTAssertEqual(left.firstAttribute, .leftMargin)
+		XCTAssertEqual(left.secondAttribute, .leftMargin)
+		XCTAssertEqual(left.multiplier, 1)
+		XCTAssertEqual(left.constant, 0)
+		XCTAssertEqual(left.relation, .equal)
+		XCTAssertEqual(left.priority, .required)
+		
+		let right = constraints.right!
+		XCTAssertTrue(right.firstItem === view)
+		XCTAssertTrue(right.secondItem === superview)
+		XCTAssertEqual(right.firstAttribute, .rightMargin)
+		XCTAssertEqual(right.secondAttribute, .rightMargin)
+		XCTAssertEqual(right.multiplier, 1)
+		XCTAssertEqual(right.constant, 0)
+		XCTAssertEqual(right.relation, .equal)
+		XCTAssertEqual(right.priority, .required)
+		
+		XCTAssertNil(constraints.leading)
+		
+		XCTAssertNil(constraints.trailing)
+		
+		let top = constraints.top!
+		XCTAssertTrue(top.firstItem === view)
+		XCTAssertTrue(top.secondItem === superview)
+		XCTAssertEqual(top.firstAttribute, .topMargin)
+		XCTAssertEqual(top.secondAttribute, .topMargin)
+		XCTAssertEqual(top.multiplier, 1)
+		XCTAssertEqual(top.constant, 0)
+		XCTAssertEqual(top.relation, .equal)
+		XCTAssertEqual(top.priority, .required)
+		
+		let bottom = constraints.bottom!
+		XCTAssertTrue(bottom.firstItem === view)
+		XCTAssertTrue(bottom.secondItem === superview)
+		XCTAssertEqual(bottom.firstAttribute, .bottomMargin)
+		XCTAssertEqual(bottom.secondAttribute, .bottomMargin)
+		XCTAssertEqual(bottom.multiplier, 1)
+		XCTAssertEqual(bottom.constant, 0)
+		XCTAssertEqual(bottom.relation, .equal)
+		XCTAssertEqual(bottom.priority, .required)
+	}
 }

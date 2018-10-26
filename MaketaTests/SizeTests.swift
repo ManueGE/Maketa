@@ -993,4 +993,41 @@ class SizeTests: ConstraintsTestCase {
 		XCTAssertFalse(view.translatesAutoresizingMaskIntoConstraints)
 		XCTAssertFalse(otherView.translatesAutoresizingMaskIntoConstraints)
 	}
+	
+	// MARK: - Superview
+	func testViewCanSetSizeWithSuperSize() {
+		// given
+		var constraints = SizeConstraints()
+		superview.mkt.size = CGSize(width: 10, height: 20)
+		let previousConstraintsCount = superview.constraints.count
+		
+		let view = UIView()
+		superview.addSubview(view)
+		
+		// when
+		view.mkt.size = Superview.size => constraints
+		
+		// then
+		XCTAssertEqual(superview.constraints.count, previousConstraintsCount + 2)
+		
+		let constraintWidth = constraints.width
+		XCTAssertTrue(constraintWidth.firstItem === view)
+		XCTAssertTrue(constraintWidth.secondItem === superview)
+		XCTAssertEqual(constraintWidth.firstAttribute, .width)
+		XCTAssertEqual(constraintWidth.secondAttribute, .width)
+		XCTAssertEqual(constraintWidth.constant, 0)
+		XCTAssertEqual(constraintWidth.multiplier, 1)
+		XCTAssertEqual(constraintWidth.relation, .equal)
+		XCTAssertEqual(constraintWidth.priority, .required)
+		
+		let constraintHeight = constraints.height
+		XCTAssertTrue(constraintHeight.firstItem === view)
+		XCTAssertTrue(constraintHeight.secondItem === superview)
+		XCTAssertEqual(constraintHeight.firstAttribute, .height)
+		XCTAssertEqual(constraintHeight.secondAttribute, .height)
+		XCTAssertEqual(constraintHeight.constant, 0)
+		XCTAssertEqual(constraintHeight.multiplier, 1)
+		XCTAssertEqual(constraintHeight.relation, .equal)
+		XCTAssertEqual(constraintHeight.priority, .required)
+	}
 }

@@ -221,20 +221,20 @@ view.mkt.edges = otherView.mkt.edges - 20
 view.mkt.edges = otherView.mkt.layoutDirectionMargins - UIEdgeInsets(top: 10, left: 15, bottom: 20, right: 25)
 ```
 
-## `super`
-When you want to match some properties of a view to its superview, you can use the `super` property of `mkt`:
+## `Superview`
+When you want to match some properties of a view to its superview, you can use the static methods of the `Superview` struct`:
 
 ```
-view.mkt.leading = view.mkt.super.leading
+view.mkt.leading = Superview.leading
 
-view.mkt.edges = view.mkt.super.margins - 16
+view.mkt.edges = Superview.margins - 16
 
-view.mkt.size = view.mkt.super.size
+view.mkt.size = Superview.size
 
-view.mkt.center = view.mkt.super.center
+view.mkt.center = Superview.center
 ```
 
-`mkt.super` returns a non-optional object so, if at the moment of calling it the view has not been added to a super-view, it will throw a fatal error.
+`Superview`  static methods will throw a  fatal error in case the view has not been added to a super-view.
 
 # Installation
 
