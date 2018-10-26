@@ -16,14 +16,15 @@ class LayoutTests: XCTestCase {
         let view = UIView()
         
         // when
-        let layout1 = view.mkt
-        let layout2 = view.mkt
+        let maketa1 = view.mkt
+        let maketa2 = view.mkt
         
         // then
-        XCTAssertTrue(layout1.view === view)
-        XCTAssertTrue(layout1 === layout2)
+        XCTAssertTrue(maketa1.view === view)
+        XCTAssertTrue(maketa1 === maketa2)
     }
 
+	@available(*, deprecated)
     func testSuperMaketaObjectIsPorperlyReturned() {
         
         // given
@@ -39,7 +40,8 @@ class LayoutTests: XCTestCase {
         XCTAssertTrue(maketa1.view === superview)
         XCTAssertTrue(maketa1 === maketa2)
     }
-    
+	
+	@available(*, deprecated)
     func testSingleSuperLayoutObjectIsUsedForSameView() {
         
         // given
@@ -48,10 +50,10 @@ class LayoutTests: XCTestCase {
         superview.addSubview(view)
         
         // when
-        let layout1 = view.mkt.super
-        let layout2 = view.mkt.super
+        let maketa1 = view.mkt.super
+        let maketa2 = view.mkt.super
         
         // then
-        XCTAssertTrue(layout1 === layout2)
+        XCTAssertTrue(maketa1 === maketa2)
     }
 }
