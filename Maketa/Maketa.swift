@@ -24,7 +24,8 @@ public class Maketa {
         self.view = view
     }
     
-    /// Returns the `Maketa` object associated to the superview. If the view is not added to a superview, it throws a fatal error. 
+    /// Returns the `Maketa` object associated to the superview. If the view is not added to a superview, it throws a fatal error.
+	@available(*, deprecated, message: "User `Superview` struct instead` => e.g., replace `view.mkt.super.left` with `Superview.left`")
     public var `super`: Maketa {
         guard let superview = view.superview else { fatalError("\(self) has not a superview, so mkt.\(#function) can't be used") }
         return superview.mkt
