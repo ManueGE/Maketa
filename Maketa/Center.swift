@@ -101,7 +101,8 @@ public extension Maketa {
             return Center(view: view, withinMargins: false)
         }
         set {
-            
+            view.preparedForAutolayout()
+			
             let useMargins = newValue.withinMargins
             let relation = newValue.relation
             

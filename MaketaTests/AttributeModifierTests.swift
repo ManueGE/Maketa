@@ -432,4 +432,38 @@ class AttributeModifierTests: ConstraintsTestCase {
         // then
         XCTAssertEqual(view.mkt.aspectRatio, 2)
     }
+	
+	// MARK: Autolayout not changed on right side
+	func testAutolayoutIsNotActivatedOnRightView() {
+		// given
+		let otherView = UIView()
+		superview.addSubview(otherView)
+		
+		XCTAssertTrue(view.translatesAutoresizingMaskIntoConstraints)
+		XCTAssertTrue(otherView.translatesAutoresizingMaskIntoConstraints)
+		
+		// when
+		view.mkt.left = otherView.mkt.left
+		
+		// then
+		XCTAssertFalse(view.translatesAutoresizingMaskIntoConstraints)
+		XCTAssertTrue(otherView.translatesAutoresizingMaskIntoConstraints)
+	}
+	
+	func testAutolayoutIsNotDeactivatedOnRightView() {
+		// given
+		let otherView = UIView()
+		otherView.preparedForAutolayout()
+		superview.addSubview(otherView)
+		
+		XCTAssertTrue(view.translatesAutoresizingMaskIntoConstraints)
+		XCTAssertFalse(otherView.translatesAutoresizingMaskIntoConstraints)
+		
+		// when
+		view.mkt.left = otherView.mkt.left
+		
+		// then
+		XCTAssertFalse(view.translatesAutoresizingMaskIntoConstraints)
+		XCTAssertFalse(otherView.translatesAutoresizingMaskIntoConstraints)
+	}
 }

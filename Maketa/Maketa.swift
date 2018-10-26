@@ -22,7 +22,6 @@ public class Maketa {
     // MARK: Inits
     internal init(view: UIView) {
         self.view = view
-        view.preparedForAutolayout()
     }
     
     /// Returns the `Maketa` object associated to the superview. If the view is not added to a superview, it throws a fatal error. 

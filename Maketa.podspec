@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "Maketa"
-  spec.version      = "2.0.0"
+  spec.version      = "2.0.1"
   spec.summary      = "An operational API to manage AutoLayout"
   spec.description  = <<-DESC
   **Maketa** provides an operational, easy to read, easy to write, API to manage AutoLayout.  
