@@ -1,6 +1,6 @@
 # Changelog
 
-### 2.1.0 (26 October 2018)
+### 2.1.0 (26 October 2018) + 2.1.1 (29 October 2018)
 - Deprecated  `mkt.super`, added `Superview` instead. To migrate old code, follow the following pattern:
     - `view.left = view.mkt.super.left` ->  `view.left = Superview.left`.  
 

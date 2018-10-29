@@ -8,5 +8,7 @@
 
 import Foundation
 
-/// A struc that can be used to refer the receiver view's superview 
-public struct Superview {}
+/// A struct that can be used to refer the receiver view's superview 
+public struct Superview {
+	private init() { fatalError("Superview can't be instantiated" )}
+}
