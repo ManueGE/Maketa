@@ -24,7 +24,7 @@ view.mkt.center = otherView.mkt.center
 view.mkt.center = Superview.center
 
 // Make edges to match other edges or margins
-view.mkt.edges = Superview.edges - UIContentInset(top: 16, left: 16, bottom: 16, right: 16)
+view.mkt.edges = Superview.edges - UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
 view.mkt.edges = otherView.mkt.margins - .top
 ```
 
